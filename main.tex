@@ -1,0 +1,47 @@
+\documentclass[10pt]{exam} % Usa la clase 'exam'
+
+% Configuración de la cabecera
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath} % Por si necesitas matemáticas
+
+\title{Examen Corto: Conceptos Fundamentales}
+\author{Clase de Prueba}
+\date{\today}
+
+\begin{document}
+
+\maketitle % Muestra el título, autor y fecha
+
+% Puntuación total (opcional, pero útil)
+\addpoints
+
+\begin{questions} % Inicia el entorno de preguntas
+
+% --- Pregunta 1: Opción Múltiple (2 Puntos) ---
+\question[2] ¿Cuál es el comando utilizado en LaTeX para iniciar un nuevo párrafo sin sangría?
+\begin{choices}
+    \choice \verb+\newline+
+    \choice \verb+\par+
+    \choice \verb+\noindent+ % Respuesta correcta
+    \choice \verb+\vspace+
+\end{choices}
+
+% --- Pregunta 2: Opción Múltiple (3 Puntos) ---
+\question[3] ¿Qué estructura básica define un documento en el sistema de gestión de paquetes (Vim-Plug, LazyVim, etc.)?
+\begin{choices}
+    \choice init.lua
+    \choice \verb+\documentclass{...}+ % Respuesta correcta
+    \choice \verb+\begin{document}+
+    \choice .config/nvim
+\end{choices}
+
+% --- Pregunta 3: Pregunta Abierta (5 Puntos) ---
+\question[5] Utilizando notación matemática simple, explique brevemente la diferencia entre un editor de texto (como Neovim) y un IDE (como VS Code). Limite su respuesta a un párrafo.
+
+\vspace{2in} % Deja 2 pulgadas de espacio para escribir la respuesta
+
+\end{questions}
+
+% Muestra la puntuación total al final
+\end{document}
