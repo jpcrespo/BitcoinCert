@@ -5,43 +5,24 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath} % Por si necesitas matemáticas
 
-\title{Examen Corto: Conceptos Fundamentales}
-\author{Clase de Prueba}
-\date{\today}
-
+\title{Decentralized Certification on Bitcoin Blockchain Using Taproot}
+\author{Student: Juan Crespo Vargas \\ Advisor: Dr. Sultan Ahmad Al-Muhammadi }
+\date{}
 \begin{document}
 
-\maketitle % Muestra el título, autor y fecha
+\maketitle
 
-% Puntuación total (opcional, pero útil)
-\addpoints
 
-\begin{questions} % Inicia el entorno de preguntas
+\begin{abstract}
+    
+Decentralized digital certification offers an alternative to traditional centralized trust models by reducing dependency on intermediary servers and improving institutional autonomy and system availability.
+However, current blockchain-based solutions such as Blockcerts or smart contract platforms on Ethereum, face limitations in consensus security, issuer privacy, and operational cost sustainability.
+The absence of a proof-of-work mechanism in these networks increases the risk of chain reorganizations and denial-of-service attacks, undermining the immutability required for long-term certificate verification.
 
-% --- Pregunta 1: Opción Múltiple (2 Puntos) ---
-\question[2] ¿Cuál es el comando utilizado en LaTeX para iniciar un nuevo párrafo sin sangría?
-\begin{choices}
-    \choice \verb+\newline+
-    \choice \verb+\par+
-    \choice \verb+\noindent+ % Respuesta correcta
-    \choice \verb+\vspace+
-\end{choices}
+This research proposes a digital certification system built on Bitcoin’s Layer 1, leveraging the capabilities introduced by Taproot (BIP-341/342) and the Schnorr digital signature scheme to ensure authenticity, proof of existence, and verifiable key rotation for certificate issuers.
+By combining Merkle trees and off-chain verification proofs, the system aims to achieve scalability and privacy without overloading the blockchain with public data.
+The proposal also includes a mitigation scheme against key loss or compromise through cryptographic policies embedded within Taproot scripts.
+Finally, the study evaluates implementation costs, computational complexity, and privacy guarantees in comparison with existing standards such as OpenTimestamps and Blockcerts, to assess the technical feasibility and contribution of the proposed model to decentralized trust infrastructure.
 
-% --- Pregunta 2: Opción Múltiple (3 Puntos) ---
-\question[3] ¿Qué estructura básica define un documento en el sistema de gestión de paquetes (Vim-Plug, LazyVim, etc.)?
-\begin{choices}
-    \choice init.lua
-    \choice \verb+\documentclass{...}+ % Respuesta correcta
-    \choice \verb+\begin{document}+
-    \choice .config/nvim
-\end{choices}
-
-% --- Pregunta 3: Pregunta Abierta (5 Puntos) ---
-\question[5] Utilizando notación matemática simple, explique brevemente la diferencia entre un editor de texto (como Neovim) y un IDE (como VS Code). Limite su respuesta a un párrafo.
-
-\vspace{2in} % Deja 2 pulgadas de espacio para escribir la respuesta
-
-\end{questions}
-
-% Muestra la puntuación total al final
+\end{abstract}
 \end{document}
