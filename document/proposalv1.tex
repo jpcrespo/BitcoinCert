@@ -1,0 +1,93 @@
+% Basic setup
+% Proposal Template 
+% Version 1.1 - 2024-oct
+% Created by Juan Crespo
+
+% !TeX program = latexmk
+% !TeX options = -pdf -shell-escape -interaction=nonstopmode -use-biber -outdir=build
+
+
+\documentclass[12pt,a4paper]{article} % Defines the document type as an article with 12pt font size on A4 paper.
+\usepackage[lmargin=2.5cm,rmargin=2.5cm,tmargin=2.5cm,bmargin=2.5cm]{geometry} % Sets custom page margins: left/right 2.5cm, top 2.5cm, bottom 2.5cm.
+
+% Importing packages
+\usepackage[english]{babel} % Sets the document language to English, adjusting hyphenation and language-specific typographic rules.
+
+% Loading packages
+\usepackage{hyperref}    % Enables hyperlinks for references, URLs, and citations.
+\usepackage{xcolor}      % Provides tools for defining and using colors.
+\usepackage{graphicx}    % Allows inclusion of images and graphics.
+\usepackage{caption}     % Customizes captions for figures and tables.
+\usepackage{subcaption}  % Supports subfigures and subcaptions within figures.t
+\usepackage[T1]{fontenc} % Ensures proper font encoding, important for correct character rendering. Don't touch this.
+\usepackage{setspace}    % Provides control over line spacing.
+\usepackage{csquotes}    % Improves handling of quotations.
+\usepackage{longtable,booktabs,array} % Packages for advanced table formatting.
+
+\usepackage[
+  backend=biber,
+  style=apa,  
+]{biblatex}  % Manages citations and bibliography with APA style.
+
+
+\setstretch{1.5} % Sets line spacing
+
+\definecolor{LightGray}{gray}{0.9}  % Defines a custom color 'LightGray' with 90% gray, used for the code block background.
+\hypersetup{                        % Configures hyperlink colors and behavior.
+  colorlinks=true,                  % Enable colored links instead of boxes.
+  linkcolor={blue},                 % Sets link color to blue.
+  filecolor={maroon},               % Sets file link color to maroon.
+  citecolor={blue},                 % Sets citation link color to blue.
+  urlcolor={blue}}                  % Sets URL link color to blue.
+
+\addbibresource{bib.bib} % Adds the bibliography file.
+
+\title{Decentralized Certification on Bitcoin Using Taproot}        % Sets the document title.
+% \makeatletter
+% \providecommand{\subtitle}[1]{%     % Custom command to add a subtitle.
+%   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+% }
+
+% \makeatother
+
+% \subtitle{Thesis / Paper Subtitle}  % Sets the document subtitle.
+\author{Juan Pablo Crespo Vargas\\% Sets the author's name. 
+ID : g202393610\\       % Sets the author's matriculation number.
+Supervisor: Prof. Dr. Sultan Al-Muhammadi} % Sets the supervisor of the paper / thesis     
+
+\date{}                  % Sets the document date.
+
+% From this point, the preamble ends and the actual content of the document starts.
+\begin{document}
+\pagenumbering{gobble} % Stops counting the pages from this point until changed again.
+\maketitle
+
+\input{parts/abstract.tex} 
+
+\newpage
+\renewcommand*\contentsname{Table of Contents} % This controls the title of your table of contents.
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{5} % Sets the maximum sublevel to be displayed within the table of contents.
+\tableofcontents
+}
+\newpage
+\pagenumbering{arabic}\setstretch{1.5} % Overwrites the previous command, pages are counted as normal from this point.
+
+
+\input{parts/introduction.tex} 
+\input{parts/literature_review.tex} 
+\input{parts/motivation.tex} 
+\input{parts/problem_statement.tex}
+\input{parts/methodology.tex}  
+\input{parts/timeline.tex} 
+\input{parts/conclusion.tex} 
+
+
+
+\printbibliography[ % Prints the bibliography
+heading=bibintoc,
+title={References} % title of the 'references' section, change this if necessary
+]
+
+\end{document}
