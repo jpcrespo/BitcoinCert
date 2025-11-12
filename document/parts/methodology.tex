@@ -1,4 +1,104 @@
 \section{Methodology}
+\label{methodology}
 
-haciendo tx a lo loco 
-\cite{test} para testesat 
+To meet the objectives, we propose the following methodology divided into three phases: (1) Protocol and architecture design, (2) Proof of Concept prototyping, and (3) Experimental validation and analysis.
+
+\subsection{Phase I}
+
+In this phase, objectives a, b, c, and d are developed.
+We highlight the components in our protocol's scheme:
+
+\begin{itemize}
+\item The issuer corresponds to the organization that will provide the document and an additional file, which we call a 'proof of validation', to a user.
+\item The verifier, who receives the document and the user's proof of validation. Verifies the document's validity.
+\end{itemize}
+
+Only access to the public Bitcoin blockchain history is necessary, in addition to the document and the proof of validity.
+The complete verification consists of the following components:
+
+\begin{itemize}
+    \item Integrity verification, ensures the document's content has not been manipulated.
+    \item Ownership verification, ensures it is unequivocally issued by the organization.
+    \item Revocation verification, ensures the document's validity has not been revoked.
+\end{itemize}
+
+If all these verifications are met, the document is considered valid.
+Taproot allows us to evaluate a number $N$ of certificates, ordered in batches, in a single transaction.
+The computational procedure for verification occurs off-chain; that is, it is not executed on the Bitcoin network.
+
+\subsubsection{Integrity Verification}
+
+To preserve the privacy of the document's content, integrity verification follows a procedure using the sha256 cryptographic hash as a base.
+
+The cryptographic architecture for anchoring the hashes of a batch of certificates will be defined following the BIP341 protocol to obtain a valid Merkle root, adhering to the structure shown in Figure \ref{mast}.
+Each Merkle Leaf contains the bytes of each document's hash within provably unspendable scripts; that is, they do not enable the spending of the transaction.
+Using the 'Tweak' procedure with the issuing organization's single Schnorr public key for Bitcoin, a Taproot address is derived.
+
+In this process, the issuer must provide the necessary information in the proof of validation to be able to reconstruct the Taproot address.
+For verification, the protocol demonstrates that, by calculating the certificate's hash, the same Taproot address of the transaction in which the batch is anchored is derived.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/mast.pdf}
+    \caption{MAST structure for certificate anchoring}
+    \label{mast}
+\end{figure}
+
+By containing provably unspendable scripts, the verifier is limited to comparing the Taproot address.
+They do not obtain any information about other documents.
+It does not reveal the content, nor can it spend the Taproot transaction output via the script-path.
+
+\subsubsection{Ownership Verification}
+
+We propose a scheme that contains two different Schnorr key-pairs.
+One for signing documents, $Keys_{firma}$, and another for maintaining the Bitcoin funds, $Keys_{btc}$.
+The reason is to have a separation of concerns and to improve exposure risks.
+
+Because the batches of documents to be signed can be of variable size, the private key $Sk_{firma}$ can be managed on the organization's own server.
+The digital signature is added to the proof of validity given to the user.
+The public key $Pk_{firma}$ is exposed in a second output of the Taproot transaction via \texttt{OP\_RETURN}.
+
+The protocol validates the digital signature declared in the proof of validity against the document and the public key $Pk_{firma}$.
+
+\subsubsection{Signature Rotation}
+
+Signature rotation refers to the protocol's ability to change the use of digital signature keys $P_{firma}$ without affecting the validity of previously issued documents.
+If a new batch changes the signature key, the new public key $Pk_{firma^{'}}$ is anchored in the \texttt{OP\_RETURN} of the transaction.
+Maintaining an order of each batch with its corresponding public key $Pk_{firma}$.
+
+\subsubsection{Document Revocation}
+
+The issuing organization may be interested in revoking the validity of a set of issued documents.
+A revocation scheme is proposed by declaring a validity state in a child transaction that spends the Taproot output of the issued document batch.
+The organization must use the Key-Path, using its private key $Sk_{btc}$, to spend the Taproot transaction output.
+The new child transaction must have an \texttt{OP\_RETURN} output that contains the revocation status.
+
+The verifier queries the last chained transaction that spends the parent transaction's output.
+It looks for the corresponding state in the \texttt{OP\_RETURN} output according to its order in the Merkle tree.
+A single bit in its position indicates the document's revocation.
+
+The revocation status update is for the entire batch of documents in the parent transaction.
+If an update is needed, it generates an extra network cost that must be considered in the protocol.
+
+\subsection{Phase II}
+
+A second phase of the protocol is to deploy a Proof of Concept (PoC) on the Bitcoin network.
+To avoid incurring bitcoin token expenses for testing, it is proposed to set up nodes with Signet/Testnet networks.
+
+For rapid prototyping, scripts will be developed in the Python language.
+The Bitcoin node will be configured on a Linux Debian operating system under Bitcoin-Core version 30.0.
+Documenting the entire process so that any verifier can run tests without needing third-party services.
+
+The formats in which an issuer can deliver a proof document in '.pdf' format and the proof of validity as a '.json' file to a user will be evaluated.
+
+\subsection{Phase III}
+
+With a functional PoC, experimental tests will be conducted to obtain performance metrics by varying the size of the document batches $N$ and revocations.
+Two metrics will be obtained to measure the protocol's performance:
+
+\begin{itemize}
+    \item Scalability: dependent on the batch size $N$, the time/space complexity of the proof of validity and the validation will be measured. Theoretically bounded at $O(\log N)$ by using Merkle trees.
+    \item Fee for Bitcoin network usage: measured in vBytes as a function of the batch size $N$ and revocations.
+\end{itemize}
+
+With the results obtained, we seek to pose a trade-off between privacy, scalability, and network costs when using Taproot in a decentralized document verification protocol.

@@ -1,3 +1,28 @@
 \section{Problem Statement}
 
-El problema base es hacer algo con bitcoin.
+Decentralized solutions for document verification have security problems inherent to the network on which they are deployed.
+On Bitcoin, they contain privacy issues or are inefficient in cost and blockspace in solutions using protocols such as OpenTimestamps, Blockcerts, \texttt{OP\_RETURN}, among others.
+
+Taproot applies a new, more efficient, and more private Schnorr digital signature scheme for multisignature security schemes.
+It also allows committing multiple scripts into a single output using Merkleized Abstract Syntax Trees (MAST), improving costs and blockspace usage.
+This combination has not been previously utilized to create a protocol for document verification.
+
+\subsection{Research Questions}
+
+This work aims to answer:
+\begin{itemize}
+    \item How can the tools applied by Taproot be leveraged to deploy a decentralized verification protocol?
+    \item To what extent does using MAST improve privacy, scalability, and spatial/computational complexity?
+    \item What is an appropriate methodology to add signature rotation and certificate revocation to the protocol?
+\end{itemize}
+
+\subsection{Specific Objectives}
+To answer the research questions, the following objectives are set:
+\begin{enumerate}[label=\alph*)]
+    \item Design software that creates the Merkle structure of scripts where the integrity of the issued documents is verified.
+    \item Design a software component that allows ownership verification using the digital signature on issued documents.
+    \item Design a software component that allows for document signature key rotation.
+    \item Design a software component that tracks revocation to verify the validity of issued documents.
+    \item Deploy a Proof of Concept (PoC) on a Bitcoin test network.
+    \item Measure the scalability, time/space complexity, and network costs as a function of the vBytes used in the transaction.
+\end{enumerate}

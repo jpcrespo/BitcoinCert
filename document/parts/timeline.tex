@@ -1,3 +1,46 @@
 \section{Timeline}
 
-todo acabara pronto.
+The following timeline details the stages described in \ref{methodology} and is structured into four phases:
+
+\begin{itemize}
+    \item Weeks 1-4: Construction of the decentralized certification protocol using Taproot on Bitcoin.
+    \item Weeks 5-6: Development of a Proof of Concept (PoC) and its deployment on the Bitcoin test network.
+    \item Weeks 7-8: Evaluation of the performance and security of the implemented protocol.
+    \item Weeks 9-10: Documentation of findings and publication of results.
+\end{itemize}
+
+
+\subsubsection{Gantt Chart Representation}
+
+Figure \ref{fig:gantt} illustrates the proposed timeline using a Gantt chart, providing a clear visual representation of the phases and their durations.
+
+\begin{figure}[h]
+    \centering
+
+    \begin{ganttchart}[
+        y unit chart=1.2cm,
+        x unit=0.5cm,
+        vgrid,
+        hgrid,
+        bar/.style={fill=blue!60},
+        bar height=0.7,
+        title height=1,
+        title label font=\bfseries,
+        title label node/.append style={align=center},        
+        bar label font=\small,                          
+        bar label node/.append style={align=left, text width=7cm}, 
+        group label node/.append style={align=left, text width=7cm}
+    ]{1}{18}
+
+    \gantttitle{Timeline (Weeks)}{18} \\
+    \gantttitlelist{1,...,18}{1} \\
+
+\ganttbar{Phase 1: Protocol Construction}{1}{7} \\
+    \ganttbar{Phase 2: PoC Development}{8}{12} \\
+    \ganttbar{Phase 3: Evaluation}{13}{14} \\
+    \ganttbar{Phase 4: Documentation}{15}{18}
+
+    \end{ganttchart}
+    \caption{Gantt Chart of the Proposed Timeline}
+    \label{fig:gantt}
+\end{figure}%   

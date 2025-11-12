@@ -2812,7 +2812,23 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">bib.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">abdullahlajamPerformanceEvaluationIPFS2021</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">Lemieux2016Trusting</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">Gao2017Decentralized</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">Sward2018DataInsertion</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">Bartoletti2019BitcoinMetadata</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">Strehle2020DominatingOPReturns</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">Kedziora2022AnalysisSegWit</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">Gayoso2020AnalysisCryptographic</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">Fang2020DigitalSignature</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">Zhang2025HighEfficiencySchnorrMultiSignature</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">Wang2019BlockchainCT</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">Li2020DecentralizedPKI</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Pennino2021EfficientCertification</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">Palmisano2022NotarizationAntiPlagiarism</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">Mishra2025BlockchainDecentralized</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">Harer2022DecentralizedAttestation</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">Castro2021BlockchainHigherEducation</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">Rustemi2023SLRBlockchainCertificates</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">

@@ -1,3 +1,19 @@
 \section{Conclusion}
 
-Es bitcoin lo mejor de lo mas mejor 
+A decentralized certification protocol has advantages compared to traditional centralized systems.
+Availability, denial-of-service resistance, and immutability security are characteristics of the Bitcoin network.
+Methods studied in the literature show that Bitcoin has limitations regarding scalability, privacy, and applications in document verification.
+Solutions like the use of \texttt{OP\_RETURN} and OpenTimeStamp protocols have their limitations.
+With the Taproot upgrade operational on the network since 2021, Bitcoin overcomes these limitations.
+It was identified that Taproot has not been studied in the literature for the use case of document verification.
+
+The protocol proposed in this work leverages the cryptographic tools used in Taproot.
+It allows integrity verification via the hash anchored in the Merkle tree and document ownership via Schnorr digital signatures.
+It enables the revocation of document validity and proposes key rotation by chaining transactions that spend the previous output.
+Preserving privacy by not revealing information from other documents in the batch.
+
+The proposed protocol does not consider the validity of the content of the issued documents.
+The revocation of validity remains the responsibility of the issuing organization.
+It does not consider the preservation of the document and its proof of validity once issued and delivered to the end-user.
+The study of long-term preservation and proof-of-validity mechanisms remains for future work.
+As well as the implementation of penalties and incentives for users who present invalid documents as valid.

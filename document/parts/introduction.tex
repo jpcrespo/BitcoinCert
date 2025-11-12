@@ -1,3 +1,23 @@
 \section{Introduction}
 
-Bitcoin es una red descentral
+Certificates issued by an organization are proof of the occurrence of a fact.
+The verification that this document has not been forged, manipulated, or revoked depends on the issuer.
+Confidence in the organization rests on this procedure being efficient and accessible.
+
+The verification of a certificate has historically been done in the physical world in a centralized manner.
+This entails significant costs to maintain high availability and efficiency.
+With the arrival of the Internet and the proliferation of computers, it was inevitable to bring both issuance and verification into a centralized digital space.
+
+Bitcoin began operating in 2009 as the first permissionless decentralized network.
+It has not had any censorship events or downtime as of the writing of this document.
+It allows the execution of limited smart contracts following the UTXO model, as well as data anchoring.
+Limited by design to reduce the attack surface for denial-of-service and due to the high cost of anchoring bytes of information, it was not considered a scalable solution for document verification.
+
+Various studies and proposals have turned to using other blockchain networks, such as Ethereum.
+By allowing the execution of Turing-complete smart contracts, they facilitate the validation and verification of certificates.
+However, they introduce different trust assumptions and greater complexity in consensus, which increases the risk of censorship or rollbacks, compromising verification autonomy.
+
+Bitcoin has a protocol that has evolved over its 16 years of existence.
+It had two major upgrades accepted by the community, Segwit (2017) and Taproot (2021).
+These improvements in security, privacy, and blockspace efficiency allow for the expansion of use cases.
+Utilizing the cryptographic tools enabled by Taproot, we propose a methodology for document verification directly on the base layer of Bitcoin.

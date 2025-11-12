@@ -1,7 +1,18 @@
-
 \begin{abstract}
-This is the LaTeX template (\textbf{Version 1.1}) from the DH Lab of the University of Basel. It is suitable for Seminar Papers and Master's / PhD theses, but can be adapted to fit a variety of use cases. It was created by Stefan Freitag and is derived from the Quarto template, which is also available from the DH Lab.
-The abstract of your paper / thesis goes right here. It will appear on the cover sheet (very first page) of the PDF, together with the title, subtitle, author name and date.
-If you do not want your document to have an abstract, you can also simple delete the 'abstract' part (or comment it out) with all its content and the final document will be created without it.
+
+Document verification is a crucial part of detecting manipulation and fraud.
+This process is traditionally centralized, making it costly, fragile, and a single point of failure for an issuing organization.
+If the issuing organization is compromised, verifiability is lost.
+In 2009, Bitcoin was deployed as a decentralized network with high security and availability.
+
+Data anchoring methods on Bitcoin, such as \texttt{OP\_RETURN} or OpenTimeStamp, have limitations in scalability, privacy, and usability.
+The Bitcoin protocol's Taproot upgrade in 2021 overcomes limitations on the base layer.
+
+This work proposes a new document verification protocol leveraging Taproot's cryptographic tools.
+It enables the verification of integrity, authenticity of issuance, validity revocation, and signature rotation.
+Using a Taproot address, it improves the scalability and privacy for a batch of $N$ documents.
+The protocol is based on an "off-chain verification" model.
+A rapid Proof of Concept (PoC) prototype will be developed in Python on Bitcoin's testnet/signet network.
+The objective is to evaluate the efficiency in block size, the on-chain network usage cost, and the off-chain verification efficiency.
 
 \end{abstract}
