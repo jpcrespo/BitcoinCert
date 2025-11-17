@@ -395,7 +395,6 @@
       \field{title}{Analysis of segregated witness implementation for increasing efficiency and security of the Bitcoin cryptocurrency}
       \field{volume}{7}
       \field{year}{2023}
-      \true{nocite}
       \field{pages}{44\bibrangedash 55}
       \range{pages}{12}
       \verb{doi}
@@ -472,7 +471,6 @@
       \field{title}{Analysis of the Cryptographic Tools for Blockchain and Bitcoin}
       \field{volume}{8}
       \field{year}{2020}
-      \true{nocite}
       \field{pages}{131}
       \range{pages}{1}
       \verb{doi}
@@ -810,7 +808,6 @@
       \field{title}{A Systematic Literature Review on Blockchain-Based Systems for Academic Certificate Verification}
       \field{volume}{11}
       \field{year}{2023}
-      \true{nocite}
       \field{pages}{66498\bibrangedash 66518}
       \range{pages}{21}
       \verb{doi}
@@ -846,7 +843,6 @@
       \field{title}{Dominating OP Returns: The Impact of Omni and Veriblock on Bitcoin}
       \field{volume}{18}
       \field{year}{2020}
-      \true{nocite}
       \field{pages}{575\bibrangedash 590}
       \range{pages}{16}
       \verb{doi}
@@ -888,7 +884,6 @@
       \field{title}{Data Insertion in Bitcoin’s Blockchain}
       \field{volume}{3}
       \field{year}{2018}
-      \true{nocite}
       \field{pages}{1\bibrangedash 23}
       \range{pages}{23}
       \verb{doi}
@@ -992,7 +987,6 @@
       \field{title}{Blockchain-Based Certificate Transparency and Revocation Transparency}
       \field{volume}{10958}
       \field{year}{2019}
-      \true{nocite}
       \field{pages}{144\bibrangedash 164}
       \range{pages}{21}
     \endentry

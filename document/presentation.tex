@@ -94,11 +94,88 @@
 
 \section{Literature Review}
 \begin{frame}{\secname}
-    Bitcoin is a descentralized \texttt{Network}
+    \frametitle{1. Foundation: Malleability and Legacy Anchoring Techniques}
     
+    \begin{itemize}
+        \item \textbf{Transaction Evolution (Legacy):} Initial transactions (P2PKH, P2SH) suffered from $\mathbf{malleability}$, a vulnerability allowing $\mathbf{txid}$ modification by altering the $\mathbf{ECDSA \text{ } signature \text{ } encoding}$ without invalidating the signature.
+        
+        \vspace{0.2cm}
+        \item \textbf{SegWit (2017):} Implemented $\mathbf{BIP141}$ to resolve malleability by moving signatures to the separate $\mathbf{Witness}$ section, introducing new types ($\text{P2WPKH, P2WSH}$).
+        
+        \vspace{0.2cm}
+        \item \textbf{Data Anchoring Limitations:} Initial methods lacked standardized space for arbitrary data:
+        \begin{itemize}
+            \item \textbf{P2PKH/Fake Addresses:} Encoded data inside unspendable addresses, resulting in $\mathbf{high \text{ } cost}$ (burned Bitcoin) and $\mathbf{limited \text{ } capacity}$ ($\text{20 bytes/output}$).
+            \item \textbf{ScriptHash Techniques (P2SH):} More complex, not limited by bytes, but $\mathbf{non-standard}$ and difficult to implement across platforms.
+        \end{itemize}
+        
+        \vspace{0.2cm}
+        \item \textbf{Academic Consensus:} Literature confirms that Bitcoin is useful for $\mathbf{short-term \text{ } integrity}$ but highlights a $\mathbf{trade-off}$ between data volume and $\mathbf{anchoring \text{ } costs}$~\cite{Sward2018DataInsertion}.
+    \end{itemize}
+\end{frame}
+\begin{frame}{\secname}
+    \frametitle{2. The OP\_RETURN Standard and Identified Problems}
+    
+    \begin{itemize}
+        \item \textbf{OP\_RETURN Dominance:} Established as the $\mathbf{standard \text{ } and \text{ } dominant \text{ } method}$ for embedding non-monetary data in Bitcoin, utilized heavily by services like $\mathbf{Omni}$ and $\mathbf{Veriblock}$~\cite{Strehle2020DominatingOPReturns}.
+        
+        \vspace{0.2cm}
+        \item \textbf{OP\_RETURN Mechanism:} Uses an unspendable transaction output ($\mathbf{UTXO}$) limited to $\mathbf{80 \text{ } bytes}$. It is effective for minimizing $\mathbf{UTXO \text{ } bloat}$ but contributes to overall blockchain growth ($\approx 10 \text{ } GB$ in the study period).
+        
+        \vspace{0.2cm}
+        \item \textbf{Identified Design Flaws for Verification:} Legacy anchoring methods present two critical flaws for advanced verification protocols:
+        \begin{enumerate}
+            \item \textbf{Lack of Privacy:} $\mathbf{OP\_RETURN \text{ } content \text{ } is \text{ } fully \text{ } public}$, exposing the anchored information.
+            \item \textbf{Limited Scalability:} Constrained by $\mathbf{80 \text{ } bytes}$ and lacking sophisticated $\mathbf{scripting \text{ } capacity}$ for verification logic (e.g., automated revocation).
+        \end{enumerate}
+        
+        \vspace{0.2cm}
+        \item \textbf{SegWit Impact:} Resolved malleability and offered $\mathbf{75\% \text{ } cost \text{ } reduction}$, opening the door to more versatile Smart Contracts but still necessitating the declaration and spending of data via the Witness~\cite{Kedziora2022AnalysisSegWit}.
+    \end{itemize}
 \end{frame}
 
-
+\begin{frame}{\secname}
+    \frametitle{3. Alternative Systems and the Revocation Dilemma}
+    
+    \begin{itemize}
+        \item \textbf{Ethereum (EVM/Smart Contracts):} Alternative networks use the $\mathbf{EVM \text{ } (Turing-complete)}$ model to manage $\mathbf{complex \text{ } certification \text{ } logic}$ (identity, permissions, state changes)~\cite{Wang2019BlockchainCT, Rustemi2023SLRBlockchainCertificates}.
+        
+        \vspace{0.2cm}
+        \item \textbf{Trade-off:} While flexible, these solutions depend on $\mathbf{costly \text{ } execution \text{ } (Gas \text{ } Fees)}$ and programmable complexity ($\mathbf{Solidity, \text{ } EVM}$), introducing new trust assumptions and $\mathbf{consensus \text{ } complexity}$.
+        
+        \vspace{0.2cm}
+        \item \textbf{Institutional Challenges:} Studies on academic certification fraud ($\mathbf{\$2 \text{ } billion \text{ } market}$) highlight that immutability is a challenge:
+        \begin{itemize}
+            \item $\mathbf{Revocation \text{ } of \text{ } a \text{ } diploma}$ implies changing the document's state, which is $\mathbf{inherently \text{ } difficult \text{ } or \text{ } impossible}$ in a fully immutable system, challenging $\mathbf{identity \text{ } maintenance}$~\cite{Rustemi2023SLRBlockchainCertificates}.
+            \item Generation and revocation remain challenging; $\mathbf{verification}$ is the only process executable without third-party intervention.
+        \end{itemize}
+        
+        \vspace{0.2cm}
+        \item \textbf{Technological Foundation:} The literature supports the move toward $\mathbf{Schnorr \text{ } Signatures}$ for superior $\mathbf{efficiency}$, $\mathbf{privacy}$, and $\mathbf{non-repudiation}$ (foundational to Taproot)~\cite{Gayoso2020AnalysisCryptographic}.
+    \end{itemize}
+\end{frame}
+\begin{frame}{\secname}
+    \frametitle{4. Literature Summary and Research Gap}
+    
+    \begin{itemize}
+        \item \textbf{Literature Summary:} The field presents a clear trade-off:
+        \begin{itemize}
+            \item $\mathbf{Legacy \text{ } Bitcoin \text{ } (OP\_RETURN)}$: High $\mathbf{immutability}$ but $\mathbf{low \text{ } scalability/privacy}$ for verification logic.
+            \item $\mathbf{Smart \text{ } Contracts \text{ } (EVM)}$: High $\mathbf{scripting \text{ } flexibility}$ but $\mathbf{high \text{ } operational \text{ } cost}$ and $\mathbf{lower \text{ } confidence \text{ } in \text{ } base \text{ } layer \text{ } immutability}$.
+        \end{itemize}
+        
+        \vspace{0.2cm}
+        \item \textbf{Research Gap:} The literature $\mathbf{has \text{ } not \text{ } yet \text{ } investigated}$ how $\mathbf{Taproot}$ (activated 2021) specifically addresses this trade-off for decentralized certificate verification.
+        
+        \vspace{0.2cm}
+        \item \textbf{Taproot's Unique Solution (Justification):}
+        \begin{itemize}
+            \item $\mathbf{MAST \text{ } (Merkelized \text{ } Abstract \text{ } Syntax \text{ } Trees)}$: Allows encoding complex verification logic ($\mathbf{revocation}$) with a minimal $\mathbf{transaction \text{ } footprint}$.
+            \item $\mathbf{Schnorr \text{ } Signatures}$: Provides $\mathbf{efficiency \text{ } and \text{ } key \text{ } aggregation}$ for the protocol's ownership verification component.
+            \item $\mathbf{Conclusion}$: Taproot offers a path to integrate SC-like logic with $\mathbf{Bitcoin's \text{ } L1 \text{ } security \text{ } at \text{ } minimal \text{ } cost}$ (avoiding the $\mathbf{EVM \text{ } fee \text{ } model}$).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
 
 \section{Problem Steatment}
 \begin{frame}{\secname}
@@ -111,7 +188,7 @@
     \end{itemize}
 \end{frame}
 
-% --- SEGUNDO FRAME: OBJETIVOS ESPECÍFICOS ---
+
 \begin{frame}{\secname}
     \frametitle{2. Specific Objectives}
     
@@ -134,7 +211,9 @@
         \item \textbf{Phase II: Prototyping} $\rightarrow$ $\mathbf{PoC}$ deployment on Testnet/Signet using Python.
         \item \textbf{Phase III: Validation} $\rightarrow$ Experimental analysis of $\mathbf{Scalability}$ and $\mathbf{vByte \text{ } Cost}$.
     \end{itemize}
-    
+    \end{frame}
+
+    \begin{frame}{\secname}
     \vspace{0.3cm}
     \textbf{Core Roles and Components}
     \begin{itemize}
@@ -148,11 +227,36 @@
 
 
 
+\section[Conclusiones]{Conclusions and Future Work}
+\begin{frame}{\secname: Achieving Decentralized, Efficient Verification}
+    \frametitle{Key Conclusions and Thesis Contributions}
 
-\section{Conclusions}
-\begin{frame}{\secname}
-    Bitcoin is a descentralized \texttt{Network}
-    
+    \begin{itemize}
+        \item \textbf{Decentralization Advantage:} Demonstrated that Bitcoin's inherent $\mathbf{availability}$, $\mathbf{DoS \text{ } resistance}$, and $\mathbf{immutability}$ surpass the limitations of $\mathbf{centralized \text{ } PKI}$.
+        
+        \vspace{0.2cm}
+        \item \textbf{Taproot's Critical Role:} Identified the gap in the literature regarding document verification using $\mathbf{Taproot \text{ } (2021)}$. Taproot effectively $\mathbf{overcomes \text{ } L1 \text{ } limitations}$ regarding $\mathbf{scalability}$ and $\mathbf{scripting \text{ } privacy}$ faced by legacy solutions ($\text{OP\_RETURN, OpenTimestamps}$).
+    \end{itemize}
+        \end{frame}
+
+        \begin{frame}
+
+        \textbf{Protocol Contributions:} The proposed methodology leverages Taproot's cryptographic tools to enable:
+        \begin{itemize}
+            \item $\mathbf{Integrity \text{ } Verification}$ via $\mathbf{MAST \text{ } anchored \text{ } hashes}$.
+            \item $\mathbf{Ownership \text{ } Verification}$ via $\mathbf{Schnorr \text{ } Digital \text{ } Signatures}$.
+            \item $\mathbf{Document \text{ } Revocation}$ and $\mathbf{Key \text{ } Rotation}$ via $\mathbf{chained \text{ } transactions}$ (Key-Path spending).
+            \item $\mathbf{Privacy \text{ } Preservation}$ by only revealing the necessary verification path.
+    \end{itemize}   
+    \end{frame}
+
+      \begin{frame}
+    \begin{block}{Future Work and Limitations}
+        \begin{itemize}
+            \item \textbf{Scope Limitations:} The protocol does not address $\mathbf{content \text{ } validity}$ or $\mathbf{long-term \text{ } preservation}$ of documents (user responsibility).
+            \item \textbf{Future Directions:} Study the implementation of $\mathbf{penalties \text{ } and \text{ } incentives}$ for invalid proof presentation, and explore $\mathbf{long-term \text{ } preservation \text{ } mechanisms}$.
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 \section{References}
