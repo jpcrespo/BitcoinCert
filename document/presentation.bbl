@@ -1,0 +1,1235 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Bartoletti2019BitcoinMetadata}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=2d02e0086a3b5333f3f804c853b6ae0a}{%
+           family={Bartoletti},
+           familyi={B\bibinitperiod},
+           given={Massimo},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8ed06053961981c343fe646c6dba3b18}{%
+           family={Bellomy},
+           familyi={B\bibinitperiod},
+           given={Bryn},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=38e112a374a1c736080e6f725a62f7f4}{%
+           family={Pompianu},
+           familyi={P\bibinitperiod},
+           given={Livio},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature B.V.}%
+      }
+      \strng{namehash}{692923749c2531a9561a50bab59f7124}
+      \strng{fullhash}{692923749c2531a9561a50bab59f7124}
+      \strng{bibnamehash}{692923749c2531a9561a50bab59f7124}
+      \strng{authorbibnamehash}{692923749c2531a9561a50bab59f7124}
+      \strng{authornamehash}{692923749c2531a9561a50bab59f7124}
+      \strng{authorfullhash}{692923749c2531a9561a50bab59f7124}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J Grid Comput}
+      \field{title}{A Journey into Bitcoin Metadata}
+      \field{volume}{17}
+      \field{year}{2019}
+      \true{nocite}
+      \field{pages}{3\bibrangedash 22}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/s10723-019-09473-3
+      \endverb
+    \endentry
+    \entry{Bruschi2020TunnelingTrust}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=f2f5b985b33524035bed7c98c4bb56ec}{%
+           family={Bruschi},
+           familyi={B\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fa8614cc6f3b17b8fbd16bfcee0a3c19}{%
+           family={Rana},
+           familyi={R\bibinitperiod},
+           given={Vincenzo},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7071c79bd0ee83bd8ea982df4f3a4ab5}{%
+           family={Pagani},
+           familyi={P\bibinitperiod},
+           given={Alessio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bb18541247f2775c952353a232629aeb}{%
+           family={Sciuto},
+           familyi={S\bibinitperiod},
+           given={Donatella},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1ba2d8bbab7e77fd1e610cecb16594a3}
+      \strng{fullhash}{eed35203f225ebf49edea6b8b1c36b01}
+      \strng{bibnamehash}{1ba2d8bbab7e77fd1e610cecb16594a3}
+      \strng{authorbibnamehash}{1ba2d8bbab7e77fd1e610cecb16594a3}
+      \strng{authornamehash}{1ba2d8bbab7e77fd1e610cecb16594a3}
+      \strng{authorfullhash}{eed35203f225ebf49edea6b8b1c36b01}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Tunneling Trust Into the Blockchain: A Merkle Based Proof System for Structured Documents}
+      \field{volume}{8}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{174418\bibrangedash 174431}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2020.3028498
+      \endverb
+    \endentry
+    \entry{Castro2021BlockchainHigherEducation}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=75d9d1c9888260a7a1a9bcfb4e494493}{%
+           family={Castro},
+           familyi={C\bibinitperiod},
+           given={Renato\bibnamedelima Q.},
+           giveni={R\bibinitperiod\bibinitdelim Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=830141bba5c23d9650beb31847f3df62}{%
+           family={Au-Yong-Oliveira},
+           familyi={A\bibinithyphendelim Y\bibinithyphendelim O\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{822f4fdebd2954db2abddbd1fdb252de}
+      \strng{fullhash}{822f4fdebd2954db2abddbd1fdb252de}
+      \strng{bibnamehash}{822f4fdebd2954db2abddbd1fdb252de}
+      \strng{authorbibnamehash}{822f4fdebd2954db2abddbd1fdb252de}
+      \strng{authornamehash}{822f4fdebd2954db2abddbd1fdb252de}
+      \strng{authorfullhash}{822f4fdebd2954db2abddbd1fdb252de}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Eur. J. Investig. Health Psychol. Educ.}
+      \field{title}{Blockchain and Higher Education Diplomas}
+      \field{volume}{11}
+      \field{year}{2021}
+      \true{nocite}
+      \field{pages}{154\bibrangedash 167}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.3390/ejihpe11010013
+      \endverb
+    \endentry
+    \entry{Fang2020DigitalSignature}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=0d45ee05592553f54bef678a1380319d}{%
+           family={Fang},
+           familyi={F\bibinitperiod},
+           given={Weidong},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=06debc36f6b61a405e8f0da1c7ccd6ca}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2a4c3f489c843cdbd67b3f7cea04c881}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Wuxiong},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=40a9e9b870b0d42a6311e0d702ea7039}{%
+           family={Pei},
+           familyi={P\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bf2a265ffaf503a02eaa6a1a949a9d64}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Weiwei},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e688036b060b2013bd667b4ee180a822}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Guohui},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0e6aab1032ee43d02adc9a5131a7bdb7}
+      \strng{fullhash}{bdf3916893edccece4d5973c54051e85}
+      \strng{bibnamehash}{0e6aab1032ee43d02adc9a5131a7bdb7}
+      \strng{authorbibnamehash}{0e6aab1032ee43d02adc9a5131a7bdb7}
+      \strng{authornamehash}{0e6aab1032ee43d02adc9a5131a7bdb7}
+      \strng{authorfullhash}{bdf3916893edccece4d5973c54051e85}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{56}
+      \field{journaltitle}{EURASIP Journal on Wireless Communications and Networking}
+      \field{title}{Digital signature scheme for information non-repudiation in blockchain: a state of the art review}
+      \field{volume}{2020}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1186/s13638-020-01665-w
+      \endverb
+    \endentry
+    \entry{Gao2017Decentralized}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=fdec780843c6812ae8370d9dcd506b03}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yuefei},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=165a56b2efb8ad4a0af588fe05fbc2ca}{%
+           family={Nobuhara},
+           familyi={N\bibinitperiod},
+           given={Hajime},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f5109480d064dc1902677ae64d319f75}
+      \strng{fullhash}{f5109480d064dc1902677ae64d319f75}
+      \strng{bibnamehash}{f5109480d064dc1902677ae64d319f75}
+      \strng{authorbibnamehash}{f5109480d064dc1902677ae64d319f75}
+      \strng{authornamehash}{f5109480d064dc1902677ae64d319f75}
+      \strng{authorfullhash}{f5109480d064dc1902677ae64d319f75}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEJ Journal of Industry Applications}
+      \field{number}{4}
+      \field{title}{A Decentralized Trusted Timestamping Based on Blockchains}
+      \field{volume}{6}
+      \field{year}{2017}
+      \true{nocite}
+      \field{pages}{252\bibrangedash 257}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1541/ieejjia.6.252
+      \endverb
+    \endentry
+    \entry{Harer2022DecentralizedAttestation}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=9f6d8ab6ed96f53314bbda5202348e11}{%
+           family={Härer},
+           familyi={H\bibinitperiod},
+           given={Felix},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9c359579da14c40804fa1a88939276d2}{%
+           family={Fill},
+           familyi={F\bibinitperiod},
+           given={Hans-Georg},
+           giveni={H\bibinithyphendelim G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \strng{fullhash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \strng{bibnamehash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \strng{authorbibnamehash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \strng{authornamehash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \strng{authorfullhash}{9c9ad07b0b07f366c9c45ed792b873d3}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Decentralized Attestation and Distribution of Information Using Blockchains and Multi-Protocol Storage}
+      \field{volume}{10}
+      \field{year}{2022}
+      \true{nocite}
+      \field{pages}{20017\bibrangedash 20032}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2022.3150356
+      \endverb
+    \endentry
+    \entry{Hawashin2024UAVTraceability}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=2169bd33981888c59c0993c2fc21bcae}{%
+           family={Hawashin},
+           familyi={H\bibinitperiod},
+           given={Diana},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6fb185b2f1ffe4e462c26859445452db}{%
+           family={Nemer},
+           familyi={N\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=507152ddd5fb1fb6bc999623839cb73c}{%
+           family={Salah},
+           familyi={S\bibinitperiod},
+           given={Khaled},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f2d44501d4c78fc024d38ee4c372cb38}{%
+           family={Jayaraman},
+           familyi={J\bibinitperiod},
+           given={Raja},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d6d6095c27a547eed5056f1c6c0abcd2}{%
+           family={Svetinovic},
+           familyi={S\bibinitperiod},
+           given={Davor},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=832654d2c401b8bf9a040fe6056d3a49}{%
+           family={Damiani},
+           familyi={D\bibinitperiod},
+           given={Ernesto},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{bf399f7fed0b6ab8cad67b8f624aead3}
+      \strng{fullhash}{b2a8a10fb364f90cdad6ce5fc762424c}
+      \strng{bibnamehash}{bf399f7fed0b6ab8cad67b8f624aead3}
+      \strng{authorbibnamehash}{bf399f7fed0b6ab8cad67b8f624aead3}
+      \strng{authornamehash}{bf399f7fed0b6ab8cad67b8f624aead3}
+      \strng{authorfullhash}{b2a8a10fb364f90cdad6ce5fc762424c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Industrial Information Integration}
+      \field{title}{Blockchain and NFT-based traceability and certification for UAV parts in manufacturing}
+      \field{volume}{39}
+      \field{year}{2024}
+      \true{nocite}
+      \field{pages}{100597}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.jii.2024.100597
+      \endverb
+    \endentry
+    \entry{Kedziora2022AnalysisSegWit}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=c09b0d679d407a2929d9bbc5f8c803c7}{%
+           family={Kedziora},
+           familyi={K\bibinitperiod},
+           given={Michal},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=741473dace8cbc82df37f70645a2f340}{%
+           family={Pieprzka},
+           familyi={P\bibinitperiod},
+           given={Dawid},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1beb35b02333992567f906d6b99ba1ba}{%
+           family={Jozwiak},
+           familyi={J\bibinitperiod},
+           given={Ireneusz},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=501012f1bcb3322135fc2b659a0da497}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yongxin},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c09ffce8bcc845c548836c3433b8701b}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Houbing},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{26a242368699f64a62b0680b88181021}
+      \strng{fullhash}{2bc35f6b448f309ad8ca813d6a15aa3b}
+      \strng{bibnamehash}{26a242368699f64a62b0680b88181021}
+      \strng{authorbibnamehash}{26a242368699f64a62b0680b88181021}
+      \strng{authornamehash}{26a242368699f64a62b0680b88181021}
+      \strng{authorfullhash}{2bc35f6b448f309ad8ca813d6a15aa3b}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1Periodical}
+      \field{journaltitle}{Journal of Information and Telecommunication}
+      \field{note}{Published online: 26 Sep 2022}
+      \field{title}{Analysis of segregated witness implementation for increasing efficiency and security of the Bitcoin cryptocurrency}
+      \field{volume}{7}
+      \field{year}{2023}
+      \true{nocite}
+      \field{pages}{44\bibrangedash 55}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1080/24751839.2022.2122301
+      \endverb
+    \endentry
+    \entry{Lemieux2016Trusting}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=733d7f491a03e7f6cce3e64b333b254e}{%
+           family={Lemieux},
+           familyi={L\bibinitperiod},
+           given={Victoria\bibnamedelima Louise},
+           giveni={V\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Emerald Group Publishing Limited}%
+      }
+      \strng{namehash}{733d7f491a03e7f6cce3e64b333b254e}
+      \strng{fullhash}{733d7f491a03e7f6cce3e64b333b254e}
+      \strng{bibnamehash}{733d7f491a03e7f6cce3e64b333b254e}
+      \strng{authorbibnamehash}{733d7f491a03e7f6cce3e64b333b254e}
+      \strng{authornamehash}{733d7f491a03e7f6cce3e64b333b254e}
+      \strng{authorfullhash}{733d7f491a03e7f6cce3e64b333b254e}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Records Management Journal}
+      \field{number}{2}
+      \field{title}{Trusting records: is Blockchain technology the answer?}
+      \field{volume}{26}
+      \field{year}{2016}
+      \true{nocite}
+      \field{pages}{110\bibrangedash 139}
+      \range{pages}{30}
+      \verb{doi}
+      \verb 10.1108/RMJ-12-2015-0042
+      \endverb
+    \endentry
+    \entry{Gayoso2020AnalysisCryptographic}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=25b54ba6332018edb1e09d3f2e0df3d8}{%
+           family={Martínez},
+           familyi={M\bibinitperiod},
+           given={Víctor\bibnamedelima Gayoso},
+           giveni={V\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0ecf110b85b8451f171b65ac7ccc7fc5}{%
+           family={Hernández-Álvarez},
+           familyi={H\bibinithyphendelim Á\bibinitperiod},
+           given={Luis},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7fa4730a1f5786a43fa08aa39b201b9b}{%
+           family={Encinas},
+           familyi={E\bibinitperiod},
+           given={Luis\bibnamedelima Hernández},
+           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{604cfd6adf13cf05c1908c364687a532}
+      \strng{fullhash}{604cfd6adf13cf05c1908c364687a532}
+      \strng{bibnamehash}{604cfd6adf13cf05c1908c364687a532}
+      \strng{authorbibnamehash}{604cfd6adf13cf05c1908c364687a532}
+      \strng{authornamehash}{604cfd6adf13cf05c1908c364687a532}
+      \strng{authorfullhash}{604cfd6adf13cf05c1908c364687a532}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Mathematics}
+      \field{title}{Analysis of the Cryptographic Tools for Blockchain and Bitcoin}
+      \field{volume}{8}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{131}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/math8010131
+      \endverb
+    \endentry
+    \entry{Mishra2025BlockchainDecentralized}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=c4426d4ff5dd62096387b7dabcb946ea}{%
+           family={Mishra},
+           familyi={M\bibinitperiod},
+           given={Ayush},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27271313eacd3b2853753d5714ce4dac}{%
+           family={Mehta},
+           familyi={M\bibinitperiod},
+           given={Sakshi},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1261a06741db2dd5d8bcd086229464e7}{%
+           family={Oza},
+           familyi={O\bibinitperiod},
+           given={Bhavya},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3c6c41e77dce1b3966ba88bf6647ee5c}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Sumit},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0da23e6b90b56758f057dc4e9c550bb0}{%
+           family={Kasturiwale},
+           familyi={K\bibinitperiod},
+           given={Hemant},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{be21c39cfd026177c02e524f362d3df8}
+      \strng{fullhash}{2d7ad0c7e55d2fa2f39ee2e7838fb9ff}
+      \strng{bibnamehash}{be21c39cfd026177c02e524f362d3df8}
+      \strng{authorbibnamehash}{be21c39cfd026177c02e524f362d3df8}
+      \strng{authornamehash}{be21c39cfd026177c02e524f362d3df8}
+      \strng{authorfullhash}{2d7ad0c7e55d2fa2f39ee2e7838fb9ff}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2468-4376}
+      \field{issue}{10s}
+      \field{journaltitle}{Journal of Information Systems Engineering and Management}
+      \field{title}{Blockchain-Based Decentralized Document Verification and Its Applications}
+      \field{volume}{10}
+      \field{year}{2025}
+      \true{nocite}
+    \endentry
+    \entry{Palmisano2022NotarizationAntiPlagiarism}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=eabdbc45e69a96aee94884adfd732dc2}{%
+           family={Palmisano},
+           familyi={P\bibinitperiod},
+           given={Tonino},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=63d9c20cbb20a2dc108f1f35a5bfc379}{%
+           family={Convertini},
+           familyi={C\bibinitperiod},
+           given={Vito\bibnamedelima Nicola},
+           giveni={V\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7a423bb30d199840504ecf764f8b0db1}{%
+           family={Sarcinella},
+           familyi={S\bibinitperiod},
+           given={Lucia},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=30a77691493d93187156a9128e1848e9}{%
+           family={Gabriele},
+           familyi={G\bibinitperiod},
+           given={Luigia},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d0de3185aed20d801c1897d6a926cbb0}{%
+           family={Bonifazi},
+           familyi={B\bibinitperiod},
+           given={Mariangela},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{9cb8e913065f31e1adf27e2448f80f32}
+      \strng{fullhash}{bf1ee2a7f51d22095d39929309827287}
+      \strng{bibnamehash}{9cb8e913065f31e1adf27e2448f80f32}
+      \strng{authorbibnamehash}{9cb8e913065f31e1adf27e2448f80f32}
+      \strng{authornamehash}{9cb8e913065f31e1adf27e2448f80f32}
+      \strng{authorfullhash}{bf1ee2a7f51d22095d39929309827287}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Appl. Sci.}
+      \field{title}{Notarization and Anti-Plagiarism: A New Blockchain Approach}
+      \field{volume}{12}
+      \field{year}{2022}
+      \true{nocite}
+      \field{pages}{243}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/app12010243
+      \endverb
+    \endentry
+    \entry{Pennino2021EfficientCertification}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=c1e1d7e91112c088f244ba87a29567b3}{%
+           family={Pennino},
+           familyi={P\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dda2ee7d7f5180c0265510e45ee45396}{%
+           family={Pizzonia},
+           familyi={P\bibinitperiod},
+           given={Maurizio},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b20acc6004ab5df8bdac34cb5718cae9}{%
+           family={Vitaletti},
+           familyi={V\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aa156e8a65efc47cc4742b1ef6349357}{%
+           family={Zecchini},
+           familyi={Z\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f1d49d47a7d7d80f4018c0b557905aed}
+      \strng{fullhash}{ba58737c486a5127ba8ee9dd5cbbe053}
+      \strng{bibnamehash}{f1d49d47a7d7d80f4018c0b557905aed}
+      \strng{authorbibnamehash}{f1d49d47a7d7d80f4018c0b557905aed}
+      \strng{authornamehash}{f1d49d47a7d7d80f4018c0b557905aed}
+      \strng{authorfullhash}{ba58737c486a5127ba8ee9dd5cbbe053}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Efficient Certification of Endpoint Control on Blockchain}
+      \field{volume}{9}
+      \field{year}{2021}
+      \true{nocite}
+      \field{pages}{131901\bibrangedash 131915}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2021.3115343
+      \endverb
+    \endentry
+    \entry{Priyadarshini2025FasterTrustedCertificate}{article}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=f9f3fad38361273e430a63f8937cdd1b}{%
+           family={Priyadarshini},
+           familyi={P\bibinitperiod},
+           given={Rojalina},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=344197d30190581bbc914c09bd2d3082}{%
+           family={Pandey},
+           familyi={P\bibinitperiod},
+           given={Rhishav},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d839a87a93f13bd0aa3c126ac8f02f0e}{%
+           family={Ankit},
+           familyi={A\bibinitperiod},
+           given={K.\bibnamedelimi C.},
+           giveni={K\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=87a7d011975a1e6095bb59265c459ecc}{%
+           family={Bhandari},
+           familyi={B\bibinitperiod},
+           given={Deepesh},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b4772b629c04ae6f5be2450912b78458}{%
+           family={Khadka},
+           familyi={K\bibinitperiod},
+           given={Birendra},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a5127eaa37c4d3cc9f2c09bf505c339d}{%
+           family={Barik},
+           familyi={B\bibinitperiod},
+           given={Rabindra\bibnamedelima Kumar},
+           giveni={R\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ae4111dd75b514cee7173ba9969b6425}{%
+           family={Saikia},
+           familyi={S\bibinitperiod},
+           given={Manob\bibnamedelima Jyoti},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{50d4b33a5b8da9df82096467ff21da55}
+      \strng{fullhash}{639560a1e60b0cf32846d853e1c93a38}
+      \strng{bibnamehash}{50d4b33a5b8da9df82096467ff21da55}
+      \strng{authorbibnamehash}{50d4b33a5b8da9df82096467ff21da55}
+      \strng{authornamehash}{50d4b33a5b8da9df82096467ff21da55}
+      \strng{authorfullhash}{639560a1e60b0cf32846d853e1c93a38}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{A Faster, Integrated, and Trusted Certificate Authentication and Issuer Validation System Based on Blockchain}
+      \field{volume}{10}
+      \field{year}{2025}
+      \true{nocite}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2025.3539180
+      \endverb
+    \endentry
+    \entry{Ramica2024SelectiveDisclosure}{article}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=6856fdf08ba79ea4ce58d978d5394c7e}{%
+           family={Ramić},
+           familyi={R\bibinitperiod},
+           given={Šeila\bibnamedelima Bećirović},
+           giveni={Š\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=42e2a3b9d754dfa42f67abb1bc61d398}{%
+           family={Cogo},
+           familyi={C\bibinitperiod},
+           given={Ehlimana},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e3f29bfddd95a3810e44995c5a87bcd8}{%
+           family={Prazina},
+           familyi={P\bibinitperiod},
+           given={Irfan},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=03824b3a18e279af5236d499944eaa8c}{%
+           family={Cogo},
+           familyi={C\bibinitperiod},
+           given={Emir},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2237d7cf5f84e99b4b401d53ed6f070d}{%
+           family={Turkanović},
+           familyi={T\bibinitperiod},
+           given={Muhamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fdd6fdd23fdccaa107e29f0821aa9e22}{%
+           family={Mulahasanović},
+           familyi={M\bibinitperiod},
+           given={Razija\bibnamedelima Turčinhodžić},
+           giveni={R\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fdb17ac34cdfb74bbc54e07fa20f65af}{%
+           family={Mrdović},
+           familyi={M\bibinitperiod},
+           given={Saša},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{51ae20e0430a681d0e0d05fac7f92c74}
+      \strng{fullhash}{857445777ef1c678d8760482b3f38dbe}
+      \strng{bibnamehash}{51ae20e0430a681d0e0d05fac7f92c74}
+      \strng{authorbibnamehash}{51ae20e0430a681d0e0d05fac7f92c74}
+      \strng{authornamehash}{51ae20e0430a681d0e0d05fac7f92c74}
+      \strng{authorfullhash}{857445777ef1c678d8760482b3f38dbe}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ICT Express}
+      \field{title}{Selective disclosure in digital credentials: A review}
+      \field{volume}{10}
+      \field{year}{2024}
+      \true{nocite}
+      \field{pages}{916\bibrangedash 934}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1016/j.icte.2024.05.011
+      \endverb
+    \endentry
+    \entry{Rustemi2023SLRBlockchainCertificates}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=627008942331a3bea975994b4109c313}{%
+           family={Rustemi},
+           familyi={R\bibinitperiod},
+           given={Avni},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=661dcfedc2561710ad8fdaae465dd760}{%
+           family={Dalipi},
+           familyi={D\bibinitperiod},
+           given={Fisnik},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=53b699d3f8477b19145723cace5b0a00}{%
+           family={Atanasovski},
+           familyi={A\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e5dc89df24cf7511d1d2ee6c8562f884}{%
+           family={Risteski},
+           familyi={R\bibinitperiod},
+           given={Aleksandar},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{e2d71d1bfd43cc91b4c43c8244bab7cd}
+      \strng{fullhash}{191eaf4776899a625889ba267d53efc6}
+      \strng{bibnamehash}{e2d71d1bfd43cc91b4c43c8244bab7cd}
+      \strng{authorbibnamehash}{e2d71d1bfd43cc91b4c43c8244bab7cd}
+      \strng{authornamehash}{e2d71d1bfd43cc91b4c43c8244bab7cd}
+      \strng{authorfullhash}{191eaf4776899a625889ba267d53efc6}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{A Systematic Literature Review on Blockchain-Based Systems for Academic Certificate Verification}
+      \field{volume}{11}
+      \field{year}{2023}
+      \true{nocite}
+      \field{pages}{66498\bibrangedash 66518}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2023.3289598
+      \endverb
+    \endentry
+    \entry{Strehle2020DominatingOPReturns}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=9d96b714b8de7346ee813e89dcde3a22}{%
+           family={Strehle},
+           familyi={S\bibinitperiod},
+           given={Elias},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=689e056db0d1bb2c0da1d84f175bce9c}{%
+           family={Steinmetz},
+           familyi={S\bibinitperiod},
+           given={Fred},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \strng{fullhash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \strng{bibnamehash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \strng{authorbibnamehash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \strng{authornamehash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \strng{authorfullhash}{60ab41cb98ba8fa8b5a9c1f69f6e8026}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{J Grid Comput}
+      \field{title}{Dominating OP Returns: The Impact of Omni and Veriblock on Bitcoin}
+      \field{volume}{18}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{575\bibrangedash 590}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1007/s10723-020-09537-9
+      \endverb
+    \endentry
+    \entry{Sward2018DataInsertion}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=d251af6854c5c3fffa35864381787980}{%
+           family={Sward},
+           familyi={S\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b40b981d9883138a393f1f7a939b18bb}{%
+           family={Vecna},
+           familyi={V\bibinitperiod},
+           given={Ivy},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=80eeca1ea07bdf67af99852035ac52a8}{%
+           family={Stonedahl},
+           familyi={S\bibinitperiod},
+           given={Forrest},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \strng{fullhash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \strng{bibnamehash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \strng{authorbibnamehash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \strng{authornamehash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \strng{authorfullhash}{dced11588c7ea40e962cb6c471c4e6b6}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{LEDGER}
+      \field{title}{Data Insertion in Bitcoin’s Blockchain}
+      \field{volume}{3}
+      \field{year}{2018}
+      \true{nocite}
+      \field{pages}{1\bibrangedash 23}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.5915/LEDGER.2018.101
+      \endverb
+    \endentry
+    \entry{Wang2019BlockchainCT}{incollection}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=91bb827a2be8f97112e33ad34cbc04da}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Ze},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4896cf5332bbb298a8910059d0e1082b}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Jingqiang},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=751b473d7c358423325e698ee0899063}{%
+           family={Cai},
+           familyi={C\bibinitperiod},
+           given={Quanwei},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b0e2ccdc86ca09f012345911a8254f9}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Qiongxiao},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5a381f63cdd1c229d7205de891a4fbc4}{%
+           family={Jing},
+           familyi={J\bibinitperiod},
+           given={Jiwu},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1266fb48ece3287655931ca60aedd329}{%
+           family={Zha},
+           familyi={Z\bibinitperiod},
+           given={Daren},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{7}{}{%
+        {{hash=4dc8e02c1943053c2c553cd83d668173}{%
+           family={Zohar},
+           familyi={Z\bibinitperiod},
+           given={Aviv},
+           giveni={A\bibinitperiod}}}%
+        {{hash=183ef43dada4cf2ec046a03670a785d7}{%
+           family={Eyal},
+           familyi={E\bibinitperiod},
+           given={Ittay},
+           giveni={I\bibinitperiod}}}%
+        {{hash=14abb109521defaa76cf644620ae43b6}{%
+           family={Teague},
+           familyi={T\bibinitperiod},
+           given={Vanessa},
+           giveni={V\bibinitperiod}}}%
+        {{hash=d0054c54f53e249b95a1f7e7b702a6bf}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=23ae6f9c28379168737b47c97c899d1c}{%
+           family={Bracciali},
+           familyi={B\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd9d5961d40856ede2adb609e24eae88}{%
+           family={Pintore},
+           familyi={P\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=da9488164e71e4511a9231c913a10360}{%
+           family={Sala},
+           familyi={S\bibinitperiod},
+           given={Massimiliano},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9bc5d4d990a2056040b75d96ab42ab13}
+      \strng{fullhash}{907c49a5c441bc19cbb6aefa1aec8dde}
+      \strng{bibnamehash}{9bc5d4d990a2056040b75d96ab42ab13}
+      \strng{authorbibnamehash}{9bc5d4d990a2056040b75d96ab42ab13}
+      \strng{authornamehash}{9bc5d4d990a2056040b75d96ab42ab13}
+      \strng{authorfullhash}{907c49a5c441bc19cbb6aefa1aec8dde}
+      \strng{editorbibnamehash}{2ac960d50e6e58296ae7318231592402}
+      \strng{editornamehash}{2ac960d50e6e58296ae7318231592402}
+      \strng{editorfullhash}{c1dfb54c9989b74c6152598ccc031a90}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Financial Cryptography and Data Security: FC 2018 International Workshops, BITCOIN, VOTING, and WTSC, Revised Selected Papers}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{Blockchain-Based Certificate Transparency and Revocation Transparency}
+      \field{volume}{10958}
+      \field{year}{2019}
+      \true{nocite}
+      \field{pages}{144\bibrangedash 164}
+      \range{pages}{21}
+    \endentry
+    \entry{Xie2020EthereumCertificate}{article}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=8366d80ebb26dfed434a8210787bc770}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Rui},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fc4852b16d7781e961ea767c9873c2c0}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ba51490fdfee4e053d199f28e82dad4f}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Yue},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=83504a302aa2ce975b4df13741545177}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Qi},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=15d3c26ace4489d65320a919d2c1b350}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Zhi},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=121c0b8f4e695663cf0d18b3bceba8f8}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jun-Woo},
+           giveni={J\bibinithyphendelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bb309c6eac03ffa88e35adf4751ec628}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Jihyeok},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cd17712be36a55db78820a03f54555b9}
+      \strng{fullhash}{31bb10d6d62327ae21052e7422e8c9df}
+      \strng{bibnamehash}{cd17712be36a55db78820a03f54555b9}
+      \strng{authorbibnamehash}{cd17712be36a55db78820a03f54555b9}
+      \strng{authornamehash}{cd17712be36a55db78820a03f54555b9}
+      \strng{authorfullhash}{31bb10d6d62327ae21052e7422e8c9df}
+      \field{sortinit}{X}
+      \field{sortinithash}{1965c258adceecf23ce3d67b05113442}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Ethereum Blockchain Decentralized Certificate Management System Based on Smart Contract}
+      \field{volume}{8}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{90618\bibrangedash 90632}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2020.2993881
+      \endverb
+    \endentry
+    \entry{Yang2022EfficientVerifiablyEncrypted}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=9d362588e629aea5809440133ff290d7}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=665451be1025c4cb188a921577e743e3}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Mengling},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6bb3b51e1c1f83d3e29a7962f2fcf2ba}{%
+           family={Au},
+           familyi={A\bibinitperiod},
+           given={Man\bibnamedelima Ho},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7d405dc8c3ba97bdd21d7ea41fcd9b3b}{%
+           family={Luo},
+           familyi={L\bibinitperiod},
+           given={Xiapu},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=342f1e7ba5aaffed2053fc752e8ae7b1}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Qingqing},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{837a8e12d793cf5ecb70cdc2f3f350a9}
+      \strng{fullhash}{1167d488034010990424f180c761696f}
+      \strng{bibnamehash}{837a8e12d793cf5ecb70cdc2f3f350a9}
+      \strng{authorbibnamehash}{837a8e12d793cf5ecb70cdc2f3f350a9}
+      \strng{authornamehash}{837a8e12d793cf5ecb70cdc2f3f350a9}
+      \strng{authorfullhash}{1167d488034010990424f180c761696f}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Information Forensics and Security}
+      \field{title}{Efficient Verifiably Encrypted ECDSA-Like Signatures and Their Applications}
+      \field{volume}{17}
+      \field{year}{2022}
+      \true{nocite}
+      \field{pages}{2001\bibrangedash 2016}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1109/TIFS.2022.3165978
+      \endverb
+    \endentry
+    \entry{Zhang2025HighEfficiencySchnorrMultiSignature}{article}{}
+      \name{author}{4}{}{%
+        {{un=1,uniquepart=given,hash=f189b293bd3263254702f8c5fe1d714b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Peng},
+           giveni={P\bibinitperiod},
+           givenun=1}}%
+        {{un=0,uniquepart=base,hash=52770c4fe3f5a1e66054d24c3a1528a9}{%
+           family={Ge},
+           familyi={G\bibinitperiod},
+           given={Fa},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1fd638ffb824632b85cc86449bf8dcef}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Zujie},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=245caa86e00e31ca785125476b769a1d}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Weixin},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{43f6b7d8131958f2f51a0a7de999ff64}
+      \strng{fullhash}{2b3c6da9c0ff2c23221b542512bd2d60}
+      \strng{bibnamehash}{43f6b7d8131958f2f51a0a7de999ff64}
+      \strng{authorbibnamehash}{43f6b7d8131958f2f51a0a7de999ff64}
+      \strng{authornamehash}{43f6b7d8131958f2f51a0a7de999ff64}
+      \strng{authorfullhash}{2b3c6da9c0ff2c23221b542512bd2d60}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{9}
+      \field{journaltitle}{Electronics}
+      \field{title}{Achieving High Efficiency in Schnorr-Based Multi-Signature Applications in Blockchain}
+      \field{volume}{14}
+      \field{year}{2025}
+      \true{nocite}
+      \field{pages}{1883}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/electronics14091883
+      \endverb
+    \endentry
+    \entry{Zhang2025PrivacyProtectionIssuanceRevocationVerifiableCredentials}{article}{}
+      \name{author}{6}{}{%
+        {{un=1,uniquepart=given,hash=b686c14e5d2fd012cec0d315e122878d}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Tiantian},
+           giveni={T\bibinitperiod},
+           givenun=1}}%
+        {{un=0,uniquepart=base,hash=330e18fb499a5fa7fa598125962993f7}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Ying},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=acc699ce9dac4cdedaf322654cd717b4}{%
+           family={Gong},
+           familyi={G\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9151fe73a572c1c0dab212e99c9cfd14}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Jianbo},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9231369bea1f197c31820b5cea0fc6cc}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Junjie},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9633290db81cae468830c7be0015992c}{%
+           family={Wan},
+           familyi={W\bibinitperiod},
+           given={Changxu},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {John Wiley \& Sons Ltd.}%
+      }
+      \strng{namehash}{8d0be2962781284763620ef900256d1a}
+      \strng{fullhash}{d496dcf58766cb76b3500490f652c260}
+      \strng{bibnamehash}{8d0be2962781284763620ef900256d1a}
+      \strng{authorbibnamehash}{8d0be2962781284763620ef900256d1a}
+      \strng{authornamehash}{8d0be2962781284763620ef900256d1a}
+      \strng{authorfullhash}{d496dcf58766cb76b3500490f652c260}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{9}
+      \field{journaltitle}{Concurrency and Computation: Practice and Experience}
+      \field{title}{Privacy Protection During the Issuance and Revocation of Verifiable Credentials in Self-Sovereign Identity}
+      \field{volume}{37}
+      \field{year}{2025}
+      \true{nocite}
+      \field{pages}{e70084}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1002/cpe.70084
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

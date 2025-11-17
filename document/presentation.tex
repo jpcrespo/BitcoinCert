@@ -1,0 +1,167 @@
+\documentclass[11pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[backend=biber, style=authortitle]{biblatex}
+\addbibresource{bib.bib}
+
+\usetheme{Szeged}
+\usecolortheme{lily}
+\usefonttheme{professionalfonts}
+\definecolor{KFUPMGreen}{HTML}{006652} 
+
+
+\setbeamercolor{palette primary}{fg=white, bg=KFUPMGreen}
+\setbeamercolor{section in head/foot}{fg=white, bg=KFUPMGreen}
+\setbeamercolor{title}{fg=KFUPMGreen}
+\setbeamercolor{frametitle}{fg=KFUPMGreen}
+\setbeamercolor{itemize item}{fg=KFUPMGreen}
+\setbeamercolor{institute}{fg=white}
+\setbeamercolor{institute in head/foot}{fg=white}
+\AtEveryBibitem{\tiny}
+
+
+
+\title{Decentralized Certification on Bitcoin}
+\institute{KFUPM}
+\author{Juan Crespo}
+
+
+\section{Presentation}
+\begin{document}
+\begin{frame}[noframenumbering,t]
+\vspace*{0.4cm}
+\hspace*{-0.4cm}
+\begin{minipage}[t]{0.175\textwidth}
+\raggedright
+\includegraphics[width=\textwidth]{figures/kfupmlogo.png} 
+\end{minipage}
+\vspace{\textwidth}
+\hspace*{2cm}
+\begin{minipage}[t]{0.9\textwidth} 
+\vspace*{-2.2cm}
+\raggedright
+\small \textbf{Information \& Computer Science Department} \\
+\small College of Computing \& Mathematics \\
+\small King Fahd University of Petroleum and Minerals \\
+\centering
+\vspace*{1cm}
+\hspace*{-3cm}
+\Large \textcolor{KFUPMGreen}{Decentralized Certification on Bitcoin}\\
+\vspace*{1cm}
+\hspace*{-3cm}
+\small{Juan Pablo Crespo Vargas - ID  202393610}\\
+\hspace*{-2.5cm}
+\vspace*{1cm}
+\small{Supervised by: Dr. Sultan Al-Muhammadi}\\
+\hspace*{-2.5cm}
+\small{November 2025}
+\end{minipage}
+\end{frame}
+
+\section{Outline}
+\begin{frame}{\secname}
+    \begin{itemize}
+        \item Introduction
+        \item Motivation
+        \item Literature Review
+        \item Problem Steatment
+        \item Methodology
+        \item Conclusions
+        \item References
+    \end{itemize}
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{\secname}
+\begin{itemize}
+\item Verification of a document is essential for maintaining organizational trust
+\item The centralization of verification incurs significant expenses
+\item Bitcoin is the first decentralized network that is: permissionless, highly tolerant to DDoS attacks, and based on Proof-of-Work (PoW)
+
+\end{itemize}
+\end{frame}
+
+
+\section{Motivation}
+\begin{frame}{\secname}
+\begin{itemize}
+    \item Legacy Bitcoin solutions are not scalable
+    \item \textbf{Using alternative networks such as Ethereum introduces different security and trust considerations}, increasing consensus complexity and $\mathbf{censorship \text{ } risks}$.
+    \item Major Bitcoin upgrades (SegWit and Taproot) enable new possibilities on the base layer ($\mathbf{L1}$) by improving $\mathbf{script \text{ } efficiency}$ and $\mathbf{privacy}$, without relying on external layers.
+\end{itemize}    
+\end{frame}
+
+\section{Literature Review}
+\begin{frame}{\secname}
+    Bitcoin is a descentralized \texttt{Network}
+    
+\end{frame}
+
+
+
+\section{Problem Steatment}
+\begin{frame}{\secname}
+    \frametitle{1. Research Questions}
+    
+    \begin{itemize}
+        \item How can the tools applied by $\mathbf{Taproot}$ be leveraged to deploy a decentralized verification protocol?
+        \item To what extent does using $\mathbf{MAST}$ improve $\mathbf{privacy}$, $\mathbf{scalability}$, and $\mathbf{spatial/computational \text{ } complexity}$?
+        \item What is an appropriate methodology to add signature $\mathbf{key \text{ } rotation}$ and $\mathbf{certificate \text{ } revocation}$ to the protocol?
+    \end{itemize}
+\end{frame}
+
+% --- SEGUNDO FRAME: OBJETIVOS ESPECÍFICOS ---
+\begin{frame}{\secname}
+    \frametitle{2. Specific Objectives}
+    
+    \begin{itemize}
+        \item Design the $\mathbf{Merkle \text{ } structure \text{ } of \text{ } scripts}$ for verifying the integrity of issued documents.
+        \item Design software components for $\mathbf{ownership \text{ } verification}$ (digital signature) and $\mathbf{document \text{ } signature \text{ } key \text{ } rotation}$.
+        \item Design a software component that tracks $\mathbf{revocation}$ to verify the validity of issued documents.
+        \item Deploy a $\mathbf{Proof \text{ } of \text{ } Concept \text{ } (PoC)}$ on a Bitcoin test network.
+        \item $\mathbf{Measure}$ the $\mathbf{scalability}$, $\mathbf{time/space \text{ } complexity}$, and network $\mathbf{costs \text{ } (vBytes)}$ of the proposed protocol.
+    \end{itemize}
+\end{frame}
+
+\section{Methodology}
+\begin{frame}{\secname}
+    \frametitle{Protocol Structure and Verification Flow}
+    
+    \textbf{Protocol Overview (Three Phases)}
+    \begin{itemize}
+        \item \textbf{Phase I: Design} ($\mathbf{a, b, c, d}$ Objectives) $\rightarrow$ Protocol architecture based on Taproot/MAST.
+        \item \textbf{Phase II: Prototyping} $\rightarrow$ $\mathbf{PoC}$ deployment on Testnet/Signet using Python.
+        \item \textbf{Phase III: Validation} $\rightarrow$ Experimental analysis of $\mathbf{Scalability}$ and $\mathbf{vByte \text{ } Cost}$.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Core Roles and Components}
+    \begin{itemize}
+        \item \textbf{Issuer (Organization):} Provides the document and a $\mathbf{'Proof \text{ } of \text{ } Validation'}$ file to the user.
+        \item \textbf{Verifier (User):} Requires only the document, the proof, and access to the $\mathbf{public \text{ } Bitcoin \text{ } history}$.
+        \item \textbf{Full Verification} requires three successful checks: $\mathbf{Integrity}$, $\mathbf{Ownership}$, and $\mathbf{Revocation}$ status.
+    \end{itemize}
+    \small \textit{Note: All computational procedures (hashing, Merkle path) are executed $\mathbf{off-chain}$.}
+\end{frame}
+
+
+
+
+
+\section{Conclusions}
+\begin{frame}{\secname}
+    Bitcoin is a descentralized \texttt{Network}
+    
+\end{frame}
+
+\section{References}
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\nocite{*}
+\begin{tiny} 
+        \printbibliography
+    \end{tiny}
+\end{frame}
+
+\end{document}

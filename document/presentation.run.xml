@@ -44,43 +44,39 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>proposalv1.bcf</file>
+      <file>presentation.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>proposalv1.bbl</file>
+      <file>presentation.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
-      <file>apa.dbx</file>
       <file>blx-compat.def</file>
       <file>biblatex.def</file>
       <file>standard.bbx</file>
-      <file>apa.bbx</file>
-      <file>apa.cbx</file>
+      <file>authortitle.bbx</file>
+      <file>authortitle.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
-      <file>american.lbx</file>
-      <file>american-apa.lbx</file>
-      <file>english-apa.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>proposalv1</infile>
+      <infile>presentation</infile>
     </cmdline>
     <input>
-      <file>proposalv1.bcf</file>
+      <file>presentation.bcf</file>
     </input>
     <output>
-      <file>proposalv1.bbl</file>
+      <file>presentation.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>proposalv1.bbl</file>
+      <file>presentation.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>proposalv1.bcf</file>
+      <file>presentation.bcf</file>
     </requires>
     <requires type="editable">
       <file>bib.bib</file>
