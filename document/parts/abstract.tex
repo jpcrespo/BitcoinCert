@@ -3,16 +3,15 @@
 Document verification is a crucial part of detecting manipulation and fraud.
 This process is traditionally centralized, making it costly, fragile, and a single point of failure for an issuing organization.
 If the issuing organization is compromised, verifiability is lost.
-In 2009, Bitcoin was deployed as a decentralized network with high security and availability.
 
-Data anchoring methods on Bitcoin, such as \texttt{OP\_RETURN} or OpenTimeStamp, have limitations in scalability, privacy, and usability.
-The Bitcoin protocol's Taproot upgrade in 2021 overcomes limitations on the base layer.
+In 2009, Bitcoin was deployed as a decentralized network with high security and availability.
+"In addition to its use as a currency, it serves as a robust mechanism for anchoring immutable information.
+Data anchoring methods on Bitcoin, such as \texttt{OP\_RETURN}, fake address or OpenTimeStamp, have limitations in scalability, privacy, and usability.
+The Bitcoin protocol's Taproot improve in 2021 overcomes limitations on the base layer.
 
 This work proposes a new document verification protocol leveraging Taproot's cryptographic tools.
-It enables the verification of integrity, authenticity of issuance, validity revocation, and signature rotation.
+It enables the verification of integrity, authenticity of issuance and validity revocation.
 Using a Taproot address, it improves the scalability and privacy for a batch of $N$ documents.
-The protocol is based on an "off-chain verification" model.
-A rapid Proof of Concept (PoC) prototype will be developed in Python on Bitcoin's testnet/signet network.
-The objective is to evaluate the efficiency in block size, the on-chain network usage cost, and the off-chain verification efficiency.
+The protocol is predicated on an off-chain verification model, minimizing the on-chain footprint. We rigorously analyze the computational overhead, providing detailed estimations of costs and transaction fees for efficient utilization of Bitcoin's block space.
 
 \end{abstract}

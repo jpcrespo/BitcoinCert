@@ -25,6 +25,10 @@
 \usepackage{longtable,booktabs,array} % Packages for advanced table formatting.
 \usepackage{enumitem}
 \usepackage{pgfgantt}
+\usepackage{amsmath, amssymb, amsthm}
+
+
+
 
 \usepackage[
   backend=biber,
@@ -44,37 +48,52 @@
 
 \addbibresource{bib.bib} % Adds the bibliography file.
 
-\title{Decentralized Certification on Bitcoin Using Taproot}        % Sets the document title.
-% \makeatletter
-% \providecommand{\subtitle}[1]{%     % Custom command to add a subtitle.
-%   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-% }
 
-% \makeatother
 
-% \subtitle{Thesis / Paper Subtitle}  % Sets the document subtitle.
-\author{Juan Pablo Crespo Vargas\\% Sets the author's name. 
-ID : g202393610\\       % Sets the author's matriculation number.
-Supervisor: Prof. Dr. Sultan Al-Muhammadi} % Sets the supervisor of the paper / thesis     
-
-\date{}                  % Sets the document date.
-
-% From this point, the preamble ends and the actual content of the document starts.
 \begin{document}
-\pagenumbering{gobble} % Stops counting the pages from this point until changed again.
-\maketitle
+
+\begin{titlepage}
+\centering
+
+\includegraphics[width=0.3\textwidth]{figures/kfupmlogo.png}
+
+{\LARGE King Fahd University of Petroleum and Minerals\\}
+{\LARGE College of Computing \& Mathematics\\}
+{\Large Information \& Computer Science Department\\}
+
+\vspace{2cm}
+{\Huge\bfseries Decentralized Certificate Verification on Bitcoin Using Taproot\\}
+\vspace{1.5cm}
+{\Large Thesis Proposal} 
+
+\vspace{2cm}
+{Submitted by:\\}
+{\Large\bfseries Juan Crespo\\}
+{\normalsize Email: g202393610@kfupm.edu.sa}
+
+\vspace{0.5cm}
+{Supervised By:\\}
+{\Large\bfseries Dr. Sultan Al-Muhammadi\\}
+\vspace{0.5cm}
+{\large November 2025}
+\end{titlepage}
+
+
 
 \input{parts/abstract.tex} 
-
 \newpage
-\renewcommand*\contentsname{Table of Contents} % This controls the title of your table of contents.
+\renewcommand*\contentsname{Table of Contents} 
+
 {
 \hypersetup{linkcolor=black}
-\setcounter{tocdepth}{5} % Sets the maximum sublevel to be displayed within the table of contents.
+\setcounter{tocdepth}{5} 
 \tableofcontents
 }
 \newpage
-\pagenumbering{arabic}\setstretch{1.5} % Overwrites the previous command, pages are counted as normal from this point.
+
+
+\pagenumbering{arabic}
+
 
 
 \input{parts/introduction.tex} 

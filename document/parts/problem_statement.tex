@@ -11,18 +11,17 @@ This combination has not been previously utilized to create a protocol for docum
 
 This work aims to answer:
 \begin{itemize}
-    \item How can the tools applied by Taproot be leveraged to deploy a decentralized verification protocol?
-    \item To what extent does using MAST improve privacy, scalability, and spatial/computational complexity?
-    \item What is an appropriate methodology to add signature rotation and certificate revocation to the protocol?
+    \item How are the tools inherent to Taproot leveraged to propose a decentralized verification protocol?
+    \item How does anchoring information using Merkle trees within Taproot enhance privacy, scalability, and performance in verification?
+    \item Using Taproot, can institutions modify or revoke published certificate?
 \end{itemize}
 
 \subsection{Specific Objectives}
 To answer the research questions, the following objectives are set:
 \begin{enumerate}[label=\alph*)]
-    \item Design software that creates the Merkle structure of scripts where the integrity of the issued documents is verified.
-    \item Design a software component that allows ownership verification using the digital signature on issued documents.
-    \item Design a software component that allows for document signature key rotation.
-    \item Design a software component that tracks revocation to verify the validity of issued documents.
-    \item Deploy a Proof of Concept (PoC) on a Bitcoin test network.
-    \item Measure the scalability, time/space complexity, and network costs as a function of the vBytes used in the transaction.
+    \item To design a Merkle tree containing scripts for verifying the integrity of issued documents.
+    \item To design a component that allows the verification of ownership using the digital signature on issued documents.
+    \item To design a component that tracks the revocation of a document to verify its validity.
+    \item To construct a Proof of Concept (PoC) on a Bitcoin test network.
+    \item To estimate the scalability, temporal/spatial complexity, and network costs based on the use of vBytes.
 \end{enumerate}
