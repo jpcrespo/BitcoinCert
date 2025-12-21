@@ -1,17 +1,19 @@
 \begin{abstract}
 
-Document verification is a crucial part of detecting manipulation and fraud.
-This process is traditionally centralized, making it costly, fragile, and a single point of failure for an issuing organization.
-If the issuing organization is compromised, verifiability is lost.
+Document verification is a fundamental mechanism for detecting document falsification and fraud in institutional processes.
+Traditional approaches are based on centralized infrastructures, which incur high operational costs, limited availability, and single points of failure.
+When the issuing organization is compromised or becomes unavailable, verification capability is effectively lost.
 
-In 2009, Bitcoin was deployed as a decentralized network with high security and availability.
-"In addition to its use as a currency, it serves as a robust mechanism for anchoring immutable information.
-Data anchoring methods on Bitcoin, such as \texttt{OP\_RETURN}, fake address or OpenTimeStamp, have limitations in scalability, privacy, and usability.
-The Bitcoin protocol's Taproot improve in 2021 overcomes limitations on the base layer.
+Bitcoin, introduced in 2009, operates as a decentralized network secured by a proof-of-work consensus protocol.
+Its properties of immutability, high availability, and permissionless access make it a suitable foundation for applications beyond monetary use.
 
-This work proposes a new document verification protocol leveraging Taproot's cryptographic tools.
-It enables the verification of integrity, authenticity of issuance and validity revocation.
-Using a Taproot address, it improves the scalability and privacy for a batch of $N$ documents.
-The protocol is predicated on an off-chain verification model, minimizing the on-chain footprint. We rigorously analyze the computational overhead, providing detailed estimations of costs and transaction fees for efficient utilization of Bitcoin's block space.
+Bitcoin has been widely used for anchoring non-repudiable information.
+Several data anchoring techniques have been proposed for Bitcoin, including OP\_RETURN, fake addresses, OpenTimestamps, and Script- and Witness-based methods.
+However, these approaches exhibit limitations in scalability, privacy, and usability.
+The activation of the Taproot upgrade in 2021 introduced more efficient and private cryptographic primitives, enabling new application designs at the base layer.
 
+This work proposes a novel protocol for decentralized document verification using Taproot.
+The protocol supports integrity verification, issuer authenticity verification, and revocation status checking.
+By anchoring a batch of $N$ documents to a single pay-to-taproot P2TR output, the system improves scalability and preserves privacy.
+Verification is performed entirely off-chain, and the protocol evaluates both computational costs and on-chain block space usage.
 \end{abstract}

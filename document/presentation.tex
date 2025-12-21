@@ -1,83 +1,95 @@
-\documentclass[11pt]{beamer}
+\documentclass[10pt]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage[backend=biber, style=authortitle]{biblatex}
+\usepackage{pgfgantt}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage[backend=biber, style=numeric,sorting=none]{biblatex}
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
 \addbibresource{bib.bib}
+\definecolor{KFUPMGreen}{HTML}{006652}
 
-\usetheme{Szeged}
-\usecolortheme{lily}
+\usetheme{Berlin}
 \usefonttheme{professionalfonts}
-\definecolor{KFUPMGreen}{HTML}{006652} 
+\setbeamercolor{structure}{fg=KFUPMGreen}
+\renewcommand*{\bibfont}{\tiny}
+\setlength\bibitemsep{2pt}
 
+\setbeamertemplate{footline}{%
+  \hfill\scriptsize\bfseries\insertframenumber/\inserttotalframenumber\hspace{0.3cm}\vspace{0.15cm}
+}
+\setbeamertemplate{navigation symbols}{}
 
-\setbeamercolor{palette primary}{fg=white, bg=KFUPMGreen}
-\setbeamercolor{section in head/foot}{fg=white, bg=KFUPMGreen}
-\setbeamercolor{title}{fg=KFUPMGreen}
-\setbeamercolor{frametitle}{fg=KFUPMGreen}
-\setbeamercolor{itemize item}{fg=KFUPMGreen}
-\setbeamercolor{institute}{fg=white}
-\setbeamercolor{institute in head/foot}{fg=white}
-\AtEveryBibitem{\tiny}
-
-
-
-\title{Decentralized Certification on Bitcoin}
+\title{Decentralized Document Verification on Bitcoin Using Taproot}
 \institute{KFUPM}
-\author{Juan Crespo}
-\date{November 2025}
-\titlegraphic{\includegraphics[height=2.5cm]{figures/kfupmlogo.png}}
-\thanks{Dr. Sultan Almahumdi (Supervisor)\\
-        Dr. Mahfus Megaman\\
-        Dr. Mengueche}
+\author[Juan P. Crespo V.]{Juan P. Crespo V.}
+\date{}
 
 
 \begin{document}
-\frame{\titlepage}
-% \section{Presentation}
-% \begin{document}
-% \begin{frame}[noframenumbering,t]
-% \vspace*{0.4cm}
-% \hspace*{-0.4cm}
-% \begin{minipage}[t]{0.175\textwidth}
-% \raggedright
-% \includegraphics[width=\textwidth]{figures/kfupmlogo.png} 
-% \end{minipage}
-% \vspace{\textwidth}
-% \hspace*{2cm}
-% \begin{minipage}[t]{0.9\textwidth} 
-% \vspace*{-2.2cm}
-% \raggedright
-% \small \textbf{Information \& Computer Science Department} \\
-% \small College of Computing \& Mathematics \\
-% \small King Fahd University of Petroleum and Minerals \\
-% \centering
-% \vspace*{1cm}
-% \hspace*{-3cm}
-% \Large \textcolor{KFUPMGreen}{Decentralized Certification on Bitcoin}\\
-% \vspace*{1cm}
-% \hspace*{-3cm}
-% \small{Juan Pablo Crespo Vargas - ID  202393610}\\
-% \hspace*{-2.5cm}
-% \vspace*{1cm}
-% \small{Supervised by: Dr. Sultan Al-Muhammadi}\\
-% \hspace*{-2.5cm}
-% \small{November 2025}
-% \end{minipage}
-% \end{frame}
+    
+{
+\begin{frame}[plain,noframenumbering]
+\begin{columns}[T]   
+\column{0.25\textwidth}
+\vspace*{0.3cm}
+\centering
+\includegraphics[height=2cm]{figures/kfupmlogo.png}
+\hspace*{-1.5cm}
+\column{0.75\textwidth}
+\vspace*{0.75cm}
+{\normalsize \bfseries King Fahd University of Petroleum and Minerals\\College of Computing \& Mathematics\\Information \& Computer Science Department\\}
+\end{columns}
 
-% \section{Outline}
-% \begin{frame}{\secname}
-%     \begin{itemize}
-%         \item Introduction
-%         \item Motivation
-%         \item Literature Review
-%         \item Problem Steatment
-%         \item Methodology
-%         \item Conclusions
-%         \item References
-%     \end{itemize}
-% \end{frame}
+\vspace*{0.2cm}
+\begin{block}{\centering \huge Decentralized Document Verification\\on Bitcoin Using Taproot\\}
+\vspace*{0.2cm}
+\centering
+{\large \bfseries Master Thesis Proposal\\}
+\vspace*{0.2cm}
+{\normalsize \bfseries Presented by:\\}
+{\small Juan P. Crespo V.\\}
+{\scriptsize ID: 202393610\\}
+\vspace*{0.25cm}
+\centering
+        {\bfseries Committee Members:}\\[0.15cm]
+        \begin{tabular}{l}
+            \footnotesize Dr. Sultan Al-Muhammadi (Advisor)\\
+            \footnotesize Dr. Farag Ahmed Azzedin\\
+            \footnotesize Dr. Md Mahfuzur Rahman
+        \end{tabular}
+\end{block}
+\centering
+\vspace*{-0.1cm}
+{\scriptsize \bfseries December 2025}
+\end{frame}
+}
 
+
+\begin{frame}{Outline}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\input{presentation/1introduction.tex} 
+\input{presentation/2literaturereview.tex}
+\input{presentation/3motivation.tex}
+\input{presentation/4problemstatement.tex}
+\input{presentation/5methodology.tex}
+\input{presentation/6timeline.tex}
+\input{presentation/7conclusions.tex}
+
+
+{
+\setbeamertemplate{navigation symbols}{}
+
+\begin{frame}[allowframebreaks]{References}
+\printbibliography
+\end{frame}
+}
 
 \end{document}

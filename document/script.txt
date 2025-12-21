@@ -1,0 +1,582 @@
+SLIDE: TITLE
+
+Salam Alaikum wa Rahmatullahi wa Barakatuh.
+
+My name is Juan Pablo Crespo,
+and I will present my master’s thesis proposal entitled:
+
+“Decentralized Document Verification on Bitcoin Using Taproot.”
+
+--------------------------------------------------
+
+SLIDE: OUTLINE
+
+This presentation follows this outline:
+
+Introduction.
+Literature review.
+Motivation.
+Problem statement.
+Methodology.
+Timeline.
+And conclusions.
+
+--------------------------------------------------
+
+INTRODUCTION PART
+
+SLIDE 1 – DOCUMENT ISSUANCE AND VERIFICATION
+
+Organizations issue documents to certify that a specific fact has occurred.
+These documents can be physical, such as paper certificates,
+or digital, such as PDF files.
+
+Document verification is usually performed by the issuing organization itself.
+This process typically involves checking three fundamental requirements:
+
+The document content has not been altered.
+The document was issued by the claimed organization.
+The document has not been revoked.
+
+--------------------------------------------------
+
+SLIDE 2 – EXAMPLE: ACADEMIC CERTIFICATES
+
+A common example of document verification is academic certificates.
+
+Integrity:
+the content, such as names, dates, or degrees, must not be modified.
+
+Authenticity:
+the certificate must be issued by a legitimate institution or university.
+
+Validity:
+the certificate may become invalid if it is revoked
+due to errors or fraud discovered after issuance.
+
+--------------------------------------------------
+
+SLIDE 3 – DOCUMENT FRAUD AND CENTRALIZATION
+
+Document fraud represents a multi-billion-dollar global industry.
+
+Fraud in documents undermines trust and credibility
+in issuing institutions.
+
+In traditional systems,
+document verification is centralized
+and requires significant operational resources,
+including personnel, infrastructure,
+and physical anti-tampering measures.
+
+In digital systems,
+verification remains centralized
+and introduces additional costs related to service availability
+and cybersecurity,
+such as denial-of-service protection
+and server-side security services.
+
+--------------------------------------------------
+
+SLIDE 4 – BITCOIN BACKGROUND
+
+In 2009, Bitcoin was introduced as a decentralized network,
+secured by a proof-of-work consensus protocol
+and elliptic curve cryptography.
+
+Bitcoin exhibits several properties
+that differentiate it from traditional web services:
+
+Censorship resistance.
+High availability through a globally distributed network of nodes,
+as illustrated in the figure,
+where each blue dot represents a Bitcoin node.
+An immutable public ledger known as the blockchain.
+Public verifiability without intermediaries.
+
+--------------------------------------------------
+
+SLIDE 5 – WHY BITCOIN
+
+Bitcoin is deliberately designed
+to minimize the attack surface of the network.
+
+To reduce the risk of denial-of-service attacks,
+Bitcoin limits on-chain computation.
+
+It uses a stack-based scripting language
+with a simple execution model.
+It supports a small and well-defined set of instructions,
+known as opcodes.
+It does not allow loops, recursion,
+or persistent memory.
+
+Bitcoin follows the unspent transaction output,
+or UTXO, model,
+where each transaction is independently verified
+by every node.
+
+--------------------------------------------------
+
+SLIDE 6 – OTHER BLOCKCHAIN PLATFORMS
+
+Other blockchain platforms,
+such as Ethereum or Solana,
+adopt an account-based model
+instead of the UTXO model.
+
+These platforms support virtual machines
+that enable expressive programs
+with features such as loops,
+recursion,
+and complex state.
+
+This design introduces a trade-off:
+
+More expressive applications.
+Higher transaction costs.
+Larger attack surfaces,
+which require security audits of smart contracts.
+More complex consensus and governance mechanisms.
+
+--------------------------------------------------
+
+SLIDE 7 – TRANSITION TO THE PROPOSAL
+
+In summary,
+decentralized blockchain networks
+enable new models for digital document verification.
+
+Verification can be performed independently
+of the issuing organization,
+providing:
+
+High availability.
+Resistance to denial-of-service
+and censorship attacks.
+Immutable records
+that preserve data integrity.
+Prevention of repudiation
+by the issuing entity.
+
+--------------------------------------------------
+
+LITERATURE REVIEW PART
+
+SLIDE 1
+
+The first step in using blockchain
+for information preservation
+was studied by Lemieux.
+
+This work shows that blockchain
+can provide integrity guarantees
+for preserving digital records
+in the short and medium term,
+due to the use of cryptographic hash functions
+and digital signatures.
+
+The study also anticipates future risks
+related to quantum computing,
+which could potentially compromise
+existing cryptographic schemes
+such as ECDSA.
+
+--------------------------------------------------
+
+SLIDE 2
+
+Bitcoin does not provide a native field
+for embedding arbitrary metadata in transactions.
+
+As a result,
+alternative techniques have been proposed
+to anchor data on-chain.
+
+Gao studies a methodology
+based on encoding data
+into fake P2PKH Bitcoin addresses.
+
+The entity constructing the transaction
+does not control this address,
+since it does not possess
+the corresponding private key.
+
+This technique allows embedding data
+in multiples of 20 bytes per transaction.
+
+However,
+it permanently burns Bitcoin,
+making it economically inefficient.
+
+--------------------------------------------------
+
+SLIDE 3
+
+Bartoletti analyzes data embedding techniques in Bitcoin,
+including fake addresses,
+OP_RETURN,
+and script-based methods.
+
+Sward evaluates these methods
+in terms of performance
+and network health.
+
+They conclude that OP_RETURN-based approaches
+are preferable
+because they do not bloat the UTXO set
+and do not burn Bitcoin.
+
+UTXO bloat refers to the growth
+of the unspent transaction output set,
+which must be stored in memory
+by every node.
+
+--------------------------------------------------
+
+SLIDE 4
+
+Strehle and Steinmetz analyze OP_RETURN usage
+between 2018 and 2019.
+
+The top 37 services account
+for approximately 22 percent
+of OP_RETURN usage,
+contributing around 10 gigabytes of data
+to the blockchain.
+
+OP_RETURN places data
+in the output script.
+
+When the Bitcoin script interpreter
+encounters OP_RETURN,
+execution terminates immediately,
+making the output provably unspendable.
+
+--------------------------------------------------
+
+SLIDE 5
+
+OP_RETURN is the most widely used mechanism
+for anchoring non-monetary data in Bitcoin.
+
+It is adopted by protocols
+such as Blockcerts
+and OpenTimestamps.
+
+The embedded data
+is explicitly visible on-chain
+and does not provide privacy guarantees.
+
+OP_RETURN usage is constrained
+by relay and mining policies,
+such as the common 80-byte limit.
+
+--------------------------------------------------
+
+SLIDE 6
+
+In 2017,
+Segregated Witness, or SegWit,
+was introduced
+to improve the Bitcoin protocol.
+
+SegWit separates signature data
+from the transaction body
+into a dedicated witness structure.
+
+This enables larger data payloads
+without increasing UTXO set growth.
+
+--------------------------------------------------
+
+SLIDE 7
+
+In parallel,
+other blockchain networks
+introduced expressive smart contracts.
+
+Several works use Ethereum
+to attest certificates,
+timestamps,
+and structured data.
+
+These approaches increase flexibility,
+but also introduce higher costs,
+greater complexity,
+and larger attack surfaces.
+
+--------------------------------------------------
+
+SLIDE 8
+
+The work
+“Blockchain and Higher Education Diplomas”
+identifies challenges
+such as scalability,
+error correction,
+system complexity,
+and lack of standards.
+
+Rustemi finds that many platforms
+are implemented on Ethereum
+using complex smart contracts.
+
+Revocation often remains a challenge
+and may require third-party involvement.
+
+--------------------------------------------------
+
+SLIDE 9
+
+After SegWit,
+Bitcoin introduced new cryptographic primitives.
+
+These include Schnorr signatures
+and Merkleized Abstract Syntax Trees,
+or MAST.
+
+These features were activated in 2021
+through the Taproot upgrade,
+using a new output type
+known as Pay-to-Taproot.
+
+--------------------------------------------------
+
+MOTIVATION PART
+
+SLIDE 1
+
+Based on the literature,
+before Taproot,
+building applications on Bitcoin
+involved several limitations.
+
+All existing methods
+present technical and practical constraints.
+
+--------------------------------------------------
+
+SLIDE 2
+
+Using another blockchain,
+such as Ethereum,
+involves a trade-off.
+
+It increases the attack surface
+and operational costs.
+
+Complex executions
+are more susceptible
+to denial-of-service attacks.
+
+--------------------------------------------------
+
+SLIDE 3
+
+Taproot evolves the Bitcoin protocol
+by improving efficiency,
+privacy,
+and security.
+
+Activated in 2021,
+Taproot integrates MAST
+and Schnorr signatures.
+
+These properties motivate
+revisiting document verification on Bitcoin.
+
+--------------------------------------------------
+
+PROBLEM STATEMENT PART
+
+The proposed methodology
+is structured into two phases.
+
+Phase I:
+Protocol and Architecture Design.
+
+Phase II:
+Proof of Concept
+and Performance Estimations.
+
+--------------------------------------------------
+
+METHODOLOGY PART
+
+SLIDE 1
+
+We propose a methodology
+structured into two phases.
+
+The first phase
+is Protocol and Architecture Design.
+
+The second phase
+is Proof of Concept
+and Performance Estimations.
+
+--------------------------------------------------
+
+SLIDE 2
+
+The proposed protocol
+supports three verification objectives:
+
+Integrity.
+Authenticity.
+Revocation.
+
+Verification is performed off-chain
+using the document
+and a control file.
+
+--------------------------------------------------
+
+SLIDE 3
+
+Phase I includes issuance
+by the organization
+and verification
+by a third party.
+
+Information is anchored
+in a single P2TR output.
+
+Revocation is handled
+through transaction chaining.
+
+--------------------------------------------------
+
+SLIDE 4
+
+Privacy is preserved using MAST.
+
+Each script leaf
+is intentionally non-spendable.
+
+Verification compares
+off-chain reconstruction
+with on-chain commitment.
+
+--------------------------------------------------
+
+SLIDE 5
+
+Each Merkle leaf
+contains the hash of a document.
+
+All leaves
+are combined
+into a Merkle root.
+
+--------------------------------------------------
+
+SLIDE 6
+
+Two key pairs are used.
+
+One for Bitcoin transactions.
+One for document signing.
+
+--------------------------------------------------
+
+SLIDE 7
+
+Verification reconstructs
+the Merkle root
+and Taproot output.
+
+Signatures
+and revocation state
+are checked.
+
+--------------------------------------------------
+
+SLIDE 8
+
+Revocation is performed
+by spending the Taproot output
+and publishing a bitmap
+in OP_RETURN.
+
+--------------------------------------------------
+
+SLIDE 9
+
+The proof of concept
+is executed
+on Bitcoin Signet or Testnet.
+
+--------------------------------------------------
+
+SLIDE 10
+
+Performance is evaluated
+using scalability
+and on-chain cost in vBytes.
+
+--------------------------------------------------
+
+TIMELINE PART
+
+Phase 1:
+Protocol design,
+weeks 1 to 7.
+
+Phase 2:
+Proof of concept,
+weeks 6 to 12.
+
+Evaluation:
+weeks 13 and 14.
+
+Writing and presentation:
+weeks 15 to 17.
+
+--------------------------------------------------
+
+CONCLUSION PART
+
+SLIDE 1
+
+This work motivates
+decentralized certification protocols
+as an alternative
+to centralized systems.
+
+--------------------------------------------------
+
+SLIDE 2
+
+The protocol supports
+integrity,
+authenticity,
+revocation,
+and privacy
+using Taproot.
+
+--------------------------------------------------
+
+SLIDE 3
+
+Limitations include
+semantic validity,
+issuer-controlled revocation,
+and long-term preservation.
+
+--------------------------------------------------
+
+REFERENCES
+
+The references used in this work
+are listed
+in the final slides.
+
+They include academic papers,
+standards,
+and Bitcoin Improvement Proposals.
+
+Thank you very much for your attention.
+
+I will be happy to answer any questions.

@@ -1,27 +1,30 @@
 \section{Problem Statement}
 
-Decentralized solutions for document verification have security problems inherent to the network on which they are deployed.
-On Bitcoin, they contain privacy issues or are inefficient in cost and blockspace in solutions using protocols such as OpenTimestamps, Blockcerts, \texttt{OP\_RETURN}, among others.
+Existing decentralized approaches to document verification exhibit limitations that depend strongly on the underlying blockchain infrastructure.
+In the context of Bitcoin, current solutions based on protocols such as OpenTimestamps, Blockcerts, and \texttt{OP\_RETURN} either expose embedded metadata, compromising privacy, or incur high costs in terms of block space and transaction fees.
+As a result, these approaches do not scale efficiently for large batches of documents or long-term institutional use.
 
-Taproot applies a new, more efficient, and more private Schnorr digital signature scheme for multisignature security schemes.
-It also allows committing multiple scripts into a single output using Merkleized Abstract Syntax Trees (MAST), improving costs and blockspace usage.
-This combination has not been previously utilized to create a protocol for document verification.
+The Taproot upgrade introduces new cryptographic primitives that significantly improve efficiency and privacy at the Bitcoin base layer.
+By adopting Schnorr signatures, Taproot enables more compact and flexible multisignature constructions.
+Additionally, the use of Merkleized Abstract Syntax Trees (MAST) allows multiple script conditions to be committed within a single transaction output, reducing on-chain footprint while preserving verifiability.
+Despite these capabilities, Taproot has not yet been leveraged to design a complete protocol for decentralized document verification that simultaneously supports integrity, issuer authenticity, and revocation.
 
 \subsection{Research Questions}
 
-This work aims to answer:
+This work aims to address the following research questions:
 \begin{itemize}
-    \item How are the tools inherent to Taproot leveraged to propose a decentralized verification protocol?
-    \item How does anchoring information using Merkle trees within Taproot enhance privacy, scalability, and performance in verification?
-    \item Using Taproot, can institutions modify or revoke published certificate?
+    \item How can Taproot be used to build a decentralized document verification protocol on Bitcoin?
+    \item How does using Merkle tree commitments in Taproot improve privacy and scalability during document verification?
+    \item How can document revocation be supported within a Taproot-based verification protocol?
 \end{itemize}
 
 \subsection{Specific Objectives}
-To answer the research questions, the following objectives are set:
+
+To answer the proposed research questions, the following objectives are defined:
 \begin{enumerate}[label=\alph*)]
-    \item To design a Merkle tree containing scripts for verifying the integrity of issued documents.
-    \item To design a component that allows the verification of ownership using the digital signature on issued documents.
-    \item To design a component that tracks the revocation of a document to verify its validity.
-    \item To construct a Proof of Concept (PoC) on a Bitcoin test network.
-    \item To estimate the scalability, temporal/spatial complexity, and network costs based on the use of vBytes.
+    \item To design a Merkle tree structure that enables the verification of document integrity.
+    \item To design a mechanism for verifying issuer authenticity using digital signatures.
+    \item To design a revocation tracking mechanism that allows the verification of document validity.
+    \item To propose a proof of concept (PoC) of the proposed protocol on a Bitcoin test network.
+    \item To estimate the protocol performance in terms of scalability, computational complexity, and on-chain costs measured in virtual bytes (vBytes).
 \end{enumerate}

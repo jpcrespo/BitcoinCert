@@ -1,23 +1,21 @@
 \section{Introduction}
 
-Certificates issued by an organization are proof of the occurrence of a fact.
-The verification that this document has not been forged, manipulated, or revoked depends on the issuer.
-Confidence in the organization rests on this procedure being efficient and accessible.
+Documents issued by an organization serve as proof of a factual occurrence.
+Verifying the authenticity, integrity, and non-revocation of such documents relies on the issuer.
+Trust in the organization depends on the efficiency and accessibility of this procedure.
 
-The verification of a certificate has historically been done in the physical world in a centralized manner.
-This entails significant costs to maintain high availability and efficiency.
-With the arrival of the Internet and the proliferation of computers, it was inevitable to bring both issuance and verification into a centralized digital space.
+Historically, document verification was implemented through centralized physical processes.
+These systems require significant operational costs to achieve availability and efficiency.
+With the advent of the Internet and increased computational capacity, issuance and verification transitioned to centralized digital systems, introducing additional operational costs related to server infrastructure, cybersecurity, and software licensing.
 
-Bitcoin began operating in 2009 as the first permissionless decentralized network.
-It has not had any censorship events or downtime as of the writing of this document.
-It allows the execution of limited smart contracts following the UTXO model, as well as data anchoring.
-Limited by design to reduce the attack surface for denial-of-service and due to the high cost of anchoring bytes of information, it was not considered a scalable solution for document verification.
+Bitcoin launched in 2009 as the first decentralized network.
+It has experienced no censorship events or downtime as of this writing.
+It supports limited smart contract execution under the unspent transaction output UTXO model, enabling information anchoring.
+Constrained by design to mitigate denial-of-service DoS vectors and high block space costs, limiting the range of application logic that can be implemented directly on-chain.
 
-Various studies and proposals have turned to using other blockchain networks, such as Ethereum.
-By allowing the execution of Turing-complete smart contracts, they facilitate the validation and verification of certificates.
-However, they introduce different trust assumptions and greater complexity in consensus, which increases the risk of censorship or rollbacks, compromising verification autonomy.
+Several studies have explored alternative blockchain platforms, such as Ethereum, to enable more expressive application logic.
+Their use of Turing-complete smart contracts allows on-chain certificate validation and verification.
+However, this approach introduces additional trust assumptions and higher consensus complexity, increasing exposure to censorship and state reorganization risks, reducing verification autonomy.
 
-Bitcoin has a protocol that has evolved over its 16 years of existence.
-It had two major upgrades accepted by the community, Segwit (2017) and Taproot (2021).
-These improvements in security, privacy, and blockspace efficiency allow for the expansion of use cases.
-Utilizing the cryptographic tools enabled by Taproot, we propose a methodology for document verification directly on the base layer of Bitcoin.
+The Bitcoin protocol has evolved over 16 years through major community-accepted upgrades.
+SegWit~\cite{segwit} and Taproot~\cite{taproot} improved security, privacy, and block space efficiency, expanding the set of feasible base-layer applications, especially those requiring efficient data commitments and verification.

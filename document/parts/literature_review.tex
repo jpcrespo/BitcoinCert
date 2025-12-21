@@ -1,93 +1,100 @@
 \section{Literature Review}
 
-A Bitcoin transaction is a variable-sized string of Bytes with a theoretical maximum of 1 MB.
-It has information sections such as the timestamp, version, outputs, etc.
-We highlight one section in particular: the \texttt{scriptPubKey} in the output.
-The type of transaction is configured depending on the type of \texttt{scriptPubKey}.
+A Bitcoin transaction is a variable-sized data structure with a theoretical maximum size of 1 MB.
+It consists of multiple fields, including version information, inputs, outputs, and locking scripts.
+The \texttt{scriptPubKey} field in transaction outputs defines the spending conditions and determines the transaction type.
 
-The standard ones being Pay-to-PublicKeyHash (P2PKH) and Pay-to-ScriptHash (P2SH), known as legacy transactions.
-These transactions suffer from a vulnerability called malleability, which was resolved with the arrival of SegWit in 2017.
-Malleability is a vulnerability that allows the DER encoding of an ECDSA digital signature to be modified without invalidating it, thereby changing the transaction index (txid).
-
-This vulnerability was the primary motivation for developing SegWit in 2017.
-It modifies the transaction structure by moving the signature information (the \texttt{scriptSig}) to a separate section called the Witness.
-This introduced new transaction types: Pay-to-Witness-PublicKeyHash (P2WPKH) and Pay-to-Witness-Script-Hash (P2WSH).
+The transaction format also enables data embedding and cryptographic commitments through specific output constructions.
+This capability has been widely used as a basis for information anchoring, enabling verifiable integrity guarantees without modifying the underlying protocol.
 
 \subsection{Data Anchoring Techniques}
 
-The use of Bitcoin was initially limited only to the peer-to-peer transmission of monetary value.
-By maintaining a distributed and consistent ledger across the entire network, the possibility of using it for other applications soon became clear.
-In the work 'Trusting records: is Blockchain technology the answer?'~\cite{Lemieux2016Trusting}, it is studied whether this technology is appropriate for preserving the integrity of digital information using various ISO standards.
-The analysis concludes that, while Blockchain is useful for addressing information integrity in the short term, it does not guarantee the initial reliability of the records and presents several limitations as a long-term solution for authentic digital preservation.
-The main argument is the vulnerability of digital signature algorithms and hashes like sha256 and ripemd160.
+Although Bitcoin was originally designed for peer-to-peer monetary transfers, its globally replicated and immutable ledger motivated its use for applications beyond payments.
+Lemieux~\cite{Lemieux2016Trusting} evaluates blockchain technology as a mechanism for preserving the integrity of digital records under various ISO standards.
+The study concludes that while blockchain-based systems can provide short- and medium-term integrity guarantees, they do not ensure initial record reliability and present limitations as long-term preservation mechanisms.
+In particular, the analysis highlights the long-term reliance on cryptographic primitives such as hash functions and digital signatures, including SHA-256 and RIPEMD-160, as a fundamental concern.
 
-With the exception of Coinbase transactions (where new Bitcoin tokens are issued in each block), Bitcoin transactions do not contain a default space for inserting arbitrary information.
-The paper 'Decentralized Trusted Timestamping Blockchain'~\cite{Gao2017Decentralized} proposes a method to introduce metadata within P2PKH transactions.
-It encodes information inside a "fake" address, losing control by not having the corresponding private key (sk).
-By being able to introduce $N$ outputs in a transaction, the proposed method has $20 \times N$ available bytes.
-This method permanently burns the Bitcoin in each output, making it one of the most expensive.
+Except for coinbase transactions, Bitcoin does not natively provide a designated field for arbitrary metadata.
+Gao and Nobuhara~\cite{Gao2017Decentralized} propose embedding information into standard P2PKH transactions by encoding metadata within so-called fake addresses.
+By creating a transaction with $N$ outputs, this approach allows the insertion of up to $20 \times N$ bytes.
+However, the method permanently destroys the associated Bitcoin by rendering the outputs unspendable, resulting in high economic cost and limited scalability.
 
-In the work 'Data Insertion in Bitcoin’s Blockchain'~\cite{Sward2018DataInsertion}, an exhaustive search is made of the ways used to insert data into transactions.
-It identifies two categories: transactions that use ScriptHash and those that use "fake addresses" as in the case described in the previous paper.
-It finds that the use of ScriptHashes is a more complex process to perform.
-It has advantages in not being limited to 20 bytes; however, its construction is non-standard and needs to be developed at each stage.
-It concludes that "no universally optimal method exists" as there is a trade-off between the amount of data and the anchoring costs.
-It also mentions the need for studies to investigate the impact of SegWit, as it is limited to analyzing legacy transactions.
+Sward et al.~\cite{Sward2018DataInsertion} conduct a comprehensive analysis of data insertion techniques in Bitcoin transactions.
+Their study categorizes approaches into ScriptHash-based constructions and fake address techniques.
+While ScriptHash-based approaches are not constrained by a fixed data size limit, they require non-standard scripts and increased construction complexity.
+The authors conclude that no universally optimal data insertion method exists, as all approaches involve trade-offs between data capacity, transaction cost, network health, and standardness.
 
-The paper "A Journey into Bitcoin Metadata"~\cite{Bartoletti2019BitcoinMetadata} also analyzes techniques for anchoring metadata in Bitcoin and its applications, such as proof of ownership and financial records.
-It explores in detail whether the different anchoring methods negatively affect Bitcoin's primary function.
-Finding that one problem is the bloat of the Unspent Transaction Output (UTXO) set.
-In this regard, it highlights that methods using \texttt{OP\_RETURN} are those that generate the least impact, occupying less space in relation to the total size of the blockchain.
+Bartoletti et al.~\cite{Bartoletti2019BitcoinMetadata} further analyze metadata embedding techniques and their impact on Bitcoin’s primary function.
+They identify Unspent Transaction Output (UTXO) set growth as a critical concern, as excessive UTXO expansion negatively affects node performance.
+Among the evaluated methods, approaches based on \texttt{OP\_RETURN} minimize UTXO bloat by explicitly marking outputs as provably unspendable.
 
-\texttt{OP\_RETURN} methods utilize a transaction output, without spending Bitcoin.
-It is a \texttt{scriptPubKey} that contains the \texttt{OP\_RETURN} opcode, which terminates the script execution.
-The work "Dominating OP Returns: The Impact of Omni and Veriblock on Bitcoin"~\cite{Strehle2020DominatingOPReturns} analyzes 32.4 million transactions between 2018 and 2019, finding that the use of \texttt{OP\_RETURN} comes mainly from 37 services.
-Primarily: Omni, which anchors financial information related to the use of USDT, and Veriblock, which uses it for the security of other blockchains using Proof-of-Proof.
-Showing that \texttt{OP\_RETURN} was established as the standard and dominant method for embedding non-monetary data in the Bitcoin blockchain.
-It measures their impact on the Bitcoin network, finding that the analyzed transactions contribute approximately 10 GB to the network despite being limited to 80 bytes per output.
+The \texttt{OP\_RETURN} opcode enables arbitrary data insertion by terminating script execution.
+Strehle and Steinmetz~\cite{Strehle2020DominatingOPReturns} analyze over 32 million transactions and demonstrate that \texttt{OP\_RETURN} has become the dominant mechanism for embedding non-monetary data in Bitcoin.
+The study shows that most such transactions originate from a small number of services, notably Omni and Veriblock.
+Widely deployed protocols such as Blockcerts~\cite{Blockcerts} and OpenTimestamps~\cite{OpenTimestamps} rely on \texttt{OP\_RETURN}-based anchoring.
+Despite its efficiency and standardization, \texttt{OP\_RETURN} explicitly reveals the presence and location of embedded metadata, limiting privacy for sensitive verification use cases.
 
-The use of legacy transactions for data anchoring has two problems in its design: lack of privacy and the malleability vulnerability.
-When analyzing the blockchain, the \texttt{OP\_RETURN} content is clearly identified, losing the privacy of the anchored information.
-Malleability is a vulnerability that allows an attacker to modify the encoding of a digital signature without affecting its validity, creating two valid transactions but with different transaction IDs (txid).
+Legacy data anchoring techniques therefore exhibit two primary limitations: lack of privacy and transaction malleability.
+While SegWit effectively resolves malleability, legacy approaches still expose anchored data at the protocol level.
+Kedziora et al.~\cite{Kedziora2022AnalysisSegWit} analyze the impact of SegWit adoption, showing that segregating witness data improves both transaction efficiency and security.
+They report transaction cost reductions of up to 75\% and expanded data capacity through the Witness structure without increasing UTXO bloat.
 
-These two problems are the main reason for the implementation of BIP141 SegWit.
-In the paper 'Analysis of segregated witness implementation...'~\cite{Kedziora2022AnalysisSegWit}, the authors study the impact after the softfork's application.
-It finds benefits in separating the digital signature from the transaction's data block into another space called the Witness: efficiency and security.
-A SegWit transaction is 75\% less costly and solves the malleability problem.
-It finds that data anchoring via the Witness expands the limitation in Bytes.
-While they do not affect the bloating of the UTXO set, they need to be fully declared and spent to be anchored to the Blockchain.
-Concluding that the implementation was successful and opens the door to new types of applications with more versatile Smart Contracts.
+Table~\ref{tab:comparativeBitcoin} summarizes the main characteristics of Bitcoin-based data anchoring techniques discussed in the literature.
+The values are approximate and derived from the referenced works, providing a qualitative comparison of trade-offs.
 
-The development of new cryptographic tools is fundamental to improving performance in Blockchain networks.
-Studies like Gayoso~\cite{Gayoso2020AnalysisCryptographic}, Fang~\cite{Fang2020DigitalSignature}, and Zhang~\cite{Zhang2025HighEfficiencySchnorrMultiSignature} analyze the essential technological pillars: hash functions, digital signatures, and Merkle trees.
-They suggest the use of new digital signature schemes, highlighting Schnorr signatures.
-Adding privacy and efficiency in validation algorithms, they show their advantage in aggregate, group, and threshold signature schemes.
-The authors agree that Schnorr is a scheme that meets the non-repudiation requirements in Bitcoin.
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|l|c|c|c|c|c|}
+            \hline
+            \textbf{Characteristic} & \textbf{Fake Address} & \textbf{OP\_RETURN} & \textbf{OpenTimestamps} & \textbf{Script Methods} & \textbf{Witness Methods} \\ \hline
+            Size (Bytes) & $20 \times N$ & $\sim$80 & $\sim$40 & $\sim$1000 & $\sim$4000 \\ \hline
+            Privacy & No & Hash-visible & Hash & Hidden until spend & Hidden until spend \\ \hline
+            Scalability & Limited & Merkle Tree & Merkle Tree & Complex & Complex \\ \hline
+            UTXO Impact & High bloat & None & None & Low & Low \\ \hline
+            Cost Model & Fee + Burn & Standard & Aggregated & Low & Discounted \\ \hline
+        \end{tabular}
+    }
+    \caption{Comparison of Bitcoin-based data anchoring techniques}
+    \label{tab:comparativeBitcoin}
+\end{table}
 
-These foundations are the basis for a new softfork proposed in BIP341 Taproot; it is an extension of SegWit, considered a new version of it.
-It proposes a new transaction type, P2TR (Pay-to-TapRoot).
-Since its activation in November 2021, Taproot has been successfully implemented.
-Opening the possibility for new applications.
+\subsection{Cryptographic Foundations}
 
-\subsection{Alternative Systems and Applications (Ethereum)}
+Advances in cryptographic primitives further contribute to the evolution of blockchain-based verification systems.
+Gayoso et al.~\cite{Gayoso2020AnalysisCryptographic} and Fang et al.~\cite{Fang2020DigitalSignature} survey cryptographic foundations used in blockchain systems, emphasizing the role of hash functions, Merkle trees, and digital signatures.
+Yang et al.~\cite{Yang2022EfficientVerifiablyEncrypted} analyze advanced signature constructions, highlighting efficiency and verifiability properties relevant to non-repudiation systems.
 
-It has been shown that data can be anchored in Bitcoin in different ways.
-The limitation in Bitcoin's Script execution also limits the applications built on top of it.
-To overcome these limitations, new Blockchain networks have been created that change the UTXO design that Bitcoin uses.
-The one with the most development is Ethereum, which emulates a virtual machine called the EVM.
+More recent work by Zhang et al.~\cite{Zhang2025HighEfficiencySchnorrMultiSignature} demonstrates the efficiency and aggregation advantages of Schnorr-based signatures.
+These properties motivate their adoption in Bitcoin through BIP340~\cite{bip340} and their integration into Taproot.
 
-Different works such as Wang~\cite{Wang2019BlockchainCT}, Li~\cite{Li2020DecentralizedPKI}, Pennino~\cite{Pennino2021EfficientCertification}, Palmisano~\cite{Palmisano2022NotarizationAntiPlagiarism}, Mishra~\cite{Mishra2025BlockchainDecentralized}, and Harer~\cite{Harer2022DecentralizedAttestation} make use of Smart Contracts to attest information such as certificates, dates, and XML structures, respectively.
-Sophisticated certification and attestation in Smart Contract-based architectures depend on costly execution (gas fees) and programmable complexity (Solidity, EVM) to manage the logic of certificate verification, identity, and permissions.
-The applications vary, but they all make use of data anchoring.
+Building upon these developments, BIP341 introduces Taproot as a soft fork extension of SegWit.
+Taproot defines a new output type, Pay-to-Taproot (P2TR), combining Schnorr signatures with Merkleized Abstract Syntax Trees (MAST).
+Since its activation in November 2021, Taproot has been successfully deployed on the Bitcoin network, enabling more private and efficient spending conditions.
+Despite its expressive power, the literature has not yet explored Taproot as the foundation for a complete document verification protocol encompassing integrity, authenticity, and revocation.
 
-A case of special interest are the works related to the institutional use of document verification.
-In 'Blockchain and Higher Education Diplomas'~\cite{Castro2021BlockchainHigherEducation}, the need to eradicate fraud and falsification of diplomas and the sale of fraudulent certificates, a global market estimated at 2 billion USD, is developed.
-The study notes that, as a radical innovation, blockchain adoption must overcome technical barriers (scalability, error correction, complexity) and cultural/social barriers (lack of standards, resistance to change).
+\subsection{Alternative Systems and Applications}
 
-'A Systematic Literature Review on Blockchain-Based Systems for Academic Certificate Verification'~\cite{Rustemi2023SLRBlockchainCertificates} identifies that most existing platforms are implemented on the Ethereum blockchain and services are executed via Smart Contracts.
-The immutability of Smart Contracts is a challenge, as the revocation of a diploma implies a change in the hash value, which challenges the student's identity and is an inherently difficult or impossible process in the blockchain system.
-Verification is the only process that can be executed completely without third-party intervention, while generation and revocation remain challenging.
+To overcome Bitcoin’s script limitations, alternative blockchain platforms have adopted different execution models.
+Ethereum replaces the UTXO paradigm with an account-based model and supports a Turing-complete virtual machine.
 
-In summary, the literature presents a clear trade-off: legacy Bitcoin solutions (like \texttt{OP\_RETURN}) lack privacy and scalability, while Smart Contract solutions (like Ethereum) are computationally expensive.
+Numerous studies leverage Ethereum smart contracts for certification and attestation.
+Works by Wang et al.~\cite{Wang2019BlockchainCT}, Li et al.~\cite{Li2020DecentralizedPKI}, Pennino et al.~\cite{Pennino2021EfficientCertification}, Palmisano et al.~\cite{Palmisano2022NotarizationAntiPlagiarism}, Mishra et al.~\cite{Mishra2025BlockchainDecentralized}, and Harer et al.~\cite{Harer2022DecentralizedAttestation} demonstrate the flexibility of smart contracts for managing identity, permissions, and document validation.
+However, these systems incur increased execution cost, gas fees, and implementation complexity.
 
-Taproot, with its efficient Schnorr signatures and MAST (Merkleized Abstract Syntax Trees), allows encoding complex verification logic (similar to an SC), but does so with a minimal transaction footprint on the Bitcoin blockchain, avoiding the high operational cost of Ethereum's EVM and overcoming the data capacity limitations of old Bitcoin methods like \texttt{OP\_RETURN}.
+Beyond academic credentials, blockchain-based certification has been explored in industrial and supply-chain contexts.
+Hawashin et al.~\cite{Hawashin2024UAVTraceability} analyze NFT-based certification for UAV manufacturing components, highlighting scalability and traceability requirements beyond education-focused use cases.
+
+The institutional use of blockchain-based document verification has also been studied extensively.
+Castro and Au-Yong-Oliveira~\cite{Castro2021BlockchainHigherEducation} analyze blockchain adoption for higher education diplomas, identifying economic incentives and adoption barriers.
+Rustemi et al.~\cite{Rustemi2023SLRBlockchainCertificates} provide a systematic review showing that most academic certificate verification platforms are implemented on Ethereum.
+They identify revocation as a major challenge, as modifying immutable smart contracts or credential hashes directly impacts identity consistency.
+
+Recent studies further highlight unresolved challenges related to privacy and revocation.
+Ramica et al.~\cite{Ramica2024SelectiveDisclosure} survey selective disclosure mechanisms in digital credentials, while Zhang et al.~\cite{Zhang2025PrivacyProtectionIssuanceRevocationVerifiableCredentials} analyze privacy-preserving revocation schemes in self-sovereign identity systems.
+These works demonstrate that privacy-aware revocation remains a complex problem, often requiring additional infrastructure or off-chain coordination.
+
+In summary, the literature reveals a fundamental trade-off.
+Bitcoin-based approaches relying on legacy mechanisms such as \texttt{OP\_RETURN} provide low-cost anchoring but suffer from limited privacy and scalability.
+Smart contract platforms such as Ethereum enable expressive verification logic but incur higher execution costs and increased complexity.
+Recent advances introduced by Taproot suggest that this trade-off may be mitigated at the Bitcoin base layer, motivating further investigation into privacy-preserving and scalable document verification protocols.

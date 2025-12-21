@@ -1,81 +1,202 @@
 \section{Methodology}
 \label{methodology}
 
-To meet the objectives, we propose the following methodology divided into two phases: (1) Protocol and architecture design and (2) Proof of Concept design.
+To achieve the objectives, we propose a methodology divided into three phases:
+(1) protocol design and architectural specification,
+(2) proof-of-concept (PoC) prototyping, and
+(3) experimental validation and analysis.
 
-\subsection{Phase I}
+\subsection{Phase I: Protocol Design and Architecture}
 
-In this phase, objectives a), b) and c) are considered.
-Only access to the public Bitcoin blockchain history is necessary, in addition to the document and the proof of validity.
-The complete verification consists of the following components:
+In this phase, objectives (a), (b), and (c) are addressed by specifying the protocol components, data structures, and verification logic.
+The protocol defines two roles:
 
 \begin{itemize}
-    \item Integrity verification, ensures the document's content has not been manipulated.
-    \item Ownership verification, ensures it is unequivocally issued by the organization.
-    \item Revocation verification, ensures the document's validity has not been revoked.
+    \item \textbf{Issuer}: the organization that issues a document and generates an associated \emph{validation proof} delivered to the holder.
+    \item \textbf{Verifier}: any third party that receives the document and its validation proof and performs verification autonomously.
 \end{itemize}
 
-If all these verifications are met, the document is considered valid.
-Taproot allows us to evaluate a number $N$ of certificates, ordered in batches, in a single transaction.
-The computational procedure for verification occurs off-chain; that is, it is not executed on the Bitcoin network.
+Verification requires access only to: (i) the Bitcoin blockchain history, (ii) the document, and (iii) the validation proof.
+No interaction with the issuing organization is required at verification time.
 
-\subsubsection{Integrity Verification}
+\subsubsection{On-chain vs Off-chain Components}
 
-To preserve the privacy of the document's content, integrity verification follows a procedure using the sha256 cryptographic hash as a base.
+The protocol is designed to minimize on-chain footprint while enabling self-contained verification.
 
-The cryptographic architecture for anchoring the hashes of a batch of certificates will be defined following the BIP341 protocol to obtain a valid Merkle root, adhering to the structure shown in Figure \ref{mast}.
-Each Merkle Leaf contains the bytes of each document's hash within provably unspendable scripts; that is, they do not enable the spending of the transaction.
-Using the 'Tweak' procedure with the issuing organization's single Schnorr public key for Bitcoin, a Taproot address is derived.
+\begin{itemize}
+    \item \textbf{On-chain}: a Bitcoin transaction anchors a batch commitment using a single pay-to-taproot (P2TR) output that commits to a Merkle root (MAST). Revocation updates are published, when needed, through spending transactions that encode a revocation state.
+    \item \textbf{Off-chain}: document hashing, Merkle proof reconstruction, output key derivation (TapTweak), signature verification, and revocation state interpretation are performed by the verifier locally.
+\end{itemize}
 
-In this process, the issuer must provide the necessary information in the proof of validation to be able to reconstruct the Taproot address.
-For verification, the protocol demonstrates that, by calculating the certificate's hash, the same Taproot address of the transaction in which the batch is anchored is derived.
+Figure~\ref{fig:architecture} presents a high-level view of the protocol architecture, illustrating the interaction between issuer, holder, verifier, and the Bitcoin blockchain, as well as the separation between on-chain commitments and off-chain verification logic.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/mast.pdf}
-    \caption{MAST structure for certificate anchoring}
-    \label{mast}
+    \includegraphics[width=1\textwidth]{figures/figure1}
+    \caption{High-level architecture and data flow of the proposed Taproot-based document verification protocol. Dashed arrows represent off-chain data exchange, while solid arrows denote on-chain interactions.}
+    \label{fig:architecture}
 \end{figure}
 
-By containing provably unspendable scripts, the verifier is limited to comparing the Taproot address.
-They do not obtain any information about other documents.
-It does not reveal the content, nor can it spend the Taproot transaction output via the script-path.
+The protocol considers a batch of size $N$, where each document $D_i$ is associated with an index $i$ (denoted $D_i$ or $\mathsf{idx}=i$).
+A document is considered \emph{valid} if and only if all three checks succeed:
 
-\subsubsection{Ownership Verification}
+\begin{itemize}
+    \item \textbf{Integrity verification}: the document content matches an on-chain commitment.
+    \item \textbf{Issuer authenticity verification}: the issuer’s signature is valid under a public key bound to the on-chain commitment.
+    \item \textbf{Revocation verification}: the document index is not marked as revoked in the latest published revocation state.
+\end{itemize}
 
-We propose a scheme that contains two different Schnorr key-pairs.
-One for signing documents, $Keys_{firma}$, and another for maintaining the Bitcoin funds, $Keys_{btc}$.
-The reason is to have a separation of concerns and to improve exposure risks.
+\subsubsection{Integrity Verification}
 
-Because the batches of documents to be signed can be of variable size, the private key $Sk_{firma}$ can be managed on the organization's own server.
-The digital signature is added to the proof of validity given to the user.
-The public key $Pk_{firma}$ is exposed in a second output of the Taproot transaction via \texttt{OP\_RETURN}.
+To preserve privacy, integrity is verified using cryptographic commitments derived from SHA-256 hashes.
+For each issued document $D_i$, the issuer computes:
 
-The protocol validates the digital signature declared in the proof of validity against the document and the public key $Pk_{firma}$.
+\[
+h_i = \mathrm{SHA256}(D_i).
+\]
+
+The set of hashes $\{h_1, \ldots, h_N\}$ is arranged into a Merkle tree, with each document represented by a separate Script leaf embedding its corresponding hash.
+Let $m$ denote the resulting Merkle root.
+The commitment is then embedded into a Taproot output using the BIP341 tweak procedure, producing an output key $Q$ derived from the issuer’s internal Schnorr public key $P$ and the Merkle root $m$.
+
+For completeness, we follow the BIP341 tagged-hash definition for the tweak:
+
+\begin{equation}
+t = \mathrm{SHA256}(\mathrm{SHA256}(\mathtt{"TapTweak"}) \parallel \mathrm{SHA256}(\mathtt{"TapTweak"}) \parallel P \parallel m),
+\label{eq:taptweak}
+\end{equation}
+
+and the tweaked output key is computed as:
+
+\[
+Q = P + (t \cdot G),
+\]
+
+where $G$ is the generator point of secp256k1.
+The P2TR output on-chain commits to the entire batch through $m$, without revealing individual documents.
+
+\paragraph{Leaf script design (to be analyzed).}
+Each Merkle leaf corresponds to a script commitment that binds a single document hash $h_i$ (and optionally its index $\mathsf{idx}=i$) within a \emph{provably unspendable} script.
+The exact leaf construction will be evaluated in the thesis with respect to standardness, privacy, and implementation simplicity.
+A representative form is:
+
+\[
+S_{leaf,i} = \mathtt{OP\_RETURN} \parallel D_{commit,i},
+\quad \text{where} \quad D_{commit,i} = h_i \parallel i.
+\]
+
+This design ensures that the script path does not enable spending; instead, it serves solely as an information commitment.
+
+\paragraph{Validation proof contents (integrity).}
+For a given document index $i$, the issuer provides a validation proof containing the minimal information required to reconstruct the Merkle root and derive the committed Taproot output key, including:
+(i) the Merkle authentication path for leaf $i$,
+(ii) the leaf-level commitment preimage required by the verifier (e.g., $h_i$ and $i$), and
+(iii) the issuer internal public key $P$ (or sufficient information to derive it, depending on the instantiation).
+
+\paragraph{Integrity check (verifier).}
+The verifier computes $h_i = \mathrm{SHA256}(D_i)$, reconstructs $m$ using the Merkle path, derives $Q$ through TapTweak, and checks that the corresponding P2TR output exists in the blockchain history and matches the anchored transaction output.
+This check is performed off-chain and reveals no information about other documents in the batch.
+
+\subsubsection{Key Separation}
+
+The protocol uses two distinct key pairs:
+\begin{itemize}
+    \item $Keys_{btc}$ for controlling and spending Bitcoin funds (key-path spend of the P2TR output).
+    \item $Keys_{sign}$ for signing documents off-chain.
+\end{itemize}
+
+This separation reduces exposure risks: $Sk_{sign}$ may be managed by an institutional signing service, while $Sk_{btc}$ can be protected independently (e.g., hardware-backed custody).
+
+Each batch binds its own $Pk_{sign}$ through its committed Merkle structure.
+Therefore, historical proofs remain verifiable under the historical signing key.
+
+\subsubsection{Issuer Authenticity Verification (Signature)}
+
+Issuer authenticity is verified using a Schnorr digital signature over the document hash (or an agreed message derived from it).
+To reduce metadata exposure, the issuer’s signing public key is \emph{not} published via \texttt{OP\_RETURN}.
+Instead, the signing public key $Pk_{sign}$ is \emph{cryptographically bound} to the on-chain Taproot commitment.
+
+Concretely, $Pk_{sign}$ is included in the data committed by the leaf (or committed at the tree level), such that any modification of $Pk_{sign}$ would change the Merkle root $m$ and therefore change the derived output key $Q$.
+This makes $Pk_{sign}$ verifiable by reconstruction, while remaining hidden on-chain unless the script path is revealed by spending.
+
+\paragraph{Signature generation (issuer).}
+For each document $D_i$, the issuer computes $h_i=\mathrm{SHA256}(D_i)$ and generates a Schnorr signature:
+
+\[
+\sigma_i = \mathrm{Sign}(Sk_{sign}, h_i),
+\]
+
+where $Sk_{sign}$ is the issuer’s signing private key.
+The signature $\sigma_i$ is included in the validation proof delivered to the user.
+
+\paragraph{Authenticity check (verifier).}
+Given $(D_i, \sigma_i, Pk_{sign})$ from the validation proof, the verifier checks:
+
+\[
+\mathrm{Verify}(Pk_{sign}, h_i, \sigma_i) = \mathtt{true}.
+\]
+
+Additionally, the verifier confirms that $Pk_{sign}$ is consistent with the on-chain commitment by reconstructing the Taproot output key $Q$ from the proof.
+This achieves non-repudiation while avoiding explicit publication of $Pk_{sign}$ via \texttt{OP\_RETURN}.
+
+
 
 \subsubsection{Document Revocation}
 
-The issuing organization may be interested in revoking the validity of a set of issued documents.
-A revocation scheme is proposed by declaring a validity state in a child transaction that spends the Taproot output of the issued document batch.
-The organization must use the Key-Path, using its private key $Sk_{btc}$, to spend the Taproot transaction output.
-The new child transaction must have an \texttt{OP\_RETURN} output that contains the revocation status.
+The protocol supports revocation through a state commitment published in a spending transaction.
+To revoke documents in a batch, the issuer spends the batch’s P2TR output via the key path using $Sk_{btc}$, and publishes an updated revocation state.
 
-The verifier queries the last chained transaction that spends the parent transaction's output.
-It looks for the corresponding state in the \texttt{OP\_RETURN} output according to its order in the Merkle tree.
-A single bit in its position indicates the document's revocation.
+A compact representation is a bitmap $\mathsf{R}$ of length $N$, where:
+\[
+\mathsf{R}[i]=1 \Rightarrow D_i \text{ revoked}, \qquad \mathsf{R}[i]=0 \Rightarrow D_i \text{ valid}.
+\]
 
-The revocation status update is for the entire batch of documents in the parent transaction.
-If an update is needed, it generates an extra network cost that must be considered in the protocol.
+The updated bitmap is anchored in the child transaction (e.g., via \texttt{OP\_RETURN} as a revocation record), and the verifier queries the latest spending transaction of the parent output to obtain the most recent revocation state.
 
-\subsection{Phase II}
-
-A second phase of the protocol the objectives d) and e) are addressed.
-Focusing on the design of a Proof of Concept (PoC)  and the subsequent estimation of costs.
-To mitigate the expense of utilizing real Bitcoin tokens, we propose configuring independent nodes leveraging the Signet/Testnet environments.
-
-The study will yield two key metrics to quantify the protocol's efficiency:Scalability: We will measure the temporal ($O(t)$) and spatial ($O(s)$) complexity of the proof of validity and the verification process as a function of the batch size $N$. 
-The spatial complexity is theoretically bounded at $O(\log N)$ due to the utilization of Merkle trees.
-Network Cost: The transaction fee, measured in vBytes, will be estimated and quantified relative to the batch size $N$ and the necessary revocation transactions.
+Revocation is defined at the batch level: a single spending output updates the state of the entire batch.
+This design avoids requiring changes to the original Merkle commitments.
+To ensure unambiguous lookup, the protocol binds the document index $i$ to the corresponding leaf commitment; alternative constructions and their impact on robustness and verification complexity are analyzed in the thesis.
 
 
-With the results obtained, we seek to pose a trade-off between privacy, scalability, and network costs when using Taproot in a decentralized document verification protocol.
+Figure~\ref{fig:verification} summarizes the complete off-chain verification workflow executed by the verifier.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/figure2}
+    \caption{Off-chain verification procedure for a document and its validation proof, including integrity, authenticity, and revocation checks.}
+    \label{fig:verification}
+\end{figure}
+
+\subsection{Phase II: Proof of Concept (PoC)}
+
+In this phase, objective (d) is addressed by proposing a PoC on Bitcoin test networks (Signet or Testnet), avoiding economic cost during development.
+The prototype will be designed in Python and will interface with Bitcoin Core running on Debian Linux.
+All steps will be documented to support reproducibility and to allow any verifier to validate documents without third-party services.
+
+The PoC will define concrete file formats for delivery:
+\begin{itemize}
+    \item The issued document (e.g., \texttt{.pdf}).
+    \item The validation proof (e.g., a structured \texttt{.json} file) containing Merkle path data, committed keys, signatures, and transaction references.
+\end{itemize}
+
+\subsection{Phase III: Performance Estimation and Analysis}
+
+Performance estimations will be conducted using the PoC by varying the batch size $N$ and the number of revocation updates.
+Objective (e) is addressed by measuring:
+
+\begin{itemize}
+    \item \textbf{Scalability}: size of the validation proof and verification runtime as a function of $N$.
+    Using Merkle trees, proof reconstruction is expected to be bounded by $O(\log N)$.
+    \item \textbf{On-chain cost}: transaction cost measured in virtual bytes (vBytes), analyzed as a function of batch size and revocation frequency.
+\end{itemize}
+
+Finally, the results will be used to characterize the trade-offs between privacy, scalability, batch size, and network cost.
+The proposed protocol will be compared against legacy approaches, such as \texttt{OP\_RETURN}-based methods, considering:
+
+\begin{itemize}
+    \item Required on-chain bytes,
+    \item Verification model (on-chain vs. off-chain),
+    \item Privacy properties,
+    \item Revocation support,
+    \item Scalability behavior.
+\end{itemize}

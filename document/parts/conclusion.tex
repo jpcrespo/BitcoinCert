@@ -1,19 +1,18 @@
 \section{Conclusion}
 
-A decentralized certification protocol has advantages compared to traditional centralized systems.
-Availability, denial-of-service resistance, and immutability security are characteristics of the Bitcoin network.
-Methods studied in the literature show that Bitcoin has limitations regarding scalability, privacy, and applications in document verification.
-Solutions like the use of \texttt{OP\_RETURN} and OpenTimeStamp protocols have their limitations.
-With the Taproot upgrade operational on the network since 2021, Bitcoin overcomes these limitations.
-It was identified that Taproot has not been studied in the literature for the use case of document verification.
+Decentralized document verification protocols offer clear advantages over traditional centralized systems.
+Properties such as high availability, resistance to denial-of-service attacks, and immutability are inherent to the Bitcoin network and make it a suitable foundation for long-term verification mechanisms.
+However, existing approaches studied in the literature reveal that Bitcoin-based solutions have historically faced limitations in scalability, privacy, and expressiveness when applied to document verification.
+Protocols such as \texttt{OP\_RETURN}-based anchoring and OpenTimestamps exhibit structural constraints that restrict their applicability to large-scale or privacy-sensitive use cases.
 
-The protocol proposed in this work leverages the cryptographic tools used in Taproot.
-It allows integrity verification via the hash anchored in the Merkle tree and document ownership via Schnorr digital signatures.
-It enables the revocation of document validity and proposes key rotation by chaining transactions that spend the previous output.
-Preserving privacy by not revealing information from other documents in the batch.
+With the activation of the Taproot upgrade in 2021, Bitcoin introduced new cryptographic primitives that significantly expand its design space.
+Despite these advancements, this work identifies that Taproot has not yet been explored in the literature as the basis for a complete decentralized document verification protocol.
+This observation motivates the investigation proposed in this thesis.
 
-The proposed protocol does not consider the validity of the content of the issued documents.
-The revocation of validity remains the responsibility of the issuing organization.
-It does not consider the preservation of the document and its proof of validity once issued and delivered to the end-user.
-The study of long-term preservation and proof-of-validity mechanisms remains for future work.
-As well as the implementation of penalties and incentives for users who present invalid documents as valid.
+The protocol presented in this work leverages Taproot’s cryptographic capabilities to support document integrity verification through Merkle tree commitments and issuer authenticity verification through Schnorr digital signatures.
+It further enables document revocation through transaction chaining and supports signing key rotation without invalidating previously issued documents.
+By anchoring documents in batches and avoiding explicit disclosure of auxiliary data, the protocol preserves privacy by preventing information leakage about other documents within the same batch.
+
+This work explicitly limits its scope to cryptographic verification and does not address the semantic validity of document contents, which remains the responsibility of the issuing organization.
+Additionally, long-term preservation of documents and validation proofs after issuance is not considered.
+Future work includes the study of archival mechanisms for long-term proof persistence, enhanced revocation strategies, and incentive or penalty schemes for entities that attempt to present invalid or revoked documents as valid.
