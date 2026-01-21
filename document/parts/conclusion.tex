@@ -16,3 +16,13 @@ By anchoring documents in batches and avoiding explicit disclosure of auxiliary 
 This work explicitly limits its scope to cryptographic verification and does not address the semantic validity of document contents, which remains the responsibility of the issuing organization.
 Additionally, long-term preservation of documents and validation proofs after issuance is not considered.
 Future work includes the study of archival mechanisms for long-term proof persistence, enhanced revocation strategies, and incentive or penalty schemes for entities that attempt to present invalid or revoked documents as valid.
+
+\subsection{Contribution}
+
+This proposal introduces an original protocol for decentralized document verification built natively on Taproot over the Bitcoin network. Unlike previous approaches, the protocol leverages Taproot and MAST not as an isolated anchoring mechanism, but as a complete cryptographic verification architecture.
+
+By publishing a single P2TR output, the system enables autonomous verification of document integrity, issuer authenticity, and revocation status for a batch of documents, while preserving the privacy of both the issuer and the end user. Verification is performed entirely off-chain, without relying on smart contracts, external infrastructures, or third-party services.
+
+Additionally, the protocol is efficient in its use of block space, as it aggregates multiple documents into a single transaction and maintains an on-chain cost that remains practically constant, regardless of batch size. This combination of privacy, scalability, and operational simplicity constitutes a concrete contribution to the design of document verification systems on the Bitcoin base layer.
+
+

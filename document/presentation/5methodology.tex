@@ -24,7 +24,7 @@
         \item \textbf{Revocation}: The document has not been revoked.
     \end{itemize}
     \vspace*{0.3cm}
-    Verification is performed \textbf{off-chain} using a \textbf{control file} provided  together with the document.\\
+    Verification is performed \textbf{off-chain} using a \textbf{validation proof} provided  together with the document.\\
     \vspace*{0.1cm}
     The protocol is structured into two stages: \textbf{issuance} and \textbf{verification}.
 \end{frame}
@@ -39,7 +39,6 @@
     \framesubtitle{Privacy via MAST}
     \begin{block}{Privacy Preserved}
         Each script leaf contains the document hash and verification logic and is intentionally non-spendable.
-        Only the script leaf related to the verified document is revealed.
         Other documents in the batch remain hidden.
     \end{block}   
     \vspace*{0.3cm}
@@ -78,7 +77,7 @@ m = \mathrm{MerkleRoot}(\{\text{leaf}_1,\dots,\text{leaf}_N\})
 \[
 Q = P_{\text{btc}} + \mathrm{H}_{\text{TapTweak}}(P_{\text{btc}} \| m)\,G
 \]
-where $P_{\text{btc}}$ is the issuer’s Bitcoin public key used for Taproot output creation.
+where $P_{\text{btc}}$ is the issuer’s Bitcoin public key used for Taproot output creation.\\
 \vspace*{0.1cm}
 \textbf{Document authenticity}
 \[
