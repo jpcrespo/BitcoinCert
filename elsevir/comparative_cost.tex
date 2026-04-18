@@ -1,0 +1,54 @@
+\begin{table}[t]
+\caption{Network impact and transaction cost characteristics of Bitcoin-based document anchoring approaches.}
+\label{tab:comparative_cost}
+\centering
+\small
+\renewcommand{\arraystretch}{1.6}
+
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{
+>{\centering\arraybackslash}m{3.2cm}
+c c c c
+>{\centering\arraybackslash}m{2.8cm}
+>{\centering\arraybackslash}m{2.8cm}
+}
+\toprule
+\textbf{Property} &
+\textbf{Fake Address} &
+\textbf{OP\_RETURN} &
+\textbf{Script} &
+\textbf{Witness} &
+\shortstack{\textbf{OpenTimestamps}\\(OTS)} &
+\shortstack{\textbf{Proposed}\\(Taproot)} \\
+\midrule
+
+On-chain footprint &
+HIGH & LOW & HIGH & MEDIUM & LOW & LOW \\
+
+UTXO impact &
+HIGH & NONE & LOW & LOW & LOW & LOW \\
+
+TX Cost Model (BTC) &
+\shortstack{Burn\\+ fee} &
+\shortstack{Standard\\fee} &
+\shortstack{Standard\\fee} &
+\shortstack{Discounted\\SegWit} &
+\shortstack{Shared\\anchoring} &
+\shortstack{Discounted\\SegWit} \\
+
+Verification efficiency &
+LOW & LOW & LOW & LOW & LOW & HIGH \\
+
+Size (bytes) &
+$20\times N$ &
+$\sim 80$ &
+$\sim 1000$ &
+$\sim 4000$ &
+$\sim 40$--$80$ &
+$\sim 32$ \\
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\end{table}

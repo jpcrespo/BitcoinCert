@@ -1,0 +1,63 @@
+\begin{table}[t]
+\caption{Condensed architectural and security comparison between Bitcoin and Ethereum for document verification systems.}
+\label{tab:btc_eth_comparison}
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{4pt}
+
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{
+>{\raggedright\arraybackslash\bfseries}m{3.0cm}
+>{\raggedright\arraybackslash}m{6.2cm}
+>{\raggedright\arraybackslash}m{6.2cm}
+}
+\toprule
+Dimension & Bitcoin (PoW, UTXO) & Ethereum (PoS, Account/VM) \\
+\midrule
+
+Security basis &
+Energy-based security (hashrate $H$) &
+Stake-based security (total stake $S$) \\
+
+Adversarial threshold &
+$\alpha = H_A/H_{total}$ &
+$\alpha = S_A/S_{total}$ \\
+
+State model &
+UTXO; stateless validation &
+Global account state; persistent storage \\
+
+Execution model &
+Limited, non-Turing Script &
+Turing-complete EVM \\
+
+Verification approach &
+On-chain commitment, off-chain proof verification &
+On-chain contract-based verification \\
+
+Cost model &
+Fee per transaction size (vbytes) &
+Gas-based fee (computation + storage) \\
+
+Revocation mechanism &
+New commitment transaction required &
+Contract state update \\
+
+Finality model &
+Probabilistic finality &
+Economic finality \\
+
+Attack surface &
+Minimal scripting layer &
+VM and smart-contract dependent \\
+
+Governance style &
+Conservative soft-forks &
+Frequent hard-fork upgrades \\
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+\end{table}

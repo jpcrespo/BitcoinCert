@@ -1,0 +1,580 @@
+\documentclass{ieeeaccess}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{algorithm}
+\usepackage{array}
+ \usepackage{multirow}
+ \usepackage{longtable}
+ \usepackage{rotating}
+ \usepackage{booktabs}
+ \usepackage{url}
+ \hyphenation{op-tical net-works semi-conduc-tor}
+ \usepackage{footnote}
+
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta, positioning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{bm}
+\makeatletter
+\AtBeginDocument{\DeclareMathVersion{bold}
+\SetSymbolFont{operators}{bold}{T1}{times}{b}{n}
+\SetSymbolFont{NewLetters}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathrm}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathit}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathbf}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathtt}{bold}{OT1}{pcr}{b}{n}
+\SetSymbolFont{symbols}{bold}{OMS}{cmsy}{b}{n}
+\renewcommand\boldmath{\@nomath\boldmath\mathversion{bold}}}
+\makeatother
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+%Your document starts from here ___________________________________________________
+\begin{document}
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{xx.xxxx/ACCESS.xxxx.xxxxxxx}
+
+\title{A Commitment-Carrying Taproot (CCT) Framework for Batch Document Verification}
+\author{\uppercase{Juan Pablo Crespo Vargas}\authorrefmark{1} %\IEEEmembership{Fellow, IEEE},
+\uppercase{Sultan Almuhammadi}\authorrefmark{2} %and Third C. Author,
+%Jr.\authorrefmark{3},j
+%\IEEEmembership{Member, IEEE}
+}
+
+\address{Information and Computer Science Department,
+King Fahd University of Petroleum and Minerals,
+Dhahran, Saudi Arabia
+(emails: muhamadi@kfupm.edu.sa)}
+
+%\tfootnote{This research was supported by King Fahad University of Petroleum and Minerals, Dhahran, Saudi Arabia}
+
+\markboth
+{Crespo Vargas \MakeLowercase{\textit{et al.}}: A Commitment-Carrying Taproot (CCT) Framework for Batch Document Verification}
+{Crespo Vargas \MakeLowercase{\textit{et al.}}: A Commitment-Carrying Taproot (CCT) Framework for Batch Document Verification}
+
+%\corresp{Corresponding author: First A. Author (e-mail: author@ boulder.nist.gov).}
+
+
+\begin{abstract}
+Document authenticity, integrity, and revocation verification at scale impose significant operational costs and typically rely on centralized infrastructures with trust and availability assumptions.
+Although Bitcoin has been used for anchoring cryptographic commitments, existing approaches do not simultaneously provide scalable batch verification, privacy-preserving per-document validation, and explicit revocation support under a unified Taproot-native design.
+This work introduces a Taproot-based commitment construction that enables batch document verification using a single Pay-to-Taproot (P2TR) transaction.
+The proposed approach encodes document hashes within non-executed Taproot script paths and leverages Merkle authentication paths and Schnorr signatures to support off-chain integrity and issuer authenticity verification.
+The construction separates static issuance commitments from dynamic revocation state through transaction chaining, ensuring that revocation updates do not invalidate previously issued proofs.
+We provide an analytical on-chain cost model and characterize verification complexity as a function of batch size.
+Our results demonstrate that Taproot enables scalable and privacy-preserving decentralized document verification without modifying the Bitcoin protocol or relying on expressive smart-contract execution.
+\end{abstract}
+
+
+\begin{keywords}
+Bitcoin, Taproot, Commitment schemes, Batch document verification, Merkle trees, Schnorr signatures, Blockchain-based certification, Revocation.
+\end{keywords}
+
+
+
+\titlepgskip=-21pt
+
+\maketitle
+
+
+\section{Introduction}
+\label{sec.intro}
+
+Document fraud, particularly involving academic certificates, represents a multi-trillion-dollar global problem~\cite{Xie2020EthereumCertificate}.
+The verification of document authenticity, integrity, and validity is traditionally handled by the issuing organizations themselves, creating a structural dependency on centralized verification infrastructures.
+Historically, this process has relied on physical mechanisms such as stamps and seals, and more recently on centralized digital systems maintained by the issuer.
+Even in digital form, centralized verification systems incur significant operational costs in order to maintain availability and to mitigate denial-of-service attacks.
+
+Bitcoin is a decentralized and globally distributed network that maintains a single shared state through a Proof-of-Work consensus protocol~\cite{nakamoto2008bitcoin}.
+As the network with the highest level of security measured in aggregate computational power, Bitcoin provides strong guarantees of availability and immutability, making it an attractive platform for applications beyond purely monetary use.
+Prior work has identified blockchain technologies such as Bitcoin as suitable infrastructures for preserving the integrity of information over medium- and long-term horizons~\cite{Lemieux2016Trusting}.
+
+By design, the Bitcoin protocol stores only transaction-related data, including amounts, timestamps, and input and output scripts.
+Nevertheless, multiple studies have explored techniques for anchoring cryptographic commitments in the Bitcoin blockchain, enabling applications such as digital document verification.
+Despite protocol upgrades that improve transaction efficiency and security, existing Bitcoin-based approaches remain limited in at least one of three dimensions: scalable batch aggregation, privacy-preserving per-document verification, or explicit and auditable revocation support.
+OP_RETURN-based techniques expose commitment data publicly and provide no native authenticity or lifecycle management.
+OpenTimestamps provides scalable integrity anchoring but does not address issuer authentication or revocation.
+Blockcerts focuses on credential representation rather than cryptographic commitment design.
+As a result, no unified Taproot-native construction currently satisfies all three requirements simultaneously.
+
+In this paper, we present a Taproot-based commitment construction that enables batch document verification using a single Pay-to-Taproot (P2TR) transaction.
+The proposed approach leverages non-executed Taproot script paths to encode cryptographic commitments, combined with Merkleized Abstract Syntax Trees (MAST) and Schnorr digital signatures standardized in BIP~\cite{taproot} and BIP~\cite{bip340}.
+We formalize the design of script-path commitments that embed document hashes and issuer public keys while remaining indistinguishable from standard P2TR outputs.
+The construction separates static issuance commitments from dynamic revocation state, ensuring that revocation updates do not invalidate previously issued verification proofs.
+Verification is performed entirely off-chain by reconstructing the Taproot output key and validating Merkle authentication paths and Schnorr signatures using a proof-of-validation object distributed with each document.
+This proof contains all information required for independent verification, including the issuer public key $P_{\mathrm{iss}}$, the document signature $\sigma_i$, and the corresponding Merkle authentication path.
+
+
+\subsection{Contributions}
+
+The main contributions of this work are as follows.
+
+\begin{enumerate}
+    \item We introduce a commitment-carrying Taproot construction that encodes document commitments within non-executed script paths of a single P2TR output while preserving indistinguishability from standard transactions.
+    \item We design a batch document verification protocol that enables per-document integrity and issuer authenticity verification using Merkle authentication paths and Schnorr signatures.
+    \item We propose a revocation mechanism based on transaction chaining that updates revocation state without modifying or invalidating the original issuance commitment.
+    \item We provide an analytical characterization of on-chain cost and off-chain verification complexity as a function of batch size.
+    \item We formalize the security assumptions of the protocol and outline reduction-based arguments linking its security to the collision resistance of the hash function, the existential unforgeability of Schnorr signatures, and the immutability of the Bitcoin blockchain.
+\end{enumerate}
+
+
+% The remainder of this paper is organized as follows.
+% Section~\ref{sec.relatedwork} reviews existing data anchoring methods in Bitcoin and alternative blockchain-based approaches.
+% Section~\ref{sec.background} provides an overview of Taproot and its integration of MAST and Schnorr signatures.
+% Section~\ref{sec.proposedwork} details the proposed protocol.
+% Section~\ref{sec.discussion} discusses security considerations and expected results.
+% Finally, Section~\ref{sec_Conclusion} concludes the paper and outlines future work.
+
+\section{Related Work}
+\label{sec.relatedwork}
+
+This section reviews prior work on information anchoring techniques in the Bitcoin blockchain and on the use of smart contracts in Ethereum, with a focus on their application to document verification systems and their limitations in terms of scalability, privacy, and revocation support.
+
+\subsection{Information Anchoring Techniques in Bitcoin}
+\label{sec.methodsbitcoin}
+
+The Bitcoin protocol was deliberately designed to minimize its attack surface and mitigate denial-of-service vectors during transaction validation.
+It adopts the Unspent Transaction Output (UTXO) model, where transaction outputs are consumed exclusively by inputs, and relies on a stack-based, non-Turing-complete scripting language known as Bitcoin Script.
+This design explicitly restricts access to persistent memory, arbitrary function calls, and iterative control structures.
+
+Due to these limitations, early approaches to storing information on Bitcoin relied on encoding data within payment addresses, as analyzed by Gao et al.~\cite{Gao2017Decentralized}.
+In this scheme, information bytes are distributed across $N$ transaction outputs, allowing up to $20 \times N$ bytes to be embedded.
+However, this method permanently burns bitcoin, as the encoded outputs correspond to invalid public keys for which no private key exists, rendering them unspendable.
+As a result, fake address-based methods exhibit poor scalability, high cost per byte, and a direct economic loss in addition to standard transaction fees.
+
+With the introduction of additional payment script types, alternative data anchoring techniques have been proposed.
+Comprehensive analyses classify these approaches into two main categories: script-based methods, which increase construction and verification complexity, and fake address-based methods, which incur higher cost and lack privacy~\cite{Bartoletti2019BitcoinMetadata}.
+Among these, OP\_RETURN-based techniques explicitly mark outputs as unspendable and avoid UTXO set growth, thereby reducing negative impact on the network~\cite{Strehle2020DominatingOPReturns}.
+While OP\_RETURN has historically been constrained by policy limits, it remains the most widely adopted mechanism for anchoring non-monetary data in Bitcoin.
+
+In 2017, the Segregated Witness (SegWit) soft fork introduced significant modifications to Bitcoin’s transaction structure and script execution model.
+By separating witness data into an independent structure, SegWit improves block space efficiency and reduces transaction costs without increasing UTXO set size, achieving reported cost reductions of up to 75\% compared to pre-SegWit transactions~\cite{Kedziora2022AnalysisSegWit}.
+These improvements enabled data anchoring mechanisms to leverage the Witness field for lower-cost cryptographic commitments.
+However, SegWit-based approaches remain limited to integrity verification and do not introduce native support for issuer authenticity verification, explicit revocation mechanisms, or efficient per-document verification within large batches.
+Consequently, although SegWit optimizes the efficiency of existing anchoring schemes, it does not address the combined requirements of scalability, privacy, and lifecycle management required for comprehensive document verification systems.
+
+Several standardized solutions are widely deployed on Bitcoin today.
+Blockcerts~\cite{Blockcerts} proposes an open standard for issuing verifiable credentials by anchoring identifiers on the Bitcoin blockchain.
+OpenTimestamps~\cite{OpenTimestamps} provides a scalable mechanism for proving the existence of digital documents by anchoring document hashes using Merkle tree aggregation.
+While both systems are effective and widely adopted, they are fundamentally integrity-oriented.
+Blockcerts focuses on credential representation rather than cryptographic commitment design, and OpenTimestamps provides only proof of existence and integrity.
+Neither system includes cryptographic mechanisms for verifying issuer authenticity nor supports explicit and auditable revocation of previously issued documents.
+
+Importantly, none of the aforementioned approaches leverage Taproot script-path commitments as non-executed commitment carriers, nor do they explicitly separate static issuance commitments from dynamic revocation state within a unified construction.
+This distinction is central to the Taproot-based commitment design proposed in this work.
+
+Table~\ref{tab:comparativeBitcoin} summarizes the main characteristics and trade-offs of representative Bitcoin-based anchoring techniques and contrasts them with the proposed construction.
+The values are qualitative and derived from the referenced works.
+Script-based and Witness-based methods refer to general classes of approaches rather than specific standardized protocols.
+
+\begin{table*}[t]
+\centering
+\caption{Qualitative comparison of Bitcoin-based data anchoring techniques}
+\label{tab:comparativeBitcoin}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Property} 
+& \textbf{Fake Address} 
+& \textbf{OP\_RETURN} 
+& \textbf{OpenTimestamps} 
+& \textbf{Script-based} 
+& \textbf{Witness-based} 
+& \textbf{Proposed} \\
+\midrule
+On-chain data visibility 
+& Full data exposure 
+& Hash visible 
+& Hash only 
+& Hidden until spend 
+& Hidden until spend 
+& Hidden (Taproot commitment) \\
+
+Batch aggregation support 
+& No 
+& Limited 
+& Yes (Merkle tree) 
+& Possible 
+& Possible 
+& Yes (Merkle tree) \\
+
+Issuer authenticity 
+& No 
+& No 
+& No 
+& Possible 
+& Possible 
+& Yes (Schnorr signatures) \\
+
+Revocation support 
+& No 
+& No 
+& No 
+& No 
+& No 
+& Yes (transaction chaining) \\
+
+UTXO set impact 
+& High 
+& None 
+& None 
+& Low 
+& Low 
+& None \\
+
+Transaction cost model 
+& Fee + value burn 
+& Standard fee 
+& Aggregated fee 
+& Low overhead 
+& Discounted (SegWit) 
+& Constant commitment + revocation bitmap \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\footnotesize
+\textit{Note: Values are representative and derived from prior studies.}
+\end{table*}
+
+\subsection{Alternative Blockchain Solutions}
+\label{sec.alternativeblockchain}
+
+Due to the deliberate design restrictions of the Bitcoin protocol in terms of computational expressiveness and state persistence, a significant portion of verification and certification system development has shifted toward more expressive blockchain platforms.
+Ethereum was proposed as a general-purpose decentralized computing platform that introduces an account-based model and a Turing-complete execution environment, enabling persistent storage, iterative control structures, and arbitrary function calls through the Ethereum Virtual Machine (EVM)~\cite{buterin2014ethereum}.
+These features increase the potential attack surface with respect to denial-of-service scenarios and introduce additional assumptions regarding network decentralization and security.
+
+This paradigm shift eliminates several limitations inherent to the UTXO model and enables verification logic to be implemented directly within on-chain smart contracts.
+Numerous studies leverage Ethereum smart contracts to implement certification and attestation systems that require expressive verification logic~\cite{Wang2019BlockchainCT,Li2020DecentralizedPKI,Pennino2021EfficientCertification,Palmisano2022NotarizationAntiPlagiarism,Mishra2025BlockchainDecentralized,Harer2022DecentralizedAttestation}.
+While these approaches demonstrate the flexibility of Ethereum’s execution model, they incur increased on-chain execution overhead, higher gas fees, and greater implementation complexity.
+
+Institutional adoption of blockchain-based document verification has also been studied extensively.
+Castro et al.~\cite{Castro2021BlockchainHigherEducation} analyze blockchain adoption for higher education diplomas.
+Rustemi et al.~\cite{Rustemi2023SLRBlockchainCertificates} show that most academic certificate verification platforms are implemented on Ethereum and identify document revocation as a major unresolved challenge.
+Recent research further highlights unresolved challenges related to privacy and revocation in decentralized credential systems~\cite{Ramica2024SelectiveDisclosure,Zhang2025PrivacyProtectionIssuanceRevocationVerifiableCredentials}.
+
+In contrast to smart-contract-based approaches, the construction proposed in this work relies exclusively on standardized Bitcoin primitives and off-chain verification.
+This design avoids on-chain execution overhead while preserving cryptographic verifiability and publicly auditable revocation state transitions.
+
+
+\section{Background}
+\label{sec.background}
+
+\subsection{Bitcoin Script and Transaction Model}
+
+Bitcoin transactions are validated using a script-based execution model that specifies the conditions under which transaction outputs may be spent.
+The Bitcoin protocol adopts the Unspent Transaction Output (UTXO) model, in which each transaction consumes existing outputs and creates new ones.
+Spending conditions are encoded using Bitcoin Script, a stack-based and intentionally non-Turing-complete language designed to ensure predictable execution costs and minimize the network’s attack surface.
+
+Bitcoin Script does not support persistent state, loops, or arbitrary function calls.
+These design choices enforce deterministic validation guarantees and enable decentralized verification by resource-constrained nodes.
+As a result, script-based constructions in Bitcoin must rely on cryptographic commitments rather than on-chain stateful computation.
+
+\subsection{Schnorr Signatures in Bitcoin}
+
+With the activation of BIP340, Bitcoin adopted Schnorr digital signatures as the signature scheme for Taproot outputs.
+Let $G$ denote the generator of an elliptic curve group of prime order $n$, and let $x \in \mathbb{Z}_n$ denote a private scalar with corresponding public key $P = xG$.
+A Schnorr signature on a message $m$ consists of a pair $(R, s)$, where $R = kG$ for a nonce $k \in \mathbb{Z}_n$ and
+\[
+s = k + H(R \parallel P \parallel m)\,x \pmod{n},
+\]
+with $H(\cdot)$ denoting a cryptographic hash function.
+The specific instantiation and message hashing procedure follow the Schnorr signature construction standardized in BIP340.
+
+Schnorr signatures provide linearity properties that enable key and signature aggregation, as well as batch verification.
+These properties reduce verification overhead and transaction size, while offering provable security under standard assumptions.
+In addition, Schnorr signatures eliminate signature malleability issues present in earlier schemes, enabling more robust protocol constructions.
+
+\subsection{Merkleized Abstract Syntax Trees (MAST)}
+
+Merkleized Abstract Syntax Trees (MAST) allow multiple alternative spending conditions to be committed within a single transaction output.
+Each spending condition is encoded as an individual script, and the hashes of these scripts form the leaves of a Merkle tree.
+
+Let $\{S_i\}$ denote a set of scripts and let $\ell_i = H_{\text{TapLeaf}}(S_i)$ be their corresponding TapLeaf hashes.
+The Merkle root $M$ is computed as
+\[
+M = \textsf{TapMerkleRoot}(\ell_1, \ldots, \ell_N).
+\]
+When spending an output via a script path, only the executed script $S_i$ and the corresponding Merkle authentication data are revealed on-chain.
+Unused scripts remain hidden, improving privacy and reducing information disclosure.
+In the context of this work, however, script-path spending is not required, and MAST is used exclusively as a commitment mechanism without revealing any script data on-chain.
+MAST therefore enables expressive spending policies without incurring proportional on-chain data costs.
+
+\subsection{Taproot and Pay-to-Taproot Outputs}
+
+Taproot, introduced through BIP341, combines Schnorr signatures and MAST into a unified output type known as Pay-to-Taproot (P2TR).
+A P2TR output commits to an internal public key $P_{\text{int}}$ and an optional Merkle root $M$ representing alternative script paths.
+
+The Taproot output key $P_{\text{out}}$ is computed using a key-tweaking mechanism defined as
+\[
+P_{\text{out}} = P_{\text{int}} + H_{\text{TapTweak}}(P_{\text{int}} \parallel M)\,G,
+\]
+where $H_{\text{TapTweak}}(\cdot)$ is a tagged hash function.
+This construction follows the Taproot key-tweaking procedure defined in BIP341.
+If no script paths are present, $M$ is set to the empty value.
+
+Spending a P2TR output can occur via one of two paths: the key path or the script path.
+In the key path, the spender provides a Schnorr signature corresponding to the Taproot output key $P_{\text{out}}$.
+In the script path, the spender reveals a script $S_i$ together with the corresponding Merkle authentication data and a valid witness satisfying the script conditions.
+
+Because both key-path and script-path spends are represented as Taproot transactions, standard blockchain analysis cannot distinguish whether a transaction encodes a simple payment, a complex spending policy, or an application-specific commitment.
+
+As a result, Taproot preserves transaction indistinguishability even when embedding commitments to complex verification logic or multi-party authorization schemes, without revealing unused conditions or the existence of alternative spending paths.
+
+Since its activation in November 2021, Taproot has been widely deployed on the Bitcoin network, enabling more expressive, efficient, and privacy-preserving transaction constructions.
+These properties form the cryptographic foundation for higher-level protocols that rely on compact commitments, selective disclosure, and off-chain verification.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proposed Work}
+\label{sec.proposedwork}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{scheme_commit.pdf}
+    \caption{System architecture and interaction flow of the proposed batch document verification protocol.}
+    \label{fig:schemecommit}
+\end{figure*}
+
+We propose a protocol composed of two main components:
+
+\begin{enumerate}
+    \item The construction of a verification proof, consisting of a single Pay-to-Taproot (P2TR) transaction derived from a batch of $N$ documents and encapsulated in an off-chain control object referred to as the \emph{proof-of-validation}.
+    \item An off-chain verification procedure that relies exclusively on the proof-of-validation object and access to a Bitcoin node for querying the blockchain.
+\end{enumerate}
+
+\subsection{Creating a Unique Taproot Commitment}
+\label{sec.createcommit}
+
+Let $\{D_i\}_{i=1}^{N}$ denote a batch of $N$ digital documents issued by a single organization.
+The issuer is identified by a Schnorr signing key pair $(x_{\mathrm{iss}}, P_{\mathrm{iss}})$, which is shared across the entire batch.
+For each document $D_i$, the issuer computes a cryptographic digest
+\begin{equation}
+h_i = H(D_i),
+\label{eq:doc_hash}
+\end{equation}
+where $H(\cdot)$ denotes a collision-resistant hash function.
+
+\paragraph{Script-leaf commitments.}
+Each document is committed into a Taproot script tree through a dedicated script leaf $S_i$.
+The purpose of $S_i$ is exclusively to embed document-related data and not to enable spending.
+Concretely, $S_i$ encodes the document hash $h_i$, the issuer’s Schnorr public key $P_{\mathrm{iss}}$, and an index $i$ that binds the commitment to its position within the batch.
+
+To ensure that script-path spending is never possible, each $S_i$ is defined as a script that embeds document-related data and unconditionally fails upon execution (e.g., by terminating with \texttt{OP\_FALSE}).
+In this work, Taproot script paths are used exclusively as commitment carriers and are not intended to be executed.
+Accordingly, verification does not rely on spending the output via a script path, and the spendability of the output is controlled solely through the Taproot key path.
+
+The Taproot leaf hash corresponding to $S_i$ is computed as
+\begin{equation}
+\ell_i = H_{\text{TapLeaf}}(S_i),
+\label{eq:tapleaf}
+\end{equation}
+where $H_{\text{TapLeaf}}(\cdot)$ denotes the tagged hash function defined in BIP341.
+
+\paragraph{Merkle aggregation.}
+All leaf hashes $\{\ell_i\}_{i=1}^{N}$ are aggregated according to the Taproot Merkleization rules, yielding a single Merkle root
+\begin{equation}
+M = \textsf{TapMerkleRoot}(\ell_1,\ell_2,\ldots,\ell_N),
+\label{eq:merkle_root}
+\end{equation}
+which compactly commits to the entire batch of documents.
+
+Figure~\ref{fig:merkle} illustrates the Merkle tree structure used in the proposed construction.
+Each leaf node corresponds to a Taproot script leaf embedding document-specific data and used exclusively as a cryptographic commitment, while internal nodes represent intermediate hashes computed according to the Taproot Merkleization rules.
+The root $M$ enables efficient per-document verification using a logarithmic-size Merkle authentication path without revealing information about other batch elements.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{merkle_tree.pdf}
+    \caption{Merkle tree structure used to aggregate script-leaf commitments for a batch of $N$ documents.}
+    \label{fig:merkle}
+\end{figure*}
+
+\paragraph{Taproot tweak and P2TR output.}
+Let $P_{\mathrm{int}}$ denote the issuer’s internal Taproot public key.
+The Pay-to-Taproot output key is derived as
+\begin{equation}
+P_{\mathrm{out}} = P_{\mathrm{int}} + H_{\text{TapTweak}}(P_{\mathrm{int}} \parallel M)\,G,
+\label{eq:taptweak}
+\end{equation}
+where $H_{\text{TapTweak}}(\cdot)$ is a tagged hash function.
+The resulting output key commits to the Merkle root $M$ while remaining indistinguishable from a standard single-signature public key.
+
+\paragraph{On-chain anchoring.}
+The issuer anchors the commitment by broadcasting a Bitcoin transaction that creates an output paying to $P_{\mathrm{out}}$.
+Once confirmed, the transaction identifier $\mathsf{txid}$ serves as a public and immutable reference for all documents in the batch.
+
+\paragraph{Per-document verification proof.}
+For each document $D_i$, the issuer distributes an off-chain proof-of-validation object $\pi_i$ together with the document.
+We define
+
+\begin{equation}
+\pi_i := (\mathsf{txid},\, i,\, P_{\mathrm{iss}},\, \sigma_i,\, \mathsf{path}_i),
+\label{eq:proof}
+\end{equation}
+
+where $\sigma_i$ is a Schnorr signature generated over a message derived from $h_i$, and $\mathsf{path}_i$ is the Merkle authentication path required to reconstruct $M$.
+
+Using $\pi_i$, a verifier can recompute $h_i$, $\ell_i$, $M$, and $P_{\mathrm{out}}$, and verify that the transaction output referenced by $\mathsf{txid}$ corresponds to the derived P2TR address.
+
+
+Algorithm~\ref{alg:p2tr_commit} summarizes the procedure used by the issuer to construct the Taproot commitment and generate the per-document proofs.
+Here, \textsf{EncodeLeaf} serializes $(h_i, P_{\mathrm{iss}}, i)$ into a script $S_i$; \textsf{TapMerkleRoot} follows the BIP341 Merkleization rules; \textsf{MerklePath} returns the authentication path for leaf $i$; and \textsf{Msg} denotes the signing message derived from $h_i$ (e.g., a domain-separated hash).
+
+\begin{algorithm}[t]
+\caption{Batch commitment and P2TR anchoring for $N$ documents}
+\label{alg:p2tr_commit}
+\begin{algorithmic}[1]
+\REQUIRE Documents $\{D_i\}_{i=1}^{N}$, issuer Schnorr key pair $(x_{\mathrm{iss}}, P_{\mathrm{iss}})$, internal Taproot key $P_{\mathrm{int}}$, hash functions $H$, $H_{\text{TapLeaf}}$, $H_{\text{TapTweak}}$
+\ENSURE P2TR output key $P_{\mathrm{out}}$ and proofs $\{\pi_i\}_{i=1}^{N}$
+
+\FOR{$i \leftarrow 1$ \TO $N$}
+    \STATE $h_i \leftarrow H(D_i)$
+    \STATE $S_i \leftarrow \textsf{EncodeLeaf}(h_i, P_{\mathrm{iss}}, i)$
+    \STATE $\ell_i \leftarrow H_{\text{TapLeaf}}(S_i)$
+\ENDFOR
+\STATE $M \leftarrow \textsf{TapMerkleRoot}(\ell_1,\ldots,\ell_N)$
+\STATE $t \leftarrow H_{\text{TapTweak}}(P_{\mathrm{int}} \parallel M)$
+\STATE $P_{\mathrm{out}} \leftarrow P_{\mathrm{int}} + tG$
+\STATE Broadcast transaction creating a P2TR output to $P_{\mathrm{out}}$ and obtain $\mathsf{txid}$
+\FOR{$i \leftarrow 1$ \TO $N$}
+    \STATE $\mathsf{path}_i \leftarrow \textsf{MerklePath}(i, \{\ell_j\}_{j=1}^{N})$
+    \STATE $\sigma_i \leftarrow \textsf{SchnorrSign}(x_{\mathrm{iss}}, \textsf{Msg}(h_i))$
+    \STATE $\pi_i \leftarrow (\mathsf{txid}, i, P_{\mathrm{iss}}, \sigma_i, \mathsf{path}_i)$
+\ENDFOR
+\RETURN $P_{\mathrm{out}}, \{\pi_i\}_{i=1}^{N}$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Revocation Mechanism}
+
+If a previously issued document must be revoked, an update mechanism is required to communicate this change.
+Since Bitcoin transactions are immutable, the original anchoring transaction cannot be modified.
+Furthermore, the protocol assumes no further interaction between issuer and holder after issuance.
+
+To support revocation, the issuer spends the original P2TR output via the Taproot key path and recreates an equivalent P2TR output that preserves the same Merkle root $M$.
+Importantly, the Merkle root committed in the original output remains unchanged across revocation updates, thereby preserving the validity of previously distributed verification proofs.
+
+The revocation state is encoded in an additional \texttt{OP\_RETURN} output that carries a bitmap.
+Formally, let $B \in \{0,1\}^N$ denote the revocation bitmap, where $B[i]=1$ indicates that document $D_i$ has been revoked and $B[i]=0$ indicates validity.
+The ordering of bits follows the index ordering used in the original script-leaf commitments.
+
+The maximum size of \texttt{OP\_RETURN} outputs is governed by node relay policy rather than consensus rules.
+While contemporary Bitcoin Core implementations permit substantially larger payloads than earlier 80-byte limits, such policy parameters are not consensus-enforced and may vary across network participants.
+Therefore, the revocation mechanism is policy-aware and practical batch sizes may require tuning to ensure broad network relay compatibility.
+
+Larger revocation bitmaps increase transaction size and consequently fee expenditure measured in virtual bytes.
+This trade-off between batch size and revocation cost is analyzed quantitatively in the following section.
+
+
+
+
+
+
+
+\section{Discussion and Future Work}
+\label{sec.discussion}
+
+The proposed protocol is designed under a set of explicit assumptions regarding the underlying cryptographic primitives, the security model of the Bitcoin network, and the operational role of the issuing organization.
+This section discusses the resulting security and privacy properties, inherent limitations and trade-offs, and practical deployment considerations, and outlines directions for future work.
+
+\subsection{Security Properties}
+
+The security and long-term durability of the proposed protocol rely on the standard security assumptions of the Bitcoin blockchain and its underlying cryptographic primitives.
+In particular, document integrity depends on the collision resistance of the hash function $H(\cdot)$ (e.g., SHA-256), while authenticity and non-repudiation are ensured by Schnorr digital signatures as standardized in BIP340.
+
+Key management and fund custody mechanisms for the Taproot outputs are considered outside the scope of this work.
+Nevertheless, the use of Schnorr signatures enables straightforward extensibility toward advanced authorization schemes, such as native multisignature or threshold signing constructions, which can be employed to mitigate key compromise or loss at the organizational level.
+Such extensions can be incorporated without modifying the core verification protocol.
+
+\subsection{Privacy Considerations}
+
+A central contribution of the proposed approach lies in its privacy-preserving verification model.
+Verifiers learn only the information strictly required to validate an individual document, without gaining knowledge about other documents in the same batch.
+The use of Merkle authentication paths ensures that no information about non-related commitments is disclosed during verification, and no direct correlation between documents in the same batch can be inferred.
+
+As future work, the integration of zero-knowledge proof techniques could further reduce information disclosure by preventing verifiers from learning document-specific metadata beyond validity, at the cost of additional computational and implementation complexity.
+
+\subsection{Limitations and Trade-offs}
+
+The batch-oriented revocation mechanism introduces inherent trade-offs.
+In particular, the size of the revocation bitmap imposes a practical upper bound on the number of documents that can be included in a single batch, as constrained by current \texttt{OP\_RETURN} relay policies and transaction fee considerations.
+When document revocation is not required, this limitation does not apply, and batch size is effectively unconstrained from an on-chain commitment perspective.
+
+The protocol does not address the semantic validity or correctness of the data issued by the organization.
+It is assumed that document generation and issuance processes include appropriate safeguards to prevent accidental errors or malicious manipulation prior to commitment.
+This assumption is consistent with existing document certification systems and remains orthogonal to the proposed verification mechanism.
+
+\subsection{Deployment Considerations}
+
+The proposed protocol is fully compatible with existing Bitcoin networks and can be deployed without modification on mainnet, testnet, or regtest environments.
+Verification requires only read-only access to the blockchain and does not depend on trusted intermediaries or interactive communication with the issuing organization.
+
+As future work, the development of a proof-of-concept implementation would enable empirical evaluation of deployment costs, verification latency, and operational considerations in real-world settings.
+
+\subsection{Performance Estimation}
+
+Independent of the number of documents included in a batch, the size of the Taproot commitment output remains constant at 32 bytes.
+As a result, on-chain commitment costs are bounded by a constant factor, with variability determined primarily by the number of inputs required to fund the P2TR output.
+
+Off-chain verification complexity and verification proof size both scale logarithmically with the batch size, i.e., $O(\log N)$, due to the use of Merkle authentication paths.
+This property enables efficient verification even for large batches and supports scalable document issuance without proportional increases in verification overhead.
+
+
+
+\section{Conclusion}
+\label{sec_Conclusion}
+
+Decentralized document verification protocols offer clear advantages over traditional centralized systems by eliminating single points of failure and reducing trust and availability assumptions.
+Properties such as immutability, censorship resistance, and robustness against denial-of-service attacks are inherent to the Bitcoin network and make it a suitable foundation for long-term, publicly verifiable certification mechanisms.
+However, prior Bitcoin-based approaches reported in the literature remain constrained by limited scalability, restricted privacy guarantees, or insufficient support for document lifecycle management, including revocation.
+
+The activation of the Taproot upgrade significantly expands the design space for non-monetary applications on Bitcoin by introducing native Schnorr signatures and Merkleized script commitments.
+Despite these capabilities, Taproot has not been systematically explored as the basis for a complete, privacy-preserving, and scalable document verification protocol.
+This work addresses this gap by presenting a Taproot-based construction that enables batch document verification, issuer authenticity verification, and revocation management using only standardized Bitcoin primitives.
+
+The proposed protocol anchors batches of documents using a single Pay-to-Taproot output, supports per-document verification through Merkle authentication paths, and preserves privacy by avoiding on-chain disclosure of auxiliary data or relationships between documents in the same batch.
+Document authenticity and non-repudiation are ensured through Schnorr digital signatures, while revocation is handled through publicly auditable state transitions implemented via transaction chaining.
+Importantly, the protocol supports signing key rotation without invalidating previously issued documents, enabling long-term operational robustness for issuing organizations.
+
+This work deliberately focuses on cryptographic verification guarantees and does not address the semantic correctness or legal validity of document contents, which remain the responsibility of the issuing entity.
+Similarly, long-term archival of documents and verification proofs after issuance is considered out of scope.
+Future research directions include the design of archival and persistence mechanisms for verification proofs, alternative revocation encodings with improved scalability, and incentive or penalty schemes for entities that attempt to misrepresent revoked or invalid documents as valid.
+
+Overall, the results presented in this paper demonstrate that Taproot enables practical and efficient decentralized document verification on Bitcoin, opening new opportunities for privacy-preserving certification systems that can operate at scale without reliance on trusted intermediaries.
+
+
+\section*{Acknowledgment}
+The author would like to thank King Fahd University of Petroleum and Minerals, Dhahran, Saudi Arabia, for supporting this research. 
+
+
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{Refs}
+
+
+%If you do not have or do not want to include a photo, you can use IEEEbiographynophoto as shown below:
+\begin{IEEEbiographynophoto}{Juan P. Crespo Vargas}
+is a master’s student with the Information and Computer Science Department,
+King Fahd University of Petroleum and Minerals (KFUPM), Saudi Arabia.
+His research interests include blockchain technologies and applied cryptography.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Sultan Almuhammadi} 
+ is an assistant professor with the Information and Computer Science Department, King Fahd University of Petroleum and Minerals (KFUPM), Saudi Arabia. He received the Ph.D. degree in computer science from Viterbi School of Engineering, University of Southern California, in 2005. He is an IEEE member and a researcher at the Interdisciplinary Research Center for Intelligent Secure Systems, KFUPM. His research interests include cryptography, cybersecurity, blockchain, quantum algorithms, and coding theory.
+\end{IEEEbiographynophoto}
+
+
+
+
+
+\EOD
+
+\end{document}

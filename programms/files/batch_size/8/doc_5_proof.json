@@ -1,0 +1,15 @@
+{
+    "index": 5,
+    "hash": "1ccbc7bd9d6053f376e08ba1ac6179c0685e40132a6a7261f1e3464ea7411a5b",
+    "sig": "262483d08ead2d3ec2883fcedc13e5544bf92fed0f034758bd5eb5e5a51ce8b13e21596d186939710e309f26ad7b9101dc24de47779ca19fcd4b65b5ec7c2b3c",
+    "pk_sign": "07fa8ec2c128e00c14a553ddd09067b312c165313dfc96318388f5a70d6542d3",
+    "proof": [
+        "56b8a9fcbfb5b0d74486219000627d73176ce6d8a64339a773894f2aae42aea3",
+        "0af4306e25db30563e33d9c7f296b23cb2fca95febbc96d746d5532ea5fda52c",
+        "a41a373abbea6b85cdc88d3944a2c9e7234899103cac265d463eeab7372581ae"
+    ],
+    "internal_key": "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+    "root": "a2570308835f00f654c76ca4c654af1fb939df4a5bb96efa3048d5e75481e0d2",
+    "idtx": "5f7d21efce3c8c7e5ddd228414b304f8193d5be84a423480c7df1a04730f3bb9",
+    "address": "bcrt1p2kg7st9vvlusr0um65w7lujk6tkynq8vdjcsa4hyf7fdqrvgye0sdgyeac"
+}

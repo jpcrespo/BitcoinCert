@@ -1,0 +1,112 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+% --- three solid dots along segment A--B (no line) ---
+\newcommand{\threedots}[2]{%
+  \fill ($ (#1)!0.30!(#2) $) circle (0.9pt);
+  \fill ($ (#1)!0.38!(#2) $) circle (0.9pt);
+  \fill ($ (#1)!0.46!(#2) $) circle (0.9pt);
+}
+
+\begin{document}
+\begin{tikzpicture}[>=Latex]
+
+% -------- STYLES (robust) --------
+\tikzstyle{edge}=[->,semithick,shorten <=2pt,shorten >=2pt]
+
+% ALL circles same size (never grow)
+\tikzstyle{hash}=[draw,circle,minimum size=24mm,text width=20mm,align=center,inner sep=1pt,font=\huge]
+
+\tikzstyle{hashb}=[draw,circle,minimum size=24mm,text width=20mm,align=center,inner sep=1pt,font=\Large]
+
+
+
+
+
+\tikzstyle{leaf}=[draw,rounded corners,minimum width=14mm,minimum height=9mm,inner sep=1pt,font=\Large]
+
+% --- compact spacing ---
+\def\x{2.7}
+\def\y{1.7}
+
+% ================= Root =================
+\node[hash] (M) at (0,0) {$M$};
+
+% % ============== Level 1 ================
+\node[hash] (hL) at (-1.5*\x,-1*\y) {$h_{1..\frac{N}{2}}$};
+\node[hashb] (hR) at ( 1.5*\x,-1*\y) {$h_{(\frac{N}{2}+1)..N}$};
+
+\draw[edge] (hL) -- (M);
+\draw[edge] (hR) -- (M);
+
+% ============ Left subtree ==============
+\node[hash] (h14) at (-3*\x,-2.8*\y) {$h_{1..4}$};
+
+\node[hash] (h12) at (-3.9*\x,-4.5*\y) {$h_{1..2}$};
+\node[hash] (h34) at (-2*\x,-4.5*\y) {$h_{3..4}$};
+
+\draw[edge] (h12) -- (h14);
+\draw[edge] (h34) -- (h14);
+
+\draw[edge,dashed] (h14) -- (hL);
+\draw[->, dashed]  (-0.5*\x,-2.6*\y) -- (hL);
+
+\node[hash] (l1) at (-4.4*\x,-6.5*\y) {$\ell_1$};
+\node[hash] (l2) at (-3.4*\x,-6.5*\y) {$\ell_2$};
+\node[hash] (l3) at (-2.4*\x,-6.5*\y) {$\ell_3$};
+\node[hash] (l4) at (-1.4*\x,-6.5*\y) {$\ell_4$};
+
+\draw[edge] (l1) -- (h12);
+\draw[edge] (l2) -- (h12);
+\draw[edge] (l3) -- (h34);
+\draw[edge] (l4) -- (h34);
+
+\node[leaf] (S1) at (-4.4*\x,-8*\y) {$S_1$};
+\node[leaf] (S2) at (-3.4*\x,-8*\y) {$S_2$};
+\node[leaf] (S3) at (-2.4*\x,-8*\y) {$S_3$};
+\node[leaf] (S4) at (-1.4*\x,-8*\y) {$S_4$};
+
+\draw[edge] (S1) -- (l1);
+\draw[edge] (S2) -- (l2);
+\draw[edge] (S3) -- (l3);
+\draw[edge] (S4) -- (l4);
+
+\node[font=\Huge] at (0*\x,-8*\y) {$\cdots$};
+
+
+% =========== Right subtree ==============
+
+\node[hashb] (hxx) at (2.8*\x,-2.8*\y) {$h_{(N-3)..N}$};
+\node[hashb] (h1x) at (3.6*\x,-4.5*\y) {$h_{(N-1)..N}$};
+\node[hashb,font=\normalsize] (h2x) at (2*\x,-4.5*\y) {$h_{(N-3)..(N-2)}$};
+
+\draw[edge,dashed] (hxx) -- (hR);
+\draw[->, dashed]  (0.5*\x,-2.6*\y) -- (hR);
+
+\draw[edge] (h1x) -- (hxx);
+\draw[edge] (h2x) -- (hxx);
+
+\node[hash] (ln1) at (4.4*\x,-6.5*\y) {$\ell_N$};
+\node[hash] (ln2) at (3.4*\x,-6.5*\y) {$\ell_{N-1}$};
+\node[hash] (ln3) at (2.4*\x,-6.5*\y) {$\ell_{N-2}$};
+\node[hash] (ln4) at (1.4*\x,-6.5*\y) {$\ell_{N-3}$};
+
+\draw[edge] (ln1) -- (h1x);
+\draw[edge] (ln2) -- (h1x);
+\draw[edge] (ln3) -- (h2x);
+\draw[edge] (ln4) -- (h2x);
+
+\node[leaf] (Sn1) at (4.4*\x,-8*\y) {$S_N$};
+\node[leaf] (Sn2) at (3.4*\x,-8*\y) {$S_{N-1}$};
+\node[leaf] (Sn3) at (2.4*\x,-8*\y) {$S_{N-2}$};
+\node[leaf] (Sn4) at (1.4*\x,-8*\y) {$S_{N-3}$};
+
+\draw[edge] (Sn1) -- (ln1);
+\draw[edge] (Sn2) -- (ln2);
+\draw[edge] (Sn3) -- (ln3);
+\draw[edge] (Sn4) -- (ln4);
+
+\end{tikzpicture}
+\end{document}

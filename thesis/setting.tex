@@ -1,0 +1,58 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The following is the list of most commonly used packages. If more / other packages are needed they are
+%% to be added immediately after the following list.
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{amsmath,epsfig}
+\usepackage{epstopdf}
+
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mhsetup}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{float}
+\usepackage{xfrac}
+\usepackage{epsfig}
+
+%The polyglossia package allows for using Arabic and English together in one document.
+%IMPORTANT: polyglossia is only compatible with XeLaTeX
+\usepackage{polyglossia}%
+\setmainlanguage{english}%
+%This handles a bug due to polyglossia which corrupts the \maketitle command in hyperref
+\let\keptmaketitle\maketitle%
+%This allows navigation using links
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=blue,
+	filecolor=blue,
+	linkcolor=blue,
+	urlcolor=blue,
+	hidelinks=false %use this to change color of hyperlinks
+}
+%This package is used to get the correct formatting of the list of abbreviations and list of symbols using glossaries
+\usepackage{enumitem}
+%--------------------------------------------------
+% Needed to insert empty page between title and committe page in double sided document
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\cleardoublepage}%
+}
+%--------------------------------------------------
+
+%% The following is required for References
+
+\addto{\captionsenglish}{%
+  \renewcommand{\bibname}{REFERENCES}
+  }	
+
+%% Thefollowing are the most common figure file extensions
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .eps}
+

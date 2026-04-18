@@ -1,0 +1,43 @@
+
+%
+%\addcontentsline{toc}{chapter}{\, \, \, LIST OF ABBREVIATIONS}{\pageref{LOA}}
+%
+%\label{LOA}
+%
+%%% The following should contain the list of all abbreviations to be used in the Thesis write-up. Enter the
+%%% the abbreviations and their full form as shown below for example.
+%
+%\nomenclature{LED}{Light Emitting Diode}
+%\nomenclature{MOS}{Metal Oxide Semiconductor}
+%\nomenclature{PC}{Personal Computer}
+%
+%\printnomenclature [2.5 cm]
+%to use the glossaries package, the symbols and acronyms have to be defined first
+%SYMBOLS: Symbols can be defined using the following code
+\newcommand{\sym}[4]{%This command can be used to define a symbol as explain below
+	\newglossaryentry{#1}{%
+		name={#2},
+		description={#3},
+		symbol={#2},
+		sort={#4}
+	}%
+}%
+%The format for defining a symbol is as follows
+%\sym{label}{symbol}{description}{alphabetical sorting name}
+%label: This will be used later on in the main body to use the symbol
+%symbol: The actual symbol to be used
+%description: The description of the symbol
+%alphabetical sorting name: This name will be used to sort the symbol in alphabetical order if desired
+%example symbol definition
+\sym{mysymbol}{\ensuremath{\Gamma}}{This is a symbol}{gamma}
+
+%An acronym or abbreviation can be defined as follows
+%\newacronym{label}{short}{long}
+%label: this will be used to call the acronym in the main body
+%short: the acronym
+%long: the full form of the acronym
+%example acronym
+\newacronym{phd}{Ph.D.}{Doctor of Philosophy}
+
+
+\makeglossaries

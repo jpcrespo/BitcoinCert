@@ -1,0 +1,66 @@
+\begin{table*}[!t]
+\caption{Functional comparison of existing Bitcoin anchoring approaches and the proposed Taproot-based protocol.}
+\label{tab:comp_functional}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{3.1cm}
+>{\RaggedRight\arraybackslash}X
+>{\RaggedRight\arraybackslash}X
+>{\RaggedRight\arraybackslash}X
+>{\RaggedRight\arraybackslash}X
+>{\RaggedRight\arraybackslash}p{3cm}
+>{\RaggedRight\arraybackslash}X}
+\toprule
+\textbf{Property} &
+\textbf{Fake Address} &
+\textbf{OP\_RETURN} &
+\textbf{Script} &
+\textbf{Witness} &
+\textbf{OpenTimestamps (OTS)} &
+\textbf{Proposed (Taproot)} \\
+\midrule
+
+Integrity Verification&
+\ding{51}  &
+\ding{51}  &
+\ding{51}  &
+\ding{51}  &
+\ding{51}  &
+\ding{51}  \\
+
+Issuer Authentication&
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{51} \\
+
+Document Revocation&
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{51} \\
+
+Batch Support &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{55} &
+\ding{51} \\
+
+Privacy&
+\ding{55} &
+LOW &
+HIGH &
+HIGH &
+MEDIUM &
+HIGH \\
+\bottomrule
+\end{tabularx}
+\end{table*}

@@ -1,0 +1,109 @@
+\documentclass[tikz,border=22pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\huge,
+    entity/.style={
+        draw, rounded corners,
+        minimum width=4.2cm, minimum height=1.2cm,
+        align=center
+    },
+    action/.style={
+        draw, rounded corners,
+        minimum width=5.2cm, minimum height=1.2cm,
+        align=center, fill=gray!5
+    },
+    chain/.style={
+        draw, rounded corners,
+        minimum width=7.2cm, minimum height=1.6cm,
+        align=center, fill=gray!10
+    },
+    stepnode/.style={
+        draw, circle, fill=white,
+        inner sep=4pt, font=\Large\bfseries
+    },
+    offchain/.style={-Latex, dashed, thick},
+    onchain/.style={-Latex, thick}
+]
+
+% ===== ROW 1 =====
+\node[entity] (issuer) {Issuer\\(Organization)};
+\node[entity, right=6cm of issuer] (holder) {Holder\\(User)};
+\node[entity, right=6cm of holder] (verifier) {Verifier\\(Third party)};
+
+% ===== ROW 2 =====
+\node[action, below=2.2cm of issuer] (anchor)
+{On-chain anchoring\\Single P2TR output\\commits to batch};
+
+\node[action, below=2.2cm of holder] (revoke)
+{On-chain update (optional)\\Spend parent output\\publish revocation state};
+
+\node[action, below=2.2cm of verifier] (read)
+{Read-only verification\\UTXO existence + spends};
+
+% ===== ROW 3 =====
+\node[chain, below=2.6cm of revoke] (blockchain)
+{Bitcoin Blockchain History\\(P2TR output + spends)};
+
+% ===== OFF-CHAIN FLOWS =====
+\draw[offchain] (issuer) -- (holder)
+node[midway, above=30pt, align=center]
+{Off-chain delivery:\\ $D_i$ + validation proof};
+
+\draw[offchain] (holder) -- (verifier)
+node[midway, above=30pt, align=center]
+{Off-chain presentation:\\ $D_i$ + validation proof};
+
+% keep dashed arrow between verifier and read-only block (as before)
+\draw[offchain] (verifier) -- (read);
+
+% ===== ON-CHAIN WRITES (NUMBERED) =====
+
+% (1) Issuer anchors batch
+\draw[onchain] (issuer) -- (anchor)
+node[midway, right=10pt] (s1) {};
+\node[stepnode] at (s1) {1};
+
+% (2) Anchor recorded in blockchain
+\draw[onchain] (anchor) -- (blockchain)
+node[midway, right=10pt] (s2) {};
+\node[stepnode] at (s2) {2};
+
+% (3) Optional revocation update
+\draw[onchain] (issuer) -- (revoke)
+node[midway, left=10pt] (s3) {};
+\node[stepnode] at (s3) {3};
+
+\draw[onchain] (revoke) -- (blockchain)
+node[midway, right=10pt] (s4) {};
+\node[stepnode] at (s4) {3};
+
+% ===== READ FLOW (DASHED FROM BLOCKCHAIN TO READ-ONLY) =====
+\draw[offchain] (blockchain.east) .. controls +(3cm,0) and +(0,-2cm) .. (read.south);
+
+% ===== LANE LABELS =====
+\node[font=\bfseries\huge, left=0.6cm of issuer] {Off-chain};
+\node[font=\bfseries\huge, left=0.6cm of anchor] {On-chain};
+\node[font=\bfseries\huge, left=0.6cm of blockchain, align=left]
+{Bitcoin\\Blockchain};
+
+% ===== LEGEND =====
+\node[
+    draw, rounded corners,
+    align=left,
+    below right=0.5cm and 2cm of blockchain,
+    inner sep=10pt
+] (legend) {
+\begin{tikzpicture}[baseline, font=\huge, scale=1.35]
+    \draw[offchain] (0,0.5) -- (1.2,0.5);
+    \node[right=8pt] at (1.2,0.5) {Off-chain action};
+
+    \draw[onchain] (0,-0.35) -- (1.2,-0.35);
+    \node[right=8pt] at (1.2,-0.35) {On-chain action};
+\end{tikzpicture}
+};
+
+\end{tikzpicture}
+\end{document}

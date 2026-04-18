@@ -1,0 +1,189 @@
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\geometry{margin=1in}
+\onehalfspacing
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue,
+  citecolor=black
+}
+
+\title{\textbf{Automated Classification of Scientific Conferences via Machine Learning}\\
+\large An Evaluation Framework for the Deanship of Research}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The rapid expansion of scientific conferences and open-access publishing has introduced
+significant administrative and ethical challenges for research governance. Manual validation
+processes are increasingly inefficient and inconsistent. This report presents a comprehensive
+machine learning framework for automated conference classification designed to support
+institutional decision-making within the Deanship of Research. The system integrates semantic
+analysis, structured metadata evaluation, ontology-based mapping, and integrity detection
+mechanisms. Emphasis is placed on explainability, human oversight, and long-term validation
+to ensure transparency, robustness, and alignment with institutional quality standards.
+\end{abstract}
+
+\section{Introduction}
+
+The scientific communication ecosystem has undergone structural transformation over the
+past decade. Digitization, open-access proliferation, and the emergence of new publishing
+models have dramatically increased the number of conferences competing for academic
+submissions. Research administrations must now evaluate applications across multiple
+dimensions simultaneously: thematic relevance, academic prestige, ethical legitimacy,
+and compliance with institutional funding policies.
+
+Traditional manual review processes are time-consuming and susceptible to variability
+across evaluators. Furthermore, predatory conferences have adopted increasingly
+sophisticated tactics, including name mimicry and artificial prestige signaling.
+An automated classification framework provides a scalable infrastructure that standardizes
+evaluation criteria while preserving human authority over final decisions.
+
+\section{Conceptual and Methodological Foundations}
+
+Conference classification is best modeled as a multi-label text classification problem.
+Each event may simultaneously belong to multiple conceptual categories, including topical
+domain, prestige tier, and legitimacy status. Supervised learning algorithms such as
+Naive Bayes, Support Vector Machines (SVM), and Random Forest have historically
+demonstrated strong performance in high-dimensional textual representations.
+However, the semantic complexity of Calls for Papers and abstracts requires deeper
+contextual modeling.
+
+Transformer-based architectures such as BERT and DistilBERT offer contextual embeddings
+that capture semantic relationships beyond frequency-based approaches such as TF--IDF.
+These models enable the system to distinguish subtle differences in scope and detect
+semantic inconsistencies indicative of low-quality venues.
+
+\section{System Architecture}
+
+The proposed system is structured as modular infrastructure integrated into a Research
+Management System (RMS). It consists of four principal layers: ingestion, semantic analysis,
+feature engineering, and integrity evaluation.
+
+The ingestion layer extracts metadata including title, abstract, keywords, DOI, acronym,
+and URL. Identifier normalization and cross-referencing with authoritative databases
+(e.g., DBLP, Crossref, CORE) reduce ambiguity and ensure persistent traceability.
+
+Semantic classification combines embedding-based similarity measures with ontology-guided
+mapping. By projecting submissions and venue descriptions into shared vector spaces,
+cosine similarity scores quantify thematic alignment. Ontology-driven classification,
+such as hierarchical taxonomies, enhances interpretability and consistency in reporting.
+
+Feature engineering operationalizes institutional standards. Academic rigor is approximated
+through signals such as acceptance rates, program committee reputation, historical continuity,
+and bibliometric proxies. Thematic consistency is evaluated via embedding similarity between
+the submission and prior proceedings. Transparency indicators include clarity of peer-review
+procedures, affiliation with recognized societies, and stability of digital identifiers.
+
+\section{Predatory Conference Detection}
+
+A dedicated integrity component classifies venues according to legitimacy risk. Machine-readable
+indicators include hyper-broad scope entropy, aggressive solicitation patterns, name similarity
+to established conferences, opaque committee structures, and abnormal publication volume spikes.
+String distance metrics, Named Entity Recognition, and anomaly detection algorithms support
+binary or probabilistic risk scoring.
+
+\section{Model Portfolio and Selection Strategy}
+
+Given institutional requirements for both performance and interpretability, a hybrid
+model portfolio is recommended in the Literature. As shown in Table~\ref{tab:modelportfolio}, each model
+contributes complementary strengths within the classification pipeline.
+
+\begin{table}[h]
+\centering
+\caption{Recommended Model Portfolio for Institutional Conference Classification}
+\label{tab:modelportfolio}
+\begin{tabular}{@{}p{2.5cm}p{3.2cm}p{7.5cm}@{}}
+\toprule
+\textbf{Model} & \textbf{Primary Role} & \textbf{Institutional Strength} \\
+\midrule
+Naive Bayes & Rapid thematic labeling & Computational efficiency for large-scale metadata processing. \\
+SVM & Multi-label quality classification & Robustness in high-dimensional sparse text spaces. \\
+Random Forest & Standards verification & High interpretability and feature importance reporting. \\
+CNN & CFP pattern detection & Effective recognition of adversarial textual templates. \\
+BERT / DistilBERT & Deep semantic analysis & Context-aware language understanding for legitimacy inference. \\
+XGBoost & Structured metadata scoring & High precision in binary classification tasks. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The integration of these models into an ensemble architecture enables semantic depth
+while preserving structured decision transparency.
+
+\section{Evaluation Framework}
+
+Classifier performance must be evaluated through accuracy, precision, recall,
+and F1 score. Precision is critical to avoid approving low-quality venues,
+while recall ensures legitimate conferences are not unjustly rejected.
+Temporal validation procedures are necessary to guarantee model stability
+across evolving publication ecosystems. Grouped validation by discipline
+and region detects structural biases. Class imbalance mitigation techniques,
+including weighted loss functions and threshold calibration, are required
+to prevent skewed decision boundaries.
+
+\section{Governance, Explainability, and Equity}
+
+Automation bias represents a significant institutional risk. The framework must
+enforce a human-in-the-loop structure in which automated outputs serve as
+decision support rather than final authority. Explainable AI mechanisms,
+including feature attribution scores and structured reason codes, provide
+defensible transparency for administrative decisions.
+
+Equity considerations require diversification of quality indicators beyond
+commercial rankings. Emerging research communities must not be systematically
+disadvantaged due to limited bibliometric visibility. Periodic bias audits
+and retraining cycles are therefore integral components of governance.
+
+\section{Implementation Roadmap}
+
+Implementation within the Deanship of Research should proceed through the
+definition of institutional standards and the construction of a labeled
+gold-standard dataset. Following ingestion pipeline deployment and identifier
+normalization, hybrid model training can be executed. Integration into the
+RMS enables automated alert generation, structured reporting, and escalation
+to human reviewers. Continuous monitoring, retraining, and annual governance
+audits ensure long-term robustness.
+
+\section{Conclusion}
+
+Automated conference classification constitutes a foundational infrastructure
+for modern research governance. By combining semantic modeling, structured
+metadata analysis, and integrity detection within a transparent and accountable
+framework, the Deanship of Research can achieve scalable, consistent, and
+ethically robust evaluation processes. When coupled with human oversight,
+this approach strengthens institutional reputation while protecting researchers
+from engagement with predatory venues.
+
+\section*{References}
+
+\begin{enumerate}[leftmargin=1.25em]
+\item A Systematic Literature Review on Machine Learning for Automated Requirements Classification - IEEE Xplore \url{https://ieeexplore.ieee.org/document/9307778/}
+\item API Learning Hub - Crossref \url{https://www.crossref.org/learning/}
+\item Frequently Asked Questions - dblp,  \url{https://dblp.org/faqcont}
+\item A Systematic Literature Review on Multi-Label Classification based on Machine Learning Algorithms - ResearchGate,  \url{https://www.researchgate.net/publication/361051294_A_Systematic_Literature_Review_on_Multi-Label_Classification_based_on_Machine_Learning_Algorithms}
+\item Intelligent Framework for Detecting Predatory publishing Venues - IEEE Xplore,  \url{https://ieeexplore.ieee.org/iel7/6287639/6514899/10056132.pdf}
+\item The CSO Classifier: Ontology-Driven Detection of Research Topics, \url{https://cso.kmi.open.ac.uk/cso-classifier/}
+\item CORE Rankings Portal - core.edu.au,  \url{https://www.core.edu.au/conference-portal}
+\item PreDefense: Defending Underserved AI Students and Researchers from Predatory Conferences \url{https://proceedings.mlr.press/v142/chen21a/chen21a.pdf}
+\item sustainet-guardian/aletheia-probe - GitHub \url{https://github.com/sustainet-guardian/aletheia-probe}
+\item An open automation system for predatory journal detection - PMC \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC9940686/}
+\item TechDispatch \#2/2025 - Human Oversight of Automated Decision-Making, \url{https://www.edps.europa.eu/data-protection/our-work/publications/techdispatch/2025-09-23-techdispatch-22025-human-oversight-automated-making_en}
+\end{enumerate}
+
+\end{document}
